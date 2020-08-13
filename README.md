@@ -1,4 +1,4 @@
-[//]: # (Implicit Links Within Project)
+[//]: #(Implicit Links Within Project)
 
 [1]: https://docs.google.com/spreadsheets/d/1dMUbgEsOmRcXkmD-zshyu050ahH6E2spgOlQVY6_hMM/edit?usp=sharing   "Risk Assessment"
 [2]: https://docs.google.com/presentation/d/1kY_lDKnaryYASI6G5EJZPsZoxwhIXEfozJvWhLewHtk/edit?usp=sharing  "Presentation"
