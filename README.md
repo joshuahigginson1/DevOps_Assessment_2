@@ -208,11 +208,32 @@ One way in which I will achieve greater (Anything is greater than 0%!) unit test
 
 An example use case of this method is shown in [this guide from JetBrains.][4]
 
+For this project, I did some detailed research on tools for unit testing. For this project, I chose to use a PyTest test runner, because:
+- After an initial learning curve, testing is a lot more efficient to write, and can be done in less lines of code than within something like unittest.
+- As a relatively simple suite of applications, I do not require massively in depth testing tools. At what point is too much?
+- Use of PyTest fixtures avoids constantly repeating myself. I hate repetition.
+- If implemented correctly, tests read like "speech", and are simple to follow along.
 
 
 ### Unit Testing
 
+#### Unit Testing Service #1
 
+#### Unit Testing Service #2
+
+Unit testing of service two took longer to write than the actual MVP code. But that's okay!
+
+I first approached testing from a musical perspective.
+
+- There are 13 notes in a musical octave. Therefore, our random function should only return a set of numbers from 1 to 13.
+
+Then, I approached testing in terms of a developer.
+
+- We should only be returning integer values in this section of code. Degrees of a scale, NOT note names.
+
+#### Unit Testing Service #3
+
+#### Unit Testing Service #4
 
 ### Functional Testing
 
