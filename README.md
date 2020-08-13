@@ -1,11 +1,11 @@
-[//]: #(Implicit Links Within Project)
+[//]: # (Implicit Links Within Project)
 
 [1]: https://docs.google.com/spreadsheets/d/1dMUbgEsOmRcXkmD-zshyu050ahH6E2spgOlQVY6_hMM/edit?usp=sharing   "Risk Assessment"
 [2]: https://docs.google.com/presentation/d/1kY_lDKnaryYASI6G5EJZPsZoxwhIXEfozJvWhLewHtk/edit?usp=sharing  "Presentation"
 [3]: https://team-1579095236068.atlassian.net/jira/software/projects/QDA2/boards/5   "JIRA Project"
 [4]: https://www.jetbrains.com/pycharm/guide/tutorials/visual_pytest/   "Visual PyTest"
 
-# Melodie
+# Mélodie
 
 🎼 🎹 🎵 🎶 🪕 📻 🎤 🎺 🎧 🎻 🎙️ 👨‍🎤 👩‍🎤 🎷 🎸
 
