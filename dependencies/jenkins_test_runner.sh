@@ -2,15 +2,7 @@
 
 # Update dependencies.
 sudo apt update
-sudo apt install -y python3
-
-python --version
-
-sudo apt install -y python3-pip
-
-pip3 --version
-
-sudo apt install -y python3-venv
+sudo apt install -y python3 python3-pip python3-venv
 
 # Create our virtual environment.
 python3 -m venv venv
@@ -19,7 +11,6 @@ python3 -m venv venv
 source /venv/bin/activate
 
 # Install our project requirements.
-cat dependencies/requirements.txt
 sudo pip3 install -r dependencies/requirements.txt
 
 # Run our test suite.
