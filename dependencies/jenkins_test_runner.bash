@@ -2,7 +2,7 @@
 
 # Activate our virtual environment.
 
-source venv/bin/activate
+. ./venv/bin/activate
 
 # Install our project requirements.
 sudo pip3 install -r dependencies/requirements.txt
