@@ -3,11 +3,12 @@
 # Here, I declare my paths.
 code_path=./src
 venv_path=./venv
-test_dir=./src/tests
+test_dir=/src/tests
 test_results_dir=./src/tests/test_results
 
 # Activate our virtual environment.
-source ${venv_path}/bin/activate
+#
+# source venv/bin/activate
 
 # Install our project requirements.
 sudo pip3 install -r ./dependencies/requirements.txt
