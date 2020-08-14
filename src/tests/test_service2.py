@@ -4,7 +4,6 @@
 
 from src.service2.service2 import random_note_pitch
 
-
 # Classes --------------------------------------------------------------------------------
 
 

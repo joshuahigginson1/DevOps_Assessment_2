@@ -4,7 +4,6 @@
 
 from src.service3.service3 import random_note_length
 
-
 # Classes --------------------------------------------------------------------------------
 
 
