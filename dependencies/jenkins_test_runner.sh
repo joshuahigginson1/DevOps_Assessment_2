@@ -1,14 +1,16 @@
 # A bash script in order to run my test dependencies.
 
-# Fix for "pyenv not working" error, caused by locales.
-
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
-sudo dpkg-reconfigure locales
-
 # Update dependencies.
-sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install -y python3 python3-pip python3-venv
+sudo apt update
+sudo apt install -y python3
+
+python --version
+
+sudo apt install -y python3-pip
+
+pip3 --version
+
+sudo apt install -y python3-venv
 
 # Create our virtual environment.
 python3 -m venv venv
