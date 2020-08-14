@@ -15,8 +15,9 @@ sudo pip3 install -r dependencies/requirements.txt
 
 sudo pylint src
 
-# Run our linter on our source filder, the output that data to 'pylint.blog'
-pylint --output-format=pylint_junit.JUnitReporter src/ > tests/test_results/pylint.log
+# Run our linter on our source finder, the output that data to 'pylint.blog'
+
+sudo pylint --output-format=pylint_junit.JUnitReporter src/
 
 # Run our test suite.
 sudo pytest --junit-xml=src/tests/test_results/junit_results.xml
