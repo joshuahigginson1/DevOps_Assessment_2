@@ -7,7 +7,7 @@ export LC_CTYPE="en_US.UTF-8"
 sudo dpkg-reconfigure locales
 
 # Update dependencies.
-sudo ap-get update
+sudo apt-get update
 sudo apt-get install -y python3 python3-pip python3-venv
 
 # Create our virtual environment.
