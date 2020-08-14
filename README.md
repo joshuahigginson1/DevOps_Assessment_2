@@ -195,6 +195,10 @@ The only things we I haven’t currently automated is the ‘in progress and don
 
 ### CI Pipeline
 
+#### Jenkins
+Chose to write my jenkins shell scripts in sh, then executing them within the Jenkins command shell.
+
+We finally run the 'pytest-cov' equivalent command, which outputs a Junit Test, for reading with Jenkins.
 
 
 ### Front End Development

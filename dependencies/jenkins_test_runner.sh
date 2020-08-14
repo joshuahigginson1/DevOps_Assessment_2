@@ -14,4 +14,4 @@ source /venv/bin/activate
 sudo pip3 install -r dependencies/requirements.txt
 
 # Run our test suite.
-sudo pytest --junit-xml=src/tests.test_results/results.xml
+sudo pytest --junit-xml=src/tests/test_results/results.xml
