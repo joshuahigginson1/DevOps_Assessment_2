@@ -1,4 +1,4 @@
-# This file contains the functions for service2 Implementation 1 & 2.
+# This file contains the functions for service3 Implementation 1 & 2.
 
 # Imports --------------------------------------------------------------------------------
 
@@ -9,12 +9,13 @@ import random
 
 # Functions ------------------------------------------------------------------------------
 
-def random_note_pitch(pitch_list):
-    return random.choice(pitch_list)
+def random_note_length(note_list):
+    return random.choice(note_list)
 
 # Methods --------------------------------------------------------------------------------
 
 
 # Define Variables -----------------------------------------------------------------------
+
 
 # Execute Code ---------------------------------------------------------------------------

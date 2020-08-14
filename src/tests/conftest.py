@@ -23,6 +23,7 @@ def tasks_db_connection(tmpdir):
 
 # Fixtures are a great place to store data to use for testing. You can return anything.
 
+
 @pytest.fixture(name='common_scales', scope='function', autouse=False)
 def common_scales():  # All of the common scales. In tab, this would be all scales with the root note of 'F'.
     common_scales = {
@@ -36,3 +37,20 @@ def common_scales():  # All of the common scales. In tab, this would be all scal
         "minor blues": [1, 4, 6, 7, 8, 11, 13]
     }
     return common_scales
+
+
+@pytest.fixture(name='all_rhythms', scope='function', autouse=False)
+def lilypond_rhythms():  # Every rhythm that Lilypond accepts.
+    return ["longa", "breve", 1, 2, 4, 8, 16, 32, 64, 128]  # All standard variations of pitch in Lilypond.
+
+
+@pytest.fixture(name='common_rhythms', scope='function', autouse=False)
+def common_rhythms():  # All common rhythms, and subsets of rhythm.
+    common_rhythms = {
+        "short": [8, 16, 32, 64],
+        "long": [1, 2, 4],
+        "standard": [1, 2, 4, 8, 16, 32],
+        "extremes": ["longa", "breve", 64, 128]
+    }
+    return common_rhythms
+

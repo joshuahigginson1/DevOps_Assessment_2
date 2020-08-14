@@ -217,11 +217,12 @@ For this project, I did some detailed research on tools for unit testing. For th
 
 ### Unit Testing
 
+Unit testing of our services took longer to write than the actual MVP code...
+...But that's okay, I was reading information, and this challenged me to think about TDD with a professional understanding.
+
 #### Unit Testing Service #1
 
 #### Unit Testing Service #2
-
-Unit testing of service two took longer to write than the actual MVP code. But that's okay!
 
 I first approached testing from a musical perspective.
 
@@ -232,6 +233,12 @@ Then, I approached testing in terms of a developer.
 - We should only be returning integer values in this section of code. Degrees of a scale, NOT note names.
 
 #### Unit Testing Service #3
+
+Lilypond has a set of distinct markers which indicate note length. I created a PyTest fixture with these all in, allowing me to re-use these values for later tests.
+
+- We check that the function works using common sets of note lengths - short, long, and extreme.
+
+- Just like service #2, we check if the function only returns string and integer values.
 
 #### Unit Testing Service #4
 

@@ -2,15 +2,14 @@
 
 # Imports --------------------------------------------------------------------------------
 
-import random
+from src.service3.service3 import random_note_length
+
 
 # Classes --------------------------------------------------------------------------------
 
 
 # Functions ------------------------------------------------------------------------------
 
-def random_note_pitch(pitch_list):
-    return random.choice(pitch_list)
 
 # Methods --------------------------------------------------------------------------------
 
@@ -18,3 +17,9 @@ def random_note_pitch(pitch_list):
 # Define Variables -----------------------------------------------------------------------
 
 # Execute Code ---------------------------------------------------------------------------
+
+def test_random_note_length(common_rhythms, all_rhythms):
+    for key, rhythms in common_rhythms.items():  # For every rhythm in our fixture of common lengths, run assertion.
+        note = random_note_length(rhythms)
+        assert note in all_rhythms  # Must be a valid Lilypond rhythm. See 'lilypond_rhythms' fixture.
+        assert isinstance(note, (int, str)) is True  # Cannot be a data type other than an integer or string.
