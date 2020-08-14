@@ -1,8 +1,8 @@
 # A bash script in order to run my test dependencies.
 
 # Update dependencies.
-sudo apt-get update
-sudp apt-get install -y python3 python3-pip python3-venv
+sudo apt update
+sudp apt install -y python3 python3-pip python3-venv
 
 # Create our virtual environment.
 python3 -m venv venv
