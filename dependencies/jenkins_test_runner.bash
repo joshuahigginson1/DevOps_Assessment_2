@@ -7,7 +7,7 @@ export LC_CTYPE="en_US.UTF-8"
 sudo dpkg-reconfigure locales
 
 # Update dependencies.
-sudo apt-get update
+sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install -y python3 python3-pip python3-venv
 
 # Create our virtual environment.
@@ -17,6 +17,7 @@ python3 -m venv venv
 source /venv/bin/activate
 
 # Install our project requirements.
+cat dependencies/requirements.txt
 sudo pip3 install -r dependencies/requirements.txt
 
 # Run our test suite.
