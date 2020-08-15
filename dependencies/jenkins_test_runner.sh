@@ -24,5 +24,5 @@ printf "\n"
 printf "\n"
 printf "\n"
 
-sudo bash -c "pylint-fail-under --fail_under=1 -f=parseable src > src/tests/test_results/pylint.log"
+sudo bash -c "pylint-fail-under --fail_under 1 -f parseable src > src/tests/test_results/pylint.log"
 
