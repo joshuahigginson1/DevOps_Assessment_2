@@ -1,8 +1,10 @@
-# Conftest.py is used to share PyTest Fixtures across multiple test files.
+"""Conftest.py is used to share PyTest Fixtures across multiple test files.
 
-# Don’t import conftest into our test files.
+Don’t import conftest into our test files.
 
-# “The conftest.py file gets read by pytest, and is considered a local plugin.
+The conftest.py file gets read by pytest, and is considered a local plugin.
+
+"""
 
 # Imports --------------------------------------------------------------
 

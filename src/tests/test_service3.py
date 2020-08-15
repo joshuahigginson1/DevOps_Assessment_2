@@ -1,4 +1,4 @@
-# This file contains the functions for service2 Implementation 1 & 2.
+"""This file contains the functions for service2 Implementation 1 & 2."""
 
 # Imports --------------------------------------------------------------
 
