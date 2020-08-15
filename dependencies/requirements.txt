@@ -5,4 +5,4 @@ pytest==6.0.1
 # Violation Checking in Jenkins
 pylint==2.5.3
 pylint-fail-under==0.3.0
-pep8==1.7.1
+pycodestyle==2.6.0
