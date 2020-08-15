@@ -27,4 +27,4 @@ printf "\n"
 sudo bash -c "pylint-fail-under --fail_under 1 -f parseable src > src/tests/test_results/pylint_report.log"
 
 # Run our Pep8 function, and saves the output to a new .txt file. We just want the style report, not for the program to fail our build.
-sudo bash -c "pycodestyle src > src/tests/test_results/pep8_report.txt || exit "
+sudo bash -c "pycodestyle src > src/tests/test_results/pep8_report.txt || exit 0"
