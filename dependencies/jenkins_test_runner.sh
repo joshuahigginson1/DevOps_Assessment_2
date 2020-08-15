@@ -18,6 +18,6 @@ sudo pytest --junit-xml=src/tests/test_results/junit_results.xml
 
 # Run our PyLint function, and save the output to a new .log file. Have to run this in it's own subshell.
 
-pylint -f pasrseable src
+pylint -f parseable src
 
 # sudo bash -c "pylint -f parseable src > src/tests/test_results/pylint.log"
