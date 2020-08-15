@@ -18,10 +18,11 @@ sudo pytest --junit-xml=src/tests/test_results/junit_results.xml
 
 # Run our PyLint function, and save the output to a new .log file. Have to run this in it's own subshell.
 # Pylint returns a non-zero exit code even only if a small warning issue was found. This will cause our builds to fail.
+# This is why se use the 'pylint-fail-under' plugin.
 
 printf "\n"
 printf "\n"
 printf "\n"
 
-sudo bash -c "pylint --fail_under=8 -f=parseable src > src/tests/test_results/pylint.log"
+sudo bash -c "pylint-fail-under --fail_under=1 -f=parseable src > src/tests/test_results/pylint.log"
 
