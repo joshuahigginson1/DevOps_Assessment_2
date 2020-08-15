@@ -147,12 +147,16 @@ JIRA server is integrated into our IDE using Tools -> Tasks and Contexts.
 
 Time Tracking system integrated into my IDE using the Jetbrains Time Tracker Plugin -> Integrates with PyCharm tasks. Will manually push to the corresponding JIRA issue. (Currently no way of automating this feature.)
 
-Git is integrated into our IDE using Jetbrains VCS. It is also integrated into JIRA, allowing us to update our JIRA project status with the use of GitHub smart commits.  
+Git is integrated into our IDE using Jetbrains VCS. It is also integrated into JIRA, allowing us to update our JIRA project status with the use of GitHub smart commits.
 I have automated the process of creating smart commit messages. We take variables from our PyCharm task metadata, which subsequently drawn from our JIRA server.
  
  Each commit is structured as so: {id} - {summary} : #comment
 
-I have integrated Jenkins within PyCharm, in order to view the build status of jobs within my IDE.  Jenkins is configured to build the master branch of our repo with gitSCM web hook polling.
+I integrated Jenkins within PyCharm, because I am too 'DevOps' to have to keep tabbing out of my IDE in order check the build status of my current job.
+With this, I faced a minor issue with compatibility between Jenkins2 and Jenkins JetBrains plugin. The fix was simple - Log in with an API token, and make sure to include our 'crumb token', in order to protect against CSRF exploitation.
+  
+
+Jenkins is configured to build the master branch of our repo with gitSCM web hook polling.
 
 ### Workflow
 
