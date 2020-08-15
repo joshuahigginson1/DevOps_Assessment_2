@@ -1,24 +1,32 @@
 # This file contains the functions for service2 Implementation 1 & 2.
 
-# Imports --------------------------------------------------------------------------------
+# Imports --------------------------------------------------------------
 
 from src.service2.service2 import random_note_pitch
 
-# Classes --------------------------------------------------------------------------------
+# Classes --------------------------------------------------------------
 
 
-# Functions ------------------------------------------------------------------------------
+# Functions ------------------------------------------------------------
 
 
-# Methods --------------------------------------------------------------------------------
+# Methods --------------------------------------------------------------
 
 
-# Define Variables -----------------------------------------------------------------------
+# Define Variables -----------------------------------------------------
 
-# Execute Code ---------------------------------------------------------------------------
+# Execute Code ---------------------------------------------------------
 
-def test_random_note_pitch(common_scales, all_scales):
-    for key, scales in common_scales.items():  # For every scale in our fixture of common scales, run our assertion.
+def test_random_note_pitch(common_scales, all_pitches):
+    """This test checks our random note pitch function.
+
+    For every scale in our fixture of common scales, run our assertion:
+
+    - Cannot be out of an octave bounds.
+    - Cannot be a data type other than an integer or string.
+    """
+
+    for key, scales in common_scales.items():
         note = random_note_pitch(scales)
-        assert note in all_scales  # Cannot be out of an octave bounds.
-        assert isinstance(note, (int, str)) is True  # Cannot be a data type other than an integer or string.
+        assert note in all_pitches
+        assert isinstance(note, (int, str)) is True
