@@ -8,10 +8,11 @@
 
 import pytest
 
-# Fixtures --------------------------------------------------------------------------------
 
+# Fixtures -------------------------------------------------------------
 
-# Fixtures are a great place to store data to use for testing. You can return anything.
+# Fixtures are a great place to store data to use for testing.
+# You can return anything.
 
 @pytest.fixture(name='all_pitches', scope='function', autouse=False)
 def melodie_proprietary_pitches():
@@ -22,7 +23,13 @@ def melodie_proprietary_pitches():
 
 
 @pytest.fixture(name='common_scales', scope='function', autouse=False)
-def common_scales():  # All of the common scales. In tab, this would be all scales with the root note of 'F'.
+def common_scales():
+    """A fixture which returns all of the common musical scales,
+    in mélodies' own proprietary format.
+
+    Represented in musical tab, this would be all of the scales in which
+    the root note starts with 'F'.
+    """
     common_scales = {
         "chromatic": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, "r"],
         "major": [1, 3, 5, 6, 8, 10, 12, 13, "r"],
@@ -55,4 +62,3 @@ def common_rhythms():
         "extremes": ["longa", "breve", 64, 128]
     }
     return common_rhythms
-

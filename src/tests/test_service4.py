@@ -19,4 +19,5 @@ def test_default_note_object():
 
 
 def test_api_generated_note_object():
+    # TODO: Add test for API generated note, after implemented.
     assert True
