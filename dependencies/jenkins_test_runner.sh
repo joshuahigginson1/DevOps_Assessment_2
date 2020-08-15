@@ -17,4 +17,4 @@ sudo pip3 install -r dependencies/requirements.txt
 sudo pytest --junit-xml=src/tests/test_results/junit_results.xml
 
 # Run our PyLint function, and save the output to a new .log file. Have to run this in it's own subshell.
-sudo sh -c "pylint -f parseable src > src/tests/test_results/pylint.log"
+sudo bash -c "pylint -f parseable src > src/tests/test_results/pylint.log"
