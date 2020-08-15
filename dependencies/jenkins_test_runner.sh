@@ -26,3 +26,5 @@ printf "\n"
 
 sudo bash -c "pylint-fail-under --fail_under 1 -f parseable src > src/tests/test_results/pylint.log"
 
+# Run our Pep8 function, and saves the output to a new .xml file.
+sudo bash -c "pep8 src > src/tests/test_results/pep8.log"
