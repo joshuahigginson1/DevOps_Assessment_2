@@ -33,7 +33,8 @@ _Created for QA Consulting by Joshua Higginson_
 - [Project Management](#project-management)
 - [Project Review](#project-review)
   - [Known Issues and Future Optimisation](#known-issues-and-future-optimisations)
-- [Authors](#authors)
+- [Contributors and Authors](#contributors--authors)
+  - [Acknowledgements](#acknowledgements)
 
 ## Pre-Project Reflection
 
@@ -275,9 +276,19 @@ Lilypond has a set of distinct markers which indicate note length. I created a P
 
 ### Known Issues and Future Optimisations
 
+## Contributors & Authors
 
+**Josh Higginson** - AUTHOR - _Junior DevOps Consultant for QA Consulting._
 
-## Authors
+### Acknowledgements
+Acknowledging Brian Okken for his book "Python Testing with PyTest", really
+ helping me to nail my lack of TDD knowledge.
+ 
+Cheers to Mark Atherton for imbuing your MIDI knowledge throughout Uni and
+ inspiring this project.
+ 
+Harry Volker & Luke Benson for continued mentorship throughout the academy.
 
-**Josh Higginson** - _Junior DevOps Consultant for QA Consulting._
+Dad, Kier, Tobi, Ed, Beth, and all of the family and friends who are
+ at the sidelines, cheering me on. 
 
