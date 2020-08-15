@@ -1,5 +1,6 @@
 """This file contains the functions for service4 Implementation 1 & 2."""
 
+
 # Imports --------------------------------------------------------------
 
 
@@ -29,13 +30,34 @@ class Note:
         self.ova = ova
         self.rhythm = rhythm
 
+
 # Functions ------------------------------------------------------------
 
+def generate_key_offset(user_input_key):
+    """ A function which takes a given user's key, and offsets it to the key
+    of f.
 
-# Methods --------------------------------------------------------------
+    Keyword Arguments:
+        user_input_key: The key of our musical phrase, set by the user in
+        service 1.
+
+    Variables:
+
+
+
+    """
+    pass
+
+
+def arbitrary_value_to_musical_scale(proprietary_gen_pitch, user_input_key):
+    pitch_to_map = proprietary_gen_pitch
+    pass
 
 
 # Define Variables -----------------------------------------------------
+
+
+
 
 
 # Execute Code ---------------------------------------------------------
