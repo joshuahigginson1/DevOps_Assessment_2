@@ -57,13 +57,13 @@ def lilypond_rhythms():
 def common_rhythms():
     """A fixture to test all subsets of common musical rhythm."""
 
-    common_rhythms = {
+    common_rhythms_dictionary = {
         "short": [8, 16, 32, 64],
         "long": [1, 2, 4],
         "standard": [1, 2, 4, 8, 16, 32],
         "extremes": ["longa", "breve", 64, 128]
     }
-    return common_rhythms
+    return common_rhythms_dictionary
 
 
 @pytest.fixture(name='key_offset_dict', scope='function', autouse=False)
@@ -75,7 +75,7 @@ def key_offset():
     NB: A flat pitch is denoted by the suffix 'es'.
     """
 
-    key_offset = {
+    key_offset_dictionary = {
         'c': -5,
         'cis': -4,
         'des': -4,
@@ -95,7 +95,7 @@ def key_offset():
         'b': 6
     }
 
-    return key_offset
+    return key_offset_dictionary
 
 
 @pytest.fixture(name='all_keys', scope='function', autouse=False)

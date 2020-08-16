@@ -98,7 +98,7 @@ def test_transpose_pitch_is_middle_octave():
     assert transpose_pitch(6, 6) == (12, "")  # Upper Bound
 
 
-def test_transpose_pitch_is_lower_octave(key_offset_dict):
+def test_transpose_pitch_is_lower_octave():
     """ This test checks the common anticipated values for pitches in our
     lower octave. """
 
@@ -130,8 +130,8 @@ def test_transpose_pitch_is_higher_octave():
 
     # Offset of 6
     assert transpose_pitch(7, 6) == (1, "'")
-    assert transpose_pitch(10, 6) == (3, "'")
-    assert transpose_pitch(13, 6) == (6, "'")
+    assert transpose_pitch(10, 6) == (4, "'")
+    assert transpose_pitch(13, 6) == (7, "'")
 
 
 def test_generate_key_offset(all_keys, key_offset_dict):
