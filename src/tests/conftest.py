@@ -88,8 +88,6 @@ def note_names_in_c():
     return c_chromatic_dictionary
 
 
-# Depreciated Fixtures -------------------------------------------------
-
 @pytest.fixture(name='key_offset_dict', scope='function', autouse=False)
 def key_offset():
     """A fixture which returns the key offset values for every musical key,
@@ -120,6 +118,8 @@ def key_offset():
     }
 
     return key_offset_dictionary
+
+# Depreciated Fixtures -------------------------------------------------
 
 
 @pytest.fixture(name='all_keys', scope='function', autouse=False)

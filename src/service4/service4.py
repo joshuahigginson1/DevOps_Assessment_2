@@ -3,9 +3,7 @@
 # Imports --------------------------------------------------------------
 
 from mingus.containers import Bar
-
-# Classes --------------------------------------------------------------
-
+from mingus.midi import midi_file_out
 
 # Functions ------------------------------------------------------------
 
@@ -59,26 +57,25 @@ while not output_bar.is_full():
     # If note is note, we call function place_notes().
 
     else:
-        output_bar.place_notes(first_note_pitch, first_note_pitch)
-
-
-
-
+        output_bar.place_notes(first_note_pitch, first_note_length)
 
     # Poll API for another note.
-
     # Rinse and repeat until bar is full.
 
     break  # Temporary break statement.
 
 # Transpose output bar to a given user key.
 
-key_to_transpose = "D"
+key_to_transpose = 5
 transpose_up_or_down = True  # True is up, False is down.
 
-output_bar.transpose(key_to_transpose, transpose_up_or_down)
+output_bar.transpose(str(key_to_transpose), transpose_up_or_down)
 
+# Save as MIDI
 
+output_beats_per_minute = 120
+
+midi_file_out.write_Bar("mélodie.mid", output_bar, output_beats_per_minute)
 
 
 # Depreciated Functions ------------------------------------------------
