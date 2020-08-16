@@ -1,39 +1,34 @@
 """This file contains the functions for service4 Implementation 1 & 2."""
 
-
 # Imports --------------------------------------------------------------
 
+import mingus
 
 # Classes --------------------------------------------------------------
-
-class Note:
-    """ For our two api services to come together, we need to 'merge' the
-    results into a representation of a single musical note.
-
-    This is done here using a class object in Python.
-    """
-
-    def __init__(self, transposed_pitch="r", ova=0, rhythm=4):
-        """ This code is ran upon initialisation of a note.
-
-        Keyword Arguments:
-            rhythm: The note length, in Lilypond format. Defaults to a quarter
-            note.
-
-            ova: The current octave, in Lilypond format. Defaults to the
-            octave below middle C.
-
-            transposed_pitch: The musical pitch, in Lilypond format.
-            Defaults to a musical rest.
-        """
-        self.pitch = transposed_pitch
-        self.ova = ova
-        self.rhythm = rhythm
 
 
 # Functions ------------------------------------------------------------
 
-# This should really be in service #1, so all we send through API is one value.
+
+# Execute Code ---------------------------------------------------------
+
+output_key = "C"  # From Service #1
+output_time_signature = 4, 4  # From Service #1
+
+# Create new bar.
+
+output_bar = mingus.containers.Bar(output_key, output_time_signature)
+
+#
+
+
+
+
+
+
+
+# Depreciated Functions ------------------------------------------------
+
 
 def generate_key_offset(input_key, key_offset_dictionary):
     """ A function which takes a given user's key, and offsets it to the key
@@ -103,7 +98,3 @@ def transpose_pitch(raw_note_pitch, transposed_key_value=0):
 
     return transposed_pitch, transposed_ova
 
-
-def lilypond_output():
-    """This function converts our note object into a lilypond object"""
-    pass

@@ -3,29 +3,12 @@
 # Imports --------------------------------------------------------------
 import pytest
 
-from src.service4.service4 import Note, generate_key_offset, transpose_pitch
+from src.service4.service4 import generate_key_offset, transpose_pitch
 
 
 # Tests ----------------------------------------------------------------
 
-def test_default_note_object():
-    """ This test checks that our default note returns the correct values.
-
-    NB. Probably an arbitrary test, but need to check note class before
-    API implementation.
-    """
-
-    test_note = Note()
-    assert test_note.rhythm == 4
-    assert test_note.ova == 0
-    assert test_note.pitch == 'r'
-
-
-def test_api_generated_note_object():
-    """ Test to check that our API generated note returns correct values."""
-
-    # TODO: Add test for API generated note, after implemented.
-    assert True
+# Depreciated Tests ----------------------------------------------------
 
 
 def test_transpose_pitch_is_rest(key_offset_dict):
@@ -154,11 +137,3 @@ def test_generate_key_offset(all_keys, key_offset_dict):
         #       key_offset_dict.get(key)  # Is this test needed?
 
         assert -5 <= generate_key_offset(key, key_offset_dict) <= 6
-
-
-def test_lilypond_output():
-    """This test checks the functionality of the function which
-     converts our python note object into lilypond note format."""
-    pass
-
-

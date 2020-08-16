@@ -66,6 +66,30 @@ def common_rhythms():
     return common_rhythms_dictionary
 
 
+@pytest.fixture(name='note_names_in_c', scope='function', autouse=False)
+def note_names_in_c():
+
+    c_chromatic_dictionary = {
+        1: 'C',
+        2: 'C#',
+        3: 'D',
+        4: 'D#',
+        5: 'E',
+        6: 'F',
+        7: 'F#',
+        8: 'G',
+        9: 'G#',
+        10: 'A',
+        11: 'A#',
+        12: 'B',
+        "r": "r"
+    }
+
+    return c_chromatic_dictionary
+
+
+# Depreciated Fixtures -------------------------------------------------
+
 @pytest.fixture(name='key_offset_dict', scope='function', autouse=False)
 def key_offset():
     """A fixture which returns the key offset values for every musical key,
@@ -76,23 +100,23 @@ def key_offset():
     """
 
     key_offset_dictionary = {
-        'c': -5,
-        'cis': -4,
-        'des': -4,
-        'd': -3,
-        'dis': -2,
-        'ees': -2,
-        'e': -1,
-        'f': 0,
-        'fis': 1,
-        'ges': 1,
-        'g': 2,
-        'gis': 3,
-        'aes': 3,
-        'a': 4,
-        'ais': 5,
-        'bes': 5,
-        'b': 6
+        'C': -5,
+        'C#': -4,
+        'Db': -4,
+        'D': -3,
+        'D#': -2,
+        'Eb': -2,
+        'E': -1,
+        'F': 0,
+        'F#': 1,
+        'Gb': 1,
+        'G': 2,
+        'G#': 3,
+        'Ab': 3,
+        'A': 4,
+        'A#': 5,
+        'Bb': 5,
+        'B': 6
     }
 
     return key_offset_dictionary
@@ -101,5 +125,5 @@ def key_offset():
 @pytest.fixture(name='all_keys', scope='function', autouse=False)
 def all_lilypond_keys():
     """A list of every possible music key root."""
-    return ['c', 'cis', 'des', 'd', 'dis', 'ees', 'e', 'f', 'fis', 'ges',
-            'g', 'gis', 'aes', 'a', 'ais', 'bes', 'b']
+    return ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb',
+            'G', 'A#', 'Ab', 'A', 'A#', 'Bb', 'B']
