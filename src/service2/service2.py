@@ -4,18 +4,10 @@
 
 import random
 
-# Classes --------------------------------------------------------------
-
 
 # Functions ------------------------------------------------------------
+
 
 def random_note_pitch(pitch_list):
     """Generate a random note pitch determinant on the pitch list."""
     return random.choice(pitch_list)
-
-# Methods --------------------------------------------------------------
-
-
-# Define Variables -----------------------------------------------------
-
-# Execute Code ---------------------------------------------------------

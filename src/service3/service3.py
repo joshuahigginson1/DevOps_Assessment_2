@@ -4,19 +4,9 @@
 
 import random
 
-# Classes --------------------------------------------------------------
-
-
 # Functions ------------------------------------------------------------
+
 
 def random_note_length(note_list):
     """Generates a random note length from a given list."""
     return random.choice(note_list)
-
-# Methods --------------------------------------------------------------
-
-
-# Define Variables -----------------------------------------------------
-
-
-# Execute Code ---------------------------------------------------------

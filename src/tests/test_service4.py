@@ -3,7 +3,8 @@
 # Imports --------------------------------------------------------------
 import pytest
 
-from src.service4.service4 import Note, generate_key_offset, transpose_pitch
+from src.service4.service4 import Note, generate_key_offset, transpose_pitch, \
+    Bar
 
 
 # Tests ----------------------------------------------------------------
@@ -15,16 +16,32 @@ def test_default_note_object():
     API implementation.
     """
 
-    test_note = Note()
-    assert test_note.rhythm == 4
-    assert test_note.ova == 0
-    assert test_note.pitch == 'r'
+    default_note = Note()
+    assert default_note.rhythm == 4
+    assert default_note.ova == 0
+    assert default_note.pitch == 'r'
 
 
 def test_api_generated_note_object():
     """ Test to check that our API generated note returns correct values."""
 
     # TODO: Add test for API generated note, after implemented.
+    assert True
+
+
+def test_default_bar_object():
+    default_bar = Bar()
+    assert default_bar.tempo == 120
+    assert default_bar.time_signature == 4
+    assert default_bar.list_of_notes == []
+    assert default_bar.bar_counter == 0
+
+
+
+def test_api_generated_bar_object():
+    """ Test to check that our API generated note returns correct values."""
+
+    # TODO: Add test for API generated bar, after implemented.
     assert True
 
 
@@ -159,6 +176,11 @@ def test_generate_key_offset(all_keys, key_offset_dict):
 def test_lilypond_output():
     """This test checks the functionality of the function which
      converts our python note object into lilypond note format."""
-    pass
+    assert True
 
+
+def test_find_length_of_bar():
+    """This test checks the functionality of the function which
+     converts our python note object into lilypond note format."""
+    assert True
 

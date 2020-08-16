@@ -17,23 +17,48 @@ class Note:
         """ This code is ran upon initialisation of a note.
 
         Keyword Arguments:
-            rhythm: The note length, in Lilypond format. Defaults to a quarter
-            note.
+            self.rhythm: The note length, in Lilypond format. Defaults to 1/4
+             note.
 
-            ova: The current octave, in Lilypond format. Defaults to the
-            octave below middle C.
+            self.ova: The current octave, in Lilypond format. Defaults to the
+             octave below middle C.
 
-            transposed_pitch: The musical pitch, in Lilypond format.
-            Defaults to a musical rest.
+            self.transposed_pitch: The musical pitch, in Lilypond format.
+             Defaults to a musical rest.
         """
         self.pitch = transposed_pitch
         self.ova = ova
         self.rhythm = rhythm
 
 
+class Bar:
+    """In music theory, bars contain a number of notes that make up our
+    melody.
+    """
+
+    def __init__(self, tempo=120, beats_in_bar=4):
+        """This code is ran upon initialisation of our Bar.
+
+        Keyword Arguments:
+            self.tempo: The tempo of our piece in BPM. How fast or slow
+             Defaults to 120bpm.
+
+            self.time_signature: How many beats are in our bar.
+
+            self.list_of_notes: The notes which comprise our bar. Should be
+             comprised of note objects.
+        """
+        self.tempo = tempo
+        self.time_signature = beats_in_bar
+        self.list_of_notes = []
+        self.bar_counter = 0
+
+
+
 # Functions ------------------------------------------------------------
 
 # This should really be in service #1, so all we send through API is one value.
+
 
 def generate_key_offset(input_key, key_offset_dictionary):
     """ A function which takes a given user's key, and offsets it to the key
@@ -67,11 +92,11 @@ def transpose_pitch(raw_note_pitch, transposed_key_value=0):
 
     Keyword Arguments:
         raw_note_pitch: This is the randomly generated note pitch from
-        service #2.
+         service #2.
 
         transposed_key_value: This is the transposed key value, AKA the
-        output from the function in service #1 - 'generate_key_offset'. This
-        defaults to 0 - the key of F chromatic.
+         output from the function in service #1 - 'generate_key_offset'. This
+         defaults to 0 - the key of F chromatic.
     """
     transposed_ova = ""
 
@@ -104,6 +129,16 @@ def transpose_pitch(raw_note_pitch, transposed_key_value=0):
     return transposed_pitch, transposed_ova
 
 
-def lilypond_output():
+def melodie_to_lilypond():
     """This function converts our note object into a lilypond object"""
+
+    # TODO: Change proprietary to lilypond.
+    pass
+
+
+def midi_output():
+    pass
+
+
+def image_output():
     pass
