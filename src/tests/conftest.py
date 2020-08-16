@@ -64,3 +64,42 @@ def common_rhythms():
         "extremes": ["longa", "breve", 64, 128]
     }
     return common_rhythms
+
+
+@pytest.fixture(name='key_offset_dict', scope='function', autouse=False)
+def key_offset():
+    """A fixture which returns the key offset values for every musical key,
+    in relation to F. Returns values as key-value pairs.
+
+    NB: A musical sharp is denoted by the suffix 'is'.
+    NB: A flat pitch is denoted by the suffix 'es'.
+    """
+
+    key_offset = {
+        'c': -5,
+        'cis': -4,
+        'des': -4,
+        'd': -3,
+        'dis': -2,
+        'ees': -2,
+        'e': -1,
+        'f': 0,
+        'fis': 1,
+        'ges': 1,
+        'g': 2,
+        'gis': 3,
+        'aes': 3,
+        'a': 4,
+        'ais': 5,
+        'bes': 5,
+        'b': 6
+    }
+
+    return key_offset
+
+
+@pytest.fixture(name='all_keys', scope='function', autouse=False)
+def all_lilypond_keys():
+    """A list of every possible music key root."""
+    return ['c', 'cis', 'des', 'd', 'dis', 'ees', 'e', 'f', 'fis', 'ges',
+            'g', 'gis', 'aes', 'a', 'ais', 'bes', 'b']
