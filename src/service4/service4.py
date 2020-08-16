@@ -2,7 +2,7 @@
 
 # Imports --------------------------------------------------------------
 
-import mingus
+from mingus.containers import Bar
 
 # Classes --------------------------------------------------------------
 
@@ -10,42 +10,78 @@ import mingus
 # Functions ------------------------------------------------------------
 
 
+def generate_key_offset(input_key, key_offset_dictionary):
+    """ A function which takes a given user's key, and offsets it to the key
+    of C chromatic.
+
+    We add our key_offset to the current pitch value.
+    We return a transposed index position (from the key of C chromatic).
+
+    Keyword Arguments:
+        input_key: The key of our musical phrase, set by the user in
+         service #1.
+
+        key_offset_dictionary: A mapping of each musical key in relation to
+         key of C. This should be in the form of a python dictionary.
+    """
+
+    return key_offset_dictionary.get(input_key)
+
 # Execute Code ---------------------------------------------------------
+
 
 output_key = "C"  # From Service #1
 output_time_signature = 4, 4  # From Service #1
 
 # Create new bar.
 
-output_bar = mingus.containers.Bar(output_key, output_time_signature)
+output_bar = Bar(output_key, output_time_signature)
 
-#
+# Pull a note pitch from service #2.
+
+first_note_pitch = "C"
+
+# Pull a note length from service #3.
+
+first_note_length = 4
+
+# While our output bar is not full, we will keep trying to add notes to it.
+# Return False if there is room in this Bar for another Note True otherwise.
+
+while not output_bar.is_full():
+    # We try and add the note to our bar.
+
+    # If note is rest, we call function place_rest().
+
+    if first_note_pitch == "r":
+        output_bar.place_rest(first_note_length)
+
+    # If note is note, we call function place_notes().
+
+    else:
+        output_bar.place_notes(first_note_pitch, first_note_pitch)
 
 
 
+
+
+    # Poll API for another note.
+
+    # Rinse and repeat until bar is full.
+
+    break  # Temporary break statement.
+
+# Transpose output bar to a given user key.
+
+key_to_transpose = "D"
+transpose_up_or_down = True  # True is up, False is down.
+
+output_bar.transpose(key_to_transpose, transpose_up_or_down)
 
 
 
 
 # Depreciated Functions ------------------------------------------------
-
-
-def generate_key_offset(input_key, key_offset_dictionary):
-    """ A function which takes a given user's key, and offsets it to the key
-    of F chromatic.
-
-    We add our key_offset to the current pitch value.
-    We return a transposed index position (from the key of F chromatic).
-
-    Keyword Arguments:
-        input_key: The key of our musical phrase, set by the user in
-        service #1.
-
-        key_offset_dictionary: A mapping of each musical key in relation to
-        key of F. This should be in the form of a python dictionary.
-    """
-
-    return key_offset_dictionary.get(input_key)
 
 
 def transpose_pitch(raw_note_pitch, transposed_key_value=0):
@@ -97,4 +133,3 @@ def transpose_pitch(raw_note_pitch, transposed_key_value=0):
         raise TypeError("")
 
     return transposed_pitch, transposed_ova
-

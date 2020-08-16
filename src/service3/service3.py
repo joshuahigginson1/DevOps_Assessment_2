@@ -9,13 +9,13 @@ import random
 
 # Functions ------------------------------------------------------------
 
-def random_note_length(note_list):
+def random_note_length(common_rhythms):
     """Generates a random note length from a given list.
 
     Keyword Arguments:
-        note_list: A list of note values between 1-13, including "r"ests.
+        common_rhythms: A list of common note rhythms, in Mingus format.
     """
-    return random.choice(note_list)
+    return random.choice(common_rhythms)
 
 # Methods --------------------------------------------------------------
 

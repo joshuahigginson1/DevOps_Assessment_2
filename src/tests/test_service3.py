@@ -12,11 +12,12 @@ def test_random_note_length(common_rhythms, all_rhythms):
 
     For every rhythm in our fixture of common lengths, run assertion:
 
-    - Must be a valid Lilypond rhythm. See 'lilypond_rhythms' fixture.
-    - Cannot be a data type other than an integer or string.
+    - Must be a valid Mingus rhythm. See 'mingus_rhythms' fixture.
+    - Cannot be a data type other than an integer or float.
     """
 
     for key, rhythms in common_rhythms.items():
         rhythm = random_note_length(rhythms)
         assert rhythm in all_rhythms
-        assert isinstance(rhythm, (int, str)) is True
+        assert isinstance(rhythm, (int, float)) is True
+

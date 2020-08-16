@@ -46,11 +46,11 @@ def common_scales():
 
 
 @pytest.fixture(name='all_rhythms', scope='function', autouse=False)
-def lilypond_rhythms():
+def mingus_rhythms():
     """A fixture which only returns the standard variations of pitch in
-    Lilypond convention."""
+    mingus convention."""
 
-    return ["longa", "breve", 1, 2, 4, 8, 16, 32, 64, 128]
+    return [0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, 128]
 
 
 @pytest.fixture(name='common_rhythms', scope='function', autouse=False)
@@ -61,7 +61,7 @@ def common_rhythms():
         "short": [8, 16, 32, 64],
         "long": [1, 2, 4],
         "standard": [1, 2, 4, 8, 16, 32],
-        "extremes": ["longa", "breve", 64, 128]
+        "extremes": [0.25, 0.5, 64, 128]
     }
     return common_rhythms_dictionary
 
@@ -100,23 +100,23 @@ def key_offset():
     """
 
     key_offset_dictionary = {
-        'C': -5,
-        'C#': -4,
-        'Db': -4,
-        'D': -3,
-        'D#': -2,
-        'Eb': -2,
-        'E': -1,
-        'F': 0,
-        'F#': 1,
-        'Gb': 1,
-        'G': 2,
-        'G#': 3,
-        'Ab': 3,
-        'A': 4,
-        'A#': 5,
-        'Bb': 5,
-        'B': 6
+        'C': 0,
+        'C#': 1,
+        'Db': 1,
+        'D': 2,
+        'D#': 3,
+        'Eb': 3,
+        'E': 4,
+        'F': 5,
+        'F#': 6,
+        'Gb': 6,
+        'G': 7,
+        'G#': 8,
+        'Ab': 8,
+        'A': 9,
+        'A#': 10,
+        'Bb': 10,
+        'B': 11
     }
 
     return key_offset_dictionary
