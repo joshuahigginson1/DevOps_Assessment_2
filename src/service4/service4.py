@@ -6,6 +6,7 @@ from mingus.containers import Bar
 from mingus.midi import midi_file_out
 from mingus.extra.lilypond import to_png, from_Bar
 
+
 # Functions ------------------------------------------------------------
 
 
@@ -77,24 +78,23 @@ output_bar.transpose(str(key_to_transpose), transpose_up_or_down)
 output_beats_per_minute = 120  # From service #1
 
 file_name = "josh-test-midi-file"  # From service #1
-midi_file_suffix = file_name + "-mélodie.mid"
+midi_file_suffix = file_name + "-melodie.mid"
 midi_save_location = "midi_output/" + midi_file_suffix
 
 midi_file_out.write_Bar(midi_save_location, output_bar,
                         output_beats_per_minute)
 
 
-""" lilypond_string = from_Bar(output_bar, showkey=True, showtime=True)
+lilypond_string = from_Bar(output_bar, showkey=True, showtime=True)
 
-# This feature will only work on a linux machine.
-# Save as lilypond string.
+print(lilypond_string)
 
-png_file_suffix = file_name + "-mélodie.png"
-png_save_location = "png_output/" + png_file_suffix
+# This feature will only work with lilypond in path. Save as lilypond string.
 
-to_png(lilypond_string, png_file_suffix)  # Exports lilypond string to png.
-"""
+png_save_location = f"png_output/{file_name}-melodie"
 
+to_png(lilypond_string, png_save_location)  # Exports lilypond
+# string to png.
 
 # Deprecated Functions -------------------------------------------------
 
