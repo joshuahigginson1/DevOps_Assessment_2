@@ -11,13 +11,10 @@ On a POST request, we want out program to return a random note.
 import random
 
 
-# Classes --------------------------------------------------------------
-
-
-# Functions ------------------------------------------------------------
 # On GET Request -------------------------------------------------------
+# Functions ------------------------------------------------------------
 
-def return_scale_list():
+def return_scale_dictionary():
     """This function is to be used with a GET request, returning a list of
     scales for our user to select from.
 
@@ -27,7 +24,7 @@ def return_scale_list():
     When Service #2 receives a GET request, it will send the output.
     """
 
-    # TODO: Write unit test for return_scale_list() with API functionality.
+    # TODO: Write unit test for return_scale_dictionary() API functionality.
 
     scale_list = {
         "chromatic": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, "r"],
