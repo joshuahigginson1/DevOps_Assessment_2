@@ -43,7 +43,7 @@ first_note_pitch = "C"
 
 # Pull a note length from service #3.
 
-first_note_length = 4
+first_note_length = 6
 
 # While our output bar is not full, we will keep trying to add notes to it.
 # Return False if there is room in this Bar for another Note True otherwise.
@@ -64,7 +64,6 @@ while not output_bar.is_full():
     # Poll API for another note.
     # Rinse and repeat until bar is full.
 
-    # break  # Temporary break statement.
 
 # Transpose output bar to a given user key.
 
@@ -86,8 +85,6 @@ midi_file_out.write_Bar(midi_save_location, output_bar,
 
 
 lilypond_string = from_Bar(output_bar, showkey=True, showtime=True)
-
-print(lilypond_string)
 
 # This feature will only work with lilypond in path. Save as lilypond string.
 
