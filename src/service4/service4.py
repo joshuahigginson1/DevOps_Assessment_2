@@ -1,81 +1,102 @@
 """This file contains the functions for service4 Implementation 1 & 2."""
 
-
 # Imports --------------------------------------------------------------
 
-
-# Classes --------------------------------------------------------------
-
-class Note:
-    """ For our two api services to come together, we need to 'merge' the
-    results into a representation of a single musical note.
-
-    This is done here using a class object in Python.
-    """
-
-    def __init__(self, transposed_pitch="r", ova=0, rhythm=4):
-        """ This code is ran upon initialisation of a note.
-
-        Keyword Arguments:
-            self.rhythm: The note length, in Lilypond format. Defaults to 1/4
-             note.
-
-            self.ova: The current octave, in Lilypond format. Defaults to the
-             octave below middle C.
-
-            self.transposed_pitch: The musical pitch, in Lilypond format.
-             Defaults to a musical rest.
-        """
-        self.pitch = transposed_pitch
-        self.ova = ova
-        self.rhythm = rhythm
-
-
-class Bar:
-    """In music theory, bars contain a number of notes that make up our
-    melody.
-    """
-
-    def __init__(self, tempo=120, beats_in_bar=4):
-        """This code is ran upon initialisation of our Bar.
-
-        Keyword Arguments:
-            self.tempo: The tempo of our piece in BPM. How fast or slow
-             Defaults to 120bpm.
-
-            self.time_signature: How many beats are in our bar.
-
-            self.list_of_notes: The notes which comprise our bar. Should be
-             comprised of note objects.
-        """
-        self.tempo = tempo
-        self.time_signature = beats_in_bar
-        self.list_of_notes = []
-        self.bar_counter = 0
-
-
+from mingus.containers import Bar
+from mingus.midi import midi_file_out
+from mingus.extra.lilypond import to_png, from_Bar
 
 # Functions ------------------------------------------------------------
-
-# This should really be in service #1, so all we send through API is one value.
 
 
 def generate_key_offset(input_key, key_offset_dictionary):
     """ A function which takes a given user's key, and offsets it to the key
-    of F chromatic.
+    of C chromatic.
 
     We add our key_offset to the current pitch value.
-    We return a transposed index position (from the key of F chromatic).
+    We return a transposed index position (from the key of C chromatic).
 
     Keyword Arguments:
         input_key: The key of our musical phrase, set by the user in
-        service #1.
+         service #1.
 
         key_offset_dictionary: A mapping of each musical key in relation to
-        key of F. This should be in the form of a python dictionary.
+         key of C. This should be in the form of a python dictionary.
     """
 
     return key_offset_dictionary.get(input_key)
+
+# Execute Code ---------------------------------------------------------
+
+
+output_key = "C"  # From Service #1
+output_time_signature = 4, 4  # From Service #1
+
+# Create new bar.
+
+output_bar = Bar(output_key, output_time_signature)
+
+# Pull a note pitch from service #2.
+
+first_note_pitch = "C"
+
+# Pull a note length from service #3.
+
+first_note_length = 4
+
+# While our output bar is not full, we will keep trying to add notes to it.
+# Return False if there is room in this Bar for another Note True otherwise.
+
+while not output_bar.is_full():
+    # We try and add the note to our bar.
+
+    # If note is rest, we call function place_rest().
+
+    if first_note_pitch == "r":
+        output_bar.place_rest(first_note_length)
+
+    # If note is note, we call function place_notes().
+
+    else:
+        output_bar.place_notes(first_note_pitch, first_note_length)
+
+    # Poll API for another note.
+    # Rinse and repeat until bar is full.
+
+    # break  # Temporary break statement.
+
+# Transpose output bar to a given user key.
+
+key_to_transpose = 5  # From generate key offset function.
+transpose_up_or_down = True  # True is up, False is down. From Service #1
+
+output_bar.transpose(str(key_to_transpose), transpose_up_or_down)
+
+# Save as MIDI
+
+output_beats_per_minute = 120  # From service #1
+
+file_name = "josh-test-midi-file"  # From service #1
+midi_file_suffix = file_name + "-mélodie.mid"
+midi_save_location = "midi_output/" + midi_file_suffix
+
+midi_file_out.write_Bar(midi_save_location, output_bar,
+                        output_beats_per_minute)
+
+
+""" lilypond_string = from_Bar(output_bar, showkey=True, showtime=True)
+
+# This feature will only work on a linux machine.
+# Save as lilypond string.
+
+png_file_suffix = file_name + "-mélodie.png"
+png_save_location = "png_output/" + png_file_suffix
+
+to_png(lilypond_string, png_file_suffix)  # Exports lilypond string to png.
+"""
+
+
+# Deprecated Functions -------------------------------------------------
 
 
 def transpose_pitch(raw_note_pitch, transposed_key_value=0):
@@ -92,11 +113,11 @@ def transpose_pitch(raw_note_pitch, transposed_key_value=0):
 
     Keyword Arguments:
         raw_note_pitch: This is the randomly generated note pitch from
-         service #2.
+        service #2.
 
         transposed_key_value: This is the transposed key value, AKA the
-         output from the function in service #1 - 'generate_key_offset'. This
-         defaults to 0 - the key of F chromatic.
+        output from the function in service #1 - 'generate_key_offset'. This
+        defaults to 0 - the key of F chromatic.
     """
     transposed_ova = ""
 
@@ -127,18 +148,3 @@ def transpose_pitch(raw_note_pitch, transposed_key_value=0):
         raise TypeError("")
 
     return transposed_pitch, transposed_ova
-
-
-def melodie_to_lilypond():
-    """This function converts our note object into a lilypond object"""
-
-    # TODO: Change proprietary to lilypond.
-    pass
-
-
-def midi_output():
-    pass
-
-
-def image_output():
-    pass

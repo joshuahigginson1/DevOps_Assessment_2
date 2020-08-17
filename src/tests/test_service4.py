@@ -3,46 +3,35 @@
 # Imports --------------------------------------------------------------
 import pytest
 
-from src.service4.service4 import Note, generate_key_offset, transpose_pitch, \
-    Bar
+from src.service4.service4 import generate_key_offset, transpose_pitch
 
 
 # Tests ----------------------------------------------------------------
 
-def test_default_note_object():
-    """ This test checks that our default note returns the correct values.
 
-    NB. Probably an arbitrary test, but need to check note class before
-    API implementation.
+def test_generate_key_offset(all_keys, key_offset_dict):
+    """ This test checks the functionality of our key offset function.
+
+    For every key, we check to ensure that our note should never be offset
+    by more than twelve notes.
+
+    The program will not crash, however, it is unexpected behaviour for
+    this scenario to occur. It means that a previously running function,
+    is not operating correctly.
+
+    Variables:
+        list_of_keys = A pytest fixture returning every possible lilypond key.
+        key_offset_dict = A pytest fixture returning our key offset.
     """
 
-    default_note = Note()
-    assert default_note.rhythm == 4
-    assert default_note.ova == 0
-    assert default_note.pitch == 'r'
+    for key in all_keys:
+        # assert generate_key_offset(key, key_offset_dict) == \
+        #       key_offset_dict.get(key)  # Is this test needed?
+
+        assert 0 <= generate_key_offset(key, key_offset_dict) <= 11
 
 
-def test_api_generated_note_object():
-    """ Test to check that our API generated note returns correct values."""
-
-    # TODO: Add test for API generated note, after implemented.
-    assert True
-
-
-def test_default_bar_object():
-    default_bar = Bar()
-    assert default_bar.tempo == 120
-    assert default_bar.time_signature == 4
-    assert default_bar.list_of_notes == []
-    assert default_bar.bar_counter == 0
-
-
-
-def test_api_generated_bar_object():
-    """ Test to check that our API generated note returns correct values."""
-
-    # TODO: Add test for API generated bar, after implemented.
-    assert True
+# Depreciated Tests ----------------------------------------------------
 
 
 def test_transpose_pitch_is_rest(key_offset_dict):
@@ -149,38 +138,3 @@ def test_transpose_pitch_is_higher_octave():
     assert transpose_pitch(7, 6) == (1, "'")
     assert transpose_pitch(10, 6) == (4, "'")
     assert transpose_pitch(13, 6) == (7, "'")
-
-
-def test_generate_key_offset(all_keys, key_offset_dict):
-    """ This test checks the functionality of our key offset function.
-
-    For every key, we check to ensure that our note should never be offset
-    by more than twelve notes.
-
-    The program will not crash, however, it is unexpected behaviour for
-    this scenario to occur. It means that a previously running function,
-    is not operating correctly.
-
-    Variables:
-        list_of_keys = A pytest fixture returning every possible lilypond key.
-        key_offset_dict = A pytest fixture returning our key offset.
-    """
-
-    for key in all_keys:
-        # assert generate_key_offset(key, key_offset_dict) == \
-        #       key_offset_dict.get(key)  # Is this test needed?
-
-        assert -5 <= generate_key_offset(key, key_offset_dict) <= 6
-
-
-def test_lilypond_output():
-    """This test checks the functionality of the function which
-     converts our python note object into lilypond note format."""
-    assert True
-
-
-def test_find_length_of_bar():
-    """This test checks the functionality of the function which
-     converts our python note object into lilypond note format."""
-    assert True
-

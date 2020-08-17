@@ -46,11 +46,11 @@ def common_scales():
 
 
 @pytest.fixture(name='all_rhythms', scope='function', autouse=False)
-def lilypond_rhythms():
+def mingus_rhythms():
     """A fixture which only returns the standard variations of pitch in
-    Lilypond convention."""
+    mingus convention."""
 
-    return ["longa", "breve", 1, 2, 4, 8, 16, 32, 64, 128]
+    return [0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, 128]
 
 
 @pytest.fixture(name='common_rhythms', scope='function', autouse=False)
@@ -61,9 +61,31 @@ def common_rhythms():
         "short": [8, 16, 32, 64],
         "long": [1, 2, 4],
         "standard": [1, 2, 4, 8, 16, 32],
-        "extremes": ["longa", "breve", 64, 128]
+        "extremes": [0.25, 0.5, 64, 128]
     }
     return common_rhythms_dictionary
+
+
+@pytest.fixture(name='note_names_in_c', scope='function', autouse=False)
+def note_names_in_c():
+
+    c_chromatic_dictionary = {
+        1: 'C',
+        2: 'C#',
+        3: 'D',
+        4: 'D#',
+        5: 'E',
+        6: 'F',
+        7: 'F#',
+        8: 'G',
+        9: 'G#',
+        10: 'A',
+        11: 'A#',
+        12: 'B',
+        "r": "r"
+    }
+
+    return c_chromatic_dictionary
 
 
 @pytest.fixture(name='key_offset_dict', scope='function', autouse=False)
@@ -76,30 +98,32 @@ def key_offset():
     """
 
     key_offset_dictionary = {
-        'c': -5,
-        'cis': -4,
-        'des': -4,
-        'd': -3,
-        'dis': -2,
-        'ees': -2,
-        'e': -1,
-        'f': 0,
-        'fis': 1,
-        'ges': 1,
-        'g': 2,
-        'gis': 3,
-        'aes': 3,
-        'a': 4,
-        'ais': 5,
-        'bes': 5,
-        'b': 6
+        'C': 0,
+        'C#': 1,
+        'Db': 1,
+        'D': 2,
+        'D#': 3,
+        'Eb': 3,
+        'E': 4,
+        'F': 5,
+        'F#': 6,
+        'Gb': 6,
+        'G': 7,
+        'G#': 8,
+        'Ab': 8,
+        'A': 9,
+        'A#': 10,
+        'Bb': 10,
+        'B': 11
     }
 
     return key_offset_dictionary
+
+# Depreciated Fixtures -------------------------------------------------
 
 
 @pytest.fixture(name='all_keys', scope='function', autouse=False)
 def all_lilypond_keys():
     """A list of every possible music key root."""
-    return ['c', 'cis', 'des', 'd', 'dis', 'ees', 'e', 'f', 'fis', 'ges',
-            'g', 'gis', 'aes', 'a', 'ais', 'bes', 'b']
+    return ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb',
+            'G', 'A#', 'Ab', 'A', 'A#', 'Bb', 'B']
