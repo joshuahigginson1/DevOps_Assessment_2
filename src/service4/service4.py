@@ -4,6 +4,7 @@
 
 from mingus.containers import Bar
 from mingus.midi import midi_file_out
+from mingus.extra.lilypond import to_png, from_Bar
 
 # Functions ------------------------------------------------------------
 
@@ -62,23 +63,40 @@ while not output_bar.is_full():
     # Poll API for another note.
     # Rinse and repeat until bar is full.
 
-    break  # Temporary break statement.
+    # break  # Temporary break statement.
 
 # Transpose output bar to a given user key.
 
-key_to_transpose = 5
-transpose_up_or_down = True  # True is up, False is down.
+key_to_transpose = 5  # From generate key offset function.
+transpose_up_or_down = True  # True is up, False is down. From Service #1
 
 output_bar.transpose(str(key_to_transpose), transpose_up_or_down)
 
 # Save as MIDI
 
-output_beats_per_minute = 120
+output_beats_per_minute = 120  # From service #1
 
-midi_file_out.write_Bar("mélodie.mid", output_bar, output_beats_per_minute)
+file_name = "josh-test-midi-file"  # From service #1
+midi_file_suffix = file_name + "-mélodie.mid"
+midi_save_location = "midi_output/" + midi_file_suffix
+
+midi_file_out.write_Bar(midi_save_location, output_bar,
+                        output_beats_per_minute)
 
 
-# Depreciated Functions ------------------------------------------------
+""" lilypond_string = from_Bar(output_bar, showkey=True, showtime=True)
+
+# This feature will only work on a linux machine.
+# Save as lilypond string.
+
+png_file_suffix = file_name + "-mélodie.png"
+png_save_location = "png_output/" + png_file_suffix
+
+to_png(lilypond_string, png_file_suffix)  # Exports lilypond string to png.
+"""
+
+
+# Deprecated Functions -------------------------------------------------
 
 
 def transpose_pitch(raw_note_pitch, transposed_key_value=0):
