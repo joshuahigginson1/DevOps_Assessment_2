@@ -68,7 +68,7 @@ while not output_bar.is_full():
 # Transpose output bar to a given user key.
 
 key_to_transpose = 5  # From generate key offset function.
-transpose_up_or_down = True  # True is up, False is down. From Service #1
+transpose_up_or_down = True  # True is up, False is down.
 
 output_bar.transpose(str(key_to_transpose), transpose_up_or_down)
 
