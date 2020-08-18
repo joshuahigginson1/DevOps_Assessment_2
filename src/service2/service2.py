@@ -132,7 +132,7 @@ def on_post_request():
     return jsonify(note_pitch_output)
 
 
-# Run our service ------------------------------------------------------
+# Run Service ----------------------------------------------------------
 
 if __name__ == "__main__":
     service2.run(port=5002)

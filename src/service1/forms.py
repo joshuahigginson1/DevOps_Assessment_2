@@ -9,12 +9,11 @@ from wtforms import StringField, SelectField, SubmitField
 from wtforms.fields.html5 import IntegerRangeField
 from wtforms.validators import DataRequired, Length, NumberRange
 
-# Import our validators.
-
 # Classes --------------------------------------------------------------
 
 
 class MelodieForm(FlaskForm):  # Creates child class from parent 'FlaskForm'.
+    """This is the main form for our front page of service #1."""
 
     file_name = StringField('File Name',
                             default="melodie",
@@ -35,6 +34,8 @@ class MelodieForm(FlaskForm):  # Creates child class from parent 'FlaskForm'.
                               validators=[
                                   DataRequired(message="Please pick a key.")])
 
+    # Get Musical Scale info from get request to service 2.
+
     musical_scale = SelectField('Scale',
                                 default='minor blues',
                                 choices=["chromatic",
@@ -48,6 +49,14 @@ class MelodieForm(FlaskForm):  # Creates child class from parent 'FlaskForm'.
                                 validators=[
                                     DataRequired(message="Pick a scale.")])
 
+    # Get list of rhythms using a get request to service 3.
+
+    rhythm_length = SelectField("rhythm",
+                                default='Rhythm of the night',
+                                choices=["FROM SERVICE 3"],
+                                validators=[
+                                    DataRequired(message="Pick a rhythm.")])
+
     tempo = IntegerRangeField('Tempo',
                               default=120,
                               validators=[NumberRange(min=60, max=220)])
@@ -59,4 +68,5 @@ class MelodieForm(FlaskForm):  # Creates child class from parent 'FlaskForm'.
                                  validators=[DataRequired(
                                      message="Pick a time signature.")])
 
-    submit = SubmitField('Submit')
+    go = SubmitField('Go')
+    refresh = SubmitField('Refresh')
