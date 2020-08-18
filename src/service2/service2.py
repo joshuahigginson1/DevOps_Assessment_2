@@ -31,17 +31,17 @@ def return_scale_dictionary():
     When Service #2 receives a GET request, it will send the output.
     """
 
-    # TODO: Write unit test for return_scale_dictionary() API functionality.
+    # TODO: Write unit test for return_scale_dictionary().
 
     scale_list = {
-        "chromatic": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, "r"],
-        "major": [1, 3, 5, 6, 8, 10, 12, 13, "r"],
-        "major pentatonic": [1, 3, 5, 8, 10, 13, "r"],
-        "major blues": [1, 3, 4, 5, 8, 10, 13, "r"],
-        "natural minor": [1, 3, 4, 6, 8, 9, 11, 13, "r"],
-        "harmonic minor": [1, 3, 4, 6, 8, 9, 12, 13, "r"],
-        "minor pentatonic": [1, 4, 6, 8, 11, 13, "r"],
-        "minor blues": [1, 4, 6, 7, 8, 11, 13, "r"]
+        "chromatic": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "r"],
+        "major": [1, 3, 5, 6, 8, 10, 12, "r"],
+        "major pentatonic": [1, 3, 5, 8, 10, "r"],
+        "major blues": [1, 3, 4, 5, 8, 10, "r"],
+        "natural minor": [1, 3, 4, 6, 8, 9, 11, "r"],
+        "harmonic minor": [1, 3, 4, 6, 8, 9, 12, "r"],
+        "minor pentatonic": [1, 4, 6, 8, 11, "r"],
+        "minor blues": [1, 4, 6, 7, 8, 11, "r"]
     }
 
     return scale_list
@@ -53,6 +53,9 @@ def return_scale_dictionary():
 @service2.route('/', methods=['GET'])
 def on_get_request():
     """This function triggers after every get request, to the endpoint '/'"""
+
+    # TODO: Write unit test for on_get_request().
+
     return jsonify(return_scale_dictionary())
 
 
@@ -119,9 +122,14 @@ def on_post_request():
     We expect to receive a specific set of notes from service 1.
     """
 
-    received_data = request.data.decode('utf-8')
-    note_pitch_output = return_random_pitch(received_data)
-    return Response(note_pitch_output, mimetype="text/plain")
+    # TODO: Write unit test for on_post_request().
+
+    received_data = request.get_json()
+    converted_data = list(received_data.values())
+    note_pitch_output = return_random_pitch(converted_data[0])
+    print(f'Converted data: {converted_data[0]}')
+    print(f'Note pitch output: {note_pitch_output}')
+    return jsonify(note_pitch_output)
 
 
 # Run our service ------------------------------------------------------

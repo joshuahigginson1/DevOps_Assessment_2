@@ -21,7 +21,7 @@ def melodie_proprietary_pitches():
     """A fixture which returns the notes in a chromatic musical scale,
     into our own proprietary format."""
 
-    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, "r"]
+    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "r"]
 
 
 @pytest.fixture(name='common_scales', scope='function', autouse=False)
@@ -33,14 +33,14 @@ def common_scales():
     the root note starts with 'F'.
     """
     common_scales = {
-        "chromatic": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, "r"],
-        "major": [1, 3, 5, 6, 8, 10, 12, 13, "r"],
-        "major pentatonic": [1, 3, 5, 8, 10, 13, "r"],
-        "major blues": [1, 3, 4, 5, 8, 10, 13, "r"],
-        "natural minor": [1, 3, 4, 6, 8, 9, 11, 13, "r"],
-        "harmonic minor": [1, 3, 4, 6, 8, 9, 12, 13, "r"],
-        "minor pentatonic": [1, 4, 6, 8, 11, 13, "r"],
-        "minor blues": [1, 4, 6, 7, 8, 11, 13, "r"]
+        "chromatic": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "r"],
+        "major": [1, 3, 5, 6, 8, 10, 12, "r"],
+        "major pentatonic": [1, 3, 5, 8, 10, "r"],
+        "major blues": [1, 3, 4, 5, 8, 10, "r"],
+        "natural minor": [1, 3, 4, 6, 8, 9, 11, "r"],
+        "harmonic minor": [1, 3, 4, 6, 8, 9, 12, "r"],
+        "minor pentatonic": [1, 4, 6, 8, 11, "r"],
+        "minor blues": [1, 4, 6, 7, 8, 11, "r"]
     }
     return common_scales
 

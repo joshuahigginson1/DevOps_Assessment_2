@@ -9,7 +9,7 @@ On a POST request, we want out program to return a random note length..
 # Imports --------------------------------------------------------------
 
 import random
-from flask import Flask, Response, request, jsonify
+from flask import Flask, request, jsonify
 
 # Flask ----------------------------------------------------------------
 
@@ -19,7 +19,6 @@ service3 = Flask(__name__)
 
 # On GET Request -------------------------------------------------------
 # Helper Functions -----------------------------------------------------
-
 
 def return_rhythms_dictionary():
     """This function is to be used with a GET request, returning a list of
@@ -54,7 +53,7 @@ def on_get_request():
 
 
 # On POST Request ------------------------------------------------------
-# Helper Function ------------------------------------------------------
+# Helper Functions -----------------------------------------------------
 
 def random_note_length(common_rhythms):
     """This function is to be used with a POST request, generating a random
@@ -67,16 +66,30 @@ def random_note_length(common_rhythms):
 
 
 # Function -------------------------------------------------------------
+
+
 @service3.route('/', methods=['POST'])
 def on_post_request():
     """This function triggers after every post request to the endpoint '/'
-    We expect to receive a specific set of rhythms from service 1.
+    We expect to receive a specific set of rhythms from service 1, in JSON
+    format.
+
+    We parse the JSON with function 'request.get_json(). This turns it into
+    a python dictionary.
+
+    We convert this dictionary into a list. Annoyingly because our data is
+    already encapsulated as a list, this method creates  a 'list inside a list'
+    This is why we must use index[0] to retrieve our data.
+
+    We then run this data through our random function, to return a note length.
+
     """
 
-    received_data = request.data.decode('utf-8')
-    note_length_output = random_note_length(received_data)
+    received_data = request.get_json()
 
-    return Response(note_length_output, mimetype="text/plain")
+    converted_data = list(received_data.values())
+    note_length_output = random_note_length(converted_data[0])
+    return jsonify(note_length_output)
 
 
 # Run our service ------------------------------------------------------

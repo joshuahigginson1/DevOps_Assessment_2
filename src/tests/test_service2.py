@@ -4,11 +4,8 @@
 
 from src.service2.service2 import generate_random_note_pitch, get_note_name
 
+# Test Functions -------------------------------------------------------
 
-# Classes --------------------------------------------------------------
-
-
-# Functions ------------------------------------------------------------
 
 def test_generate_random_note_pitch(common_scales, all_pitches):
     """This test checks our random note pitch function.
@@ -34,9 +31,4 @@ def test_get_note_name(note_names_in_c):
         note_name = note_names_in_c.get(note_pitch)
         assert get_note_name(note_pitch, note_names_in_c) == note_name
 
-# Methods --------------------------------------------------------------
-
-
-# Define Variables -----------------------------------------------------
-
-# Execute Code ---------------------------------------------------------
+# Test API Requests ----------------------------------------------------
