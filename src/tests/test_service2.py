@@ -3,6 +3,7 @@
 # Imports --------------------------------------------------------------
 
 from src.service2.service2 import generate_random_note_pitch, get_note_name
+from unittest.mock import patch
 
 # Test Functions -------------------------------------------------------
 
@@ -49,4 +50,5 @@ def test_on_get_request():
 def test_on_post_request():
     """This function tests our POST request functionality for our API."""
     # TODO: Write unit test for on_post_request().
+
     assert True
