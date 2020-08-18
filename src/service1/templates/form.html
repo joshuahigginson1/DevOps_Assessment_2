@@ -1,0 +1,55 @@
+<!-- This html file represents our form front end for Melodie --->
+
+{% block body_content %}
+
+    <div class='form'>
+
+        <form method='POST' action=''>
+
+            {{ form.hidden_tag() }}
+
+            <br>
+
+            {{ form.file_name.label }}
+            {{ form.file_name }}
+
+            <br> <br> <br>
+
+            {{ form.tempo.label }}
+            {{ form.tempo(min=60, max=220, oninput="sliderId.value =
+            form.tempo.value") }}
+            <output name="sliderLabel" id="sliderId">120</output>
+
+
+            <br> <br>
+
+            {{ form.rhythm_length.label}}
+            {{ form.rhythm_length }}
+
+            <br> <br>
+
+            {{ form.time_signature.label }}
+            {{ form.time_signature }}
+
+            <br> <br> <br>
+
+            {{ form.musical_key.label }}
+            {{ form.musical_key }}
+
+            <br> <br>
+
+            {{ form.musical_scale.label }}
+            {{ form.musical_scale }}
+
+            <br> <br> <br>
+
+            {{ form.go.label }}  {{ form.go }}
+
+            <br>
+            <br>
+
+        </form>
+
+    </div>
+
+{% endblock %}

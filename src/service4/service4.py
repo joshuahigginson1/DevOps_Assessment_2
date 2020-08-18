@@ -1,14 +1,17 @@
 """This file contains the functions for service4 Implementation 1 & 2."""
 
 # Imports --------------------------------------------------------------
-import json
-
-from flask import jsonify
+from flask import Flask, send_from_directory, abort
 from mingus.containers import Bar
 from mingus.midi import midi_file_out
 from mingus.extra.lilypond import to_png, from_Bar
 
 import requests
+
+# Flask ----------------------------------------------------------------
+
+# Create our flask application.
+service4 = Flask(__name__)
 
 
 # Functions ------------------------------------------------------------
@@ -29,8 +32,8 @@ def unpack_json():
 def create_bar(user_key, user_time_signature):
     """This function returns a new Mingus bar object.
     Keyword Arguments:
-        user_key: TODO
-        user_time_signature: TODO
+        user_key: The user's selected key signature from service 1.
+        user_time_signature: The user's selected time signature from service 1.
         """
     return Bar(user_key, user_time_signature)
 
@@ -131,7 +134,7 @@ def add_notes_to_bar(initialised_bar):
     # While the bar is not full, we try and add a new note to the bar.
     while not bar_object.is_full():
         # We poll service 2 and 3 for a new note, and add to bar.
-        filled = initialised_bar(bar_object, poll_service3(), poll_service2())
+        filled = initialised_bar(bar_object, post_service3(), post_service2())
 
     # When the bar is full, it will break out of this loop, and return a
     # full bar.
@@ -149,7 +152,13 @@ def transpose_bar(full_bar, key_to_transpose, transpose_up_or_down=True):
 
 
 def save_as_midi(file_name, output_bar, user_tempo):
-    """TODO"""
+    """This file generates a midi file from our mingus bar.
+
+        Keyword Arguments:
+            file_name: The user's chosen file name.midi
+            output_bar: A full mingus bar.
+            user_tempo: The user's selected tempo in BPM.
+    """
     midi_file_suffix = file_name + "-melodie.mid"
     midi_save_location = "midi_output/" + midi_file_suffix
 
@@ -181,3 +190,47 @@ s1_user_rhythm_key_pair = {"standard": [1, 2, 4, 8, 16, 32]}
 
 post_service2(service_2_url, s1_user_scale_key_pair)
 post_service3(service_3_url, s1_user_rhythm_key_pair)
+
+
+def send_png_to_user(user_file_name):
+    """This function returns our png file to the user if it has saved
+    correctly.
+     Keyword Arguments:
+         user_file_name: The file name set by our user in service 1.
+         """
+
+    png_save_location = f"png_output/{user_file_name}-melodie"
+    file_name = f"{user_file_name}-melodie"
+
+    try:
+        return send_from_directory(png_save_location,
+                                   filename=file_name,
+                                   as_attachment=True)
+
+    except FileNotFoundError:
+        abort(404)
+
+
+def send_midi_to_user(user_file_name):
+    """This function returns our midi file to the user if it has saved
+    correctly.
+     Keyword Arguments:
+         user_file_name: The file name set by our user in service 1.
+         """
+
+    midi_save_location = f"midi_output/{user_file_name}-melodie"
+    file_name = f"{user_file_name}-melodie"
+
+    try:
+        return send_from_directory(midi_save_location,
+                                   filename=file_name,
+                                   as_attachment=True)
+
+    except FileNotFoundError:
+        abort(404)
+
+
+# Run our service ------------------------------------------------------
+
+if __name__ == "__main__":
+    service4.run(port=5004)
