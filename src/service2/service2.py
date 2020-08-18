@@ -9,10 +9,17 @@ On a POST request, we want out program to return a random note.
 # Imports --------------------------------------------------------------
 
 import random
+from flask import Flask, jsonify, request, Response
+
+# Flask ----------------------------------------------------------------
+
+# Create our flask application.
+service2 = Flask(__name__)
 
 
 # On GET Request -------------------------------------------------------
-# Functions ------------------------------------------------------------
+# Helper Functions -----------------------------------------------------
+
 
 def return_scale_dictionary():
     """This function is to be used with a GET request, returning a list of
@@ -40,10 +47,19 @@ def return_scale_dictionary():
     return scale_list
 
 
+# Function -------------------------------------------------------------
+
+
+@service2.route('/', methods=['GET'])
+def on_get_request():
+    """This function triggers after every get request, to the endpoint '/'"""
+    return jsonify(return_scale_dictionary())
+
+
 # On POST Request ------------------------------------------------------
 # Helper Functions -----------------------------------------------------
 
-def random_note_pitch(scale_list):
+def generate_random_note_pitch(scale_list):
     """Generate a random note pitch determinant on the scale list.
 
     Keyword Arguments:
@@ -63,8 +79,6 @@ def get_note_name(generated_note_pitch, note_names_in_c):
     """
     return note_names_in_c.get(generated_note_pitch)
 
-
-# Function -------------------------------------------------------------
 
 def return_random_pitch(user_chosen_scale):
     """This function is to be used with a POST request, returning a random
@@ -92,5 +106,25 @@ def return_random_pitch(user_chosen_scale):
 
     # TODO: Write unit test for return_random_pitch() with API functionality.
 
-    rand_note_pitch = random_note_pitch(user_chosen_scale)
+    rand_note_pitch = generate_random_note_pitch(user_chosen_scale)
     return get_note_name(rand_note_pitch, c_chromatic_dictionary)
+
+
+# Function -------------------------------------------------------------
+
+
+@service2.route('/', methods=['POST'])
+def on_post_request():
+    """This function triggers after every post request to the endpoint '/'
+    We expect to receive a specific set of notes from service 1.
+    """
+
+    received_data = request.data.decode('utf-8')
+    note_pitch_output = return_random_pitch(received_data)
+    return Response(note_pitch_output, mimetype="text/plain")
+
+
+# Run our service ------------------------------------------------------
+
+if __name__ == "__main__":
+    service2.run()

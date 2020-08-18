@@ -9,12 +9,19 @@ On a POST request, we want out program to return a random note length..
 # Imports --------------------------------------------------------------
 
 import random
+from flask import Flask, Response, request, jsonify
+
+# Flask ----------------------------------------------------------------
+
+# Create our flask application.
+service3 = Flask(__name__)
 
 
 # On GET Request -------------------------------------------------------
-# Functions ------------------------------------------------------------
+# Helper Functions -----------------------------------------------------
 
-def return_length_dictionary():
+
+def return_rhythms_dictionary():
     """This function is to be used with a GET request, returning a list of
     note lengths for our user to select from.
 
@@ -37,8 +44,17 @@ def return_length_dictionary():
     return rhythms_dictionary
 
 
+# Function -------------------------------------------------------------
+
+
+@service3.route('/', methods=['GET'])
+def on_get_request():
+    """This function triggers after every get request to the endpoint '/'"""
+    return jsonify(return_rhythms_dictionary())
+
+
 # On POST Request ------------------------------------------------------
-# Functions ------------------------------------------------------------
+# Helper Function ------------------------------------------------------
 
 def random_note_length(common_rhythms):
     """This function is to be used with a POST request, generating a random
@@ -48,3 +64,22 @@ def random_note_length(common_rhythms):
         common_rhythms: A list of common note rhythms, in Mingus format.
     """
     return random.choice(common_rhythms)
+
+
+# Function -------------------------------------------------------------
+@service3.route('/', methods=['POST'])
+def on_post_request():
+    """This function triggers after every post request to the endpoint '/'
+    We expect to receive a specific set of rhythms from service 1.
+    """
+
+    received_data = request.data.decode('utf-8')
+    note_length_output = random_note_length(received_data)
+
+    return Response(note_length_output, mimetype="text/plain")
+
+
+# Run our service ------------------------------------------------------
+
+if __name__ == "__main__":
+    service3.run()

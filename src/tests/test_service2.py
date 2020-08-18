@@ -2,7 +2,7 @@
 
 # Imports --------------------------------------------------------------
 
-from src.service2.service2 import random_note_pitch, get_note_name
+from src.service2.service2 import generate_random_note_pitch, get_note_name
 
 
 # Classes --------------------------------------------------------------
@@ -10,7 +10,7 @@ from src.service2.service2 import random_note_pitch, get_note_name
 
 # Functions ------------------------------------------------------------
 
-def test_random_note_pitch(common_scales, all_pitches):
+def test_generate_random_note_pitch(common_scales, all_pitches):
     """This test checks our random note pitch function.
 
     For every scale in our fixture of common scales, run our assertion:
@@ -20,7 +20,7 @@ def test_random_note_pitch(common_scales, all_pitches):
     """
 
     for key, scales in common_scales.items():
-        note = random_note_pitch(scales)
+        note = generate_random_note_pitch(scales)
         assert note in all_pitches
         assert isinstance(note, (int, str)) is True
 
