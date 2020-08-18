@@ -4,7 +4,7 @@
 
 from src.service3.service3 import random_note_length
 
-# Tests ----------------------------------------------------------------
+# Test Functions -------------------------------------------------------
 
 
 def test_random_note_length(common_rhythms, all_rhythms):
@@ -21,3 +21,24 @@ def test_random_note_length(common_rhythms, all_rhythms):
         assert rhythm in all_rhythms
         assert isinstance(rhythm, (int, float)) is True
 
+
+def test_return_rhythms_dictionary():
+    """This test checks our GET request API functionality."""
+
+    # TODO: Write unit test for return_rhythms_dict().
+    assert True
+
+
+# Test API Requests ----------------------------------------------------
+
+
+def test_on_get_request():
+    """This test checks our GET request functionality for our API."""
+    # TODO: Write unit test for GET req API functionality.
+    assert True
+
+
+def test_on_post_request():
+    """This test checks our POST request functionality for our API."""
+    # TODO: Write unit test for POST req API functionality.
+    assert True

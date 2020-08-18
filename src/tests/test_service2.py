@@ -31,4 +31,22 @@ def test_get_note_name(note_names_in_c):
         note_name = note_names_in_c.get(note_pitch)
         assert get_note_name(note_pitch, note_names_in_c) == note_name
 
+
+def test_return_random_pitch():
+    """This test checks our 'return random pitch' function."""
+    # TODO: Write unit test for return_random_pitch().
+    assert True
+
 # Test API Requests ----------------------------------------------------
+
+
+def test_on_get_request():
+    """This function tests our GET request functionality for our API."""
+    # TODO: Write unit test for on_get_request().
+    assert True
+
+
+def test_on_post_request():
+    """This function tests our POST request functionality for our API."""
+    # TODO: Write unit test for on_post_request().
+    assert True

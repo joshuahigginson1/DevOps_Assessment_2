@@ -9,7 +9,7 @@ On a POST request, we want out program to return a random note.
 # Imports --------------------------------------------------------------
 
 import random
-from flask import Flask, jsonify, request, Response
+from flask import Flask, jsonify, request
 
 # Flask ----------------------------------------------------------------
 
@@ -107,7 +107,7 @@ def return_random_pitch(user_chosen_scale):
         "r": "r"
     }
 
-    # TODO: Write unit test for return_random_pitch() with API functionality.
+    # TODO: Write unit test for return_random_pitch().
 
     rand_note_pitch = generate_random_note_pitch(user_chosen_scale)
     return get_note_name(rand_note_pitch, c_chromatic_dictionary)
