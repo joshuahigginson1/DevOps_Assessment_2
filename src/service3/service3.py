@@ -82,4 +82,4 @@ def on_post_request():
 # Run our service ------------------------------------------------------
 
 if __name__ == "__main__":
-    service3.run()
+    service3.run(port=5003)

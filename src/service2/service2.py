@@ -127,4 +127,4 @@ def on_post_request():
 # Run our service ------------------------------------------------------
 
 if __name__ == "__main__":
-    service2.run()
+    service2.run(port=5002)
