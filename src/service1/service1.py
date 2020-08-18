@@ -21,7 +21,7 @@ def get_service_2_response(url):
 
     print("\n ----------- Service 2 GET Response ----------- \n")
     print(decoded_service_2_response)
-
+    print("\n ----------- End of Service 2 GET Response ----------- \n")
     return decoded_service_2_response
 
 
@@ -33,7 +33,7 @@ def get_service_3_response(url):
 
     print("\n ----------- Service 3 GET Response ----------- \n")
     print(decoded_service_3_response)
-    print("\n ----------- End of GET Responses ----------- \n")
+    print("\n ----------- End of Service 3 GET Response ----------- \n")
 
     return decoded_service_3_response
 

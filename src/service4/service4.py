@@ -1,13 +1,38 @@
 """This file contains the functions for service4 Implementation 1 & 2."""
 
 # Imports --------------------------------------------------------------
+import json
 
+from flask import jsonify
 from mingus.containers import Bar
 from mingus.midi import midi_file_out
 from mingus.extra.lilypond import to_png, from_Bar
 
+import requests
+
 
 # Functions ------------------------------------------------------------
+
+def unpack_json():
+    """This function will unpack our JSON data into expected variables."""
+
+    s1_key = "C"  # From Service #1
+    s1_time_signature = 4, 4  # From Service #1
+    s1_tempo = 120  # From service #1
+    s1_file_name = "josh-test-midi-file"  # From service #1
+    s1_user_scale_key_pair = {"major blues": [1, 3, 4, 5, 8, 10, "r"]}
+    s1_user_rhythm_key_pair = {"standard": [1, 2, 4, 8, 16, 32]}
+    first_note_pitch = "C"  # Pull a note pitch from service #2.
+    first_note_length = 6  # Pull a note length from service #3.
+
+
+def create_bar(user_key, user_time_signature):
+    """This function returns a new Mingus bar object.
+    Keyword Arguments:
+        user_key: TODO
+        user_time_signature: TODO
+        """
+    return Bar(user_key, user_time_signature)
 
 
 def generate_key_offset(input_key, key_offset_dictionary):
@@ -27,121 +52,132 @@ def generate_key_offset(input_key, key_offset_dictionary):
 
     return key_offset_dictionary.get(input_key)
 
-# Execute Code ---------------------------------------------------------
+
+# Our post request will send all of this data over in a neat json format.
 
 
-output_key = "C"  # From Service #1
-output_time_signature = 4, 4  # From Service #1
-
-# Create new bar.
-
-output_bar = Bar(output_key, output_time_signature)
-
-# Pull a note pitch from service #2.
-
-first_note_pitch = "C"
-
-# Pull a note length from service #3.
-
-first_note_length = 6
-
-# While our output bar is not full, we will keep trying to add notes to it.
-# Return False if there is room in this Bar for another Note True otherwise.
-
-while not output_bar.is_full():
-    # We try and add the note to our bar.
-
-    # If note is rest, we call function place_rest().
-
-    if first_note_pitch == "r":
-        output_bar.place_rest(first_note_length)
-
-    # If note is note, we call function place_notes().
-
-    else:
-        output_bar.place_notes(first_note_pitch, first_note_length)
-
-    # Poll API for another note.
-    # Rinse and repeat until bar is full.
-
-
-# Transpose output bar to a given user key.
-
-key_to_transpose = 5  # From generate key offset function.
-transpose_up_or_down = True  # True is up, False is down.
-
-output_bar.transpose(str(key_to_transpose), transpose_up_or_down)
-
-# Save as MIDI
-
-output_beats_per_minute = 120  # From service #1
-
-file_name = "josh-test-midi-file"  # From service #1
-midi_file_suffix = file_name + "-melodie.mid"
-midi_save_location = "midi_output/" + midi_file_suffix
-
-midi_file_out.write_Bar(midi_save_location, output_bar,
-                        output_beats_per_minute)
-
-
-lilypond_string = from_Bar(output_bar, showkey=True, showtime=True)
-
-# This feature will only work with lilypond in path. Save as lilypond string.
-
-png_save_location = f"png_output/{file_name}-melodie"
-
-to_png(lilypond_string, png_save_location)  # Exports lilypond
-# string to png.
-
-# Deprecated Functions -------------------------------------------------
-
-
-def transpose_pitch(raw_note_pitch, transposed_key_value=0):
-    """ This function takes a raw note pitch and our transposed key value,
-    and will transpose the output accordingly, adding a new octave flag if
-    necessary.
-
-    - Check to see if the raw note pitch is a musical note, or a rest.
-    - Check if our value is out of bounds.
-    - Transpose objects needing no octave flag.
-    - Transpose objects needing a lower octave flag.
-    - Transpose objects needing a higher object flag.
-    - Return our transposed note pitch.
+def post_service2(url, scale_key_pair):
+    """Using our existing user data from s1, we use this function to
+    send a post request to s2, for a new note pitch.
 
     Keyword Arguments:
-        raw_note_pitch: This is the randomly generated note pitch from
-        service #2.
+        url: The url of service 2.
+        scale_key_pair: A key pair scale list dictionary.
 
-        transposed_key_value: This is the transposed key value, AKA the
-        output from the function in service #1 - 'generate_key_offset'. This
-        defaults to 0 - the key of F chromatic.
     """
-    transposed_ova = ""
 
-    if raw_note_pitch == "r":
-        transposed_pitch = "r"
+    service_2_response = requests.post(url, json=scale_key_pair)
+    json_response_data = service_2_response.json()
+    status_code_response = service_2_response.status_code
 
-    elif raw_note_pitch < 0 or raw_note_pitch > 13:
-        raise ValueError("You should enter a value between 1 and 13.")
+    print("\n ----------- Service 2 POST Response ----------- \n")
 
-    # If raw note pitch is between 1 and 12, we don't add an octave flag.
+    print(f'Data: {json_response_data}')
+    print(f'Response Code: {status_code_response}')
 
-    elif 1 <= (raw_note_pitch + transposed_key_value) <= 12:
-        transposed_pitch = raw_note_pitch + transposed_key_value
+    print("\n ----------- End of Service 2 POST Response ----------- \n")
 
-    # If note pitch is transposed lower than our pitch range, add -1 ova flag.
+    return json_response_data
 
-    elif (raw_note_pitch + transposed_key_value) < 1:
-        transposed_pitch = raw_note_pitch + transposed_key_value + 12
-        transposed_ova = ","
 
-    # If note pitch is transposed higher than our pitch range, add +1 ova flag.
+def post_service3(url, rhythm_key_pair):
+    """Using our existing user data from s1, we use this function to
+    poll s3 with a post request for a new note length.
 
-    elif raw_note_pitch + transposed_key_value > 12:
-        transposed_pitch = raw_note_pitch + transposed_key_value - 12
-        transposed_ova = "'"
+    Keyword Arguments:
+        url: The url of service 3.
+        rhythm_key_pair: A key pair rhythm list dictionary.
 
+    """
+
+    service_3_response = requests.post(url, json=rhythm_key_pair)
+    json_response_data = service_3_response.json()
+    status_code_response = service_3_response.status_code
+
+    print("\n ----------- Service 3 POST Response ----------- \n")
+
+    print(f'Data: {json_response_data}')
+    print(f'Response Code: {status_code_response}')
+
+    print("\n ----------- End of Service 3 POST Response ----------- \n")
+
+    return json_response_data
+
+
+def initialise_bar(bar_object, note_length, note_pitch):
+    """This function adds a new note to an existing bar object.
+    Keyword Arguments:
+        bar_object: Our empty mingus bar object.
+        note_length: A given note length in mingus syntax.
+        note_pitch: A given note pitch in mingus syntax.
+        """
+    # TODO: Test add_note_to_bar function
+
+    if note_pitch == "r":
+        return bar_object.place_rest(note_length)
+
+    # If note is note, we call function place_notes().
     else:
-        raise TypeError("")
+        return bar_object.place_notes(note_pitch, note_length)
 
-    return transposed_pitch, transposed_ova
+
+def add_notes_to_bar(initialised_bar):
+    """This function fills an existing bar object with new notes, polled
+    from service 2 and service 3.
+    """
+    # TODO: Test fill_bar_with_notes function
+    bar_object = initialised_bar
+
+    # While the bar is not full, we try and add a new note to the bar.
+    while not bar_object.is_full():
+        # We poll service 2 and 3 for a new note, and add to bar.
+        filled = initialised_bar(bar_object, poll_service3(), poll_service2())
+
+    # When the bar is full, it will break out of this loop, and return a
+    # full bar.
+
+    return filled
+
+
+def transpose_bar(full_bar, key_to_transpose, transpose_up_or_down=True):
+    """This function transposes our full bar, dependent on the user's
+    chosen key signature in service 1."""
+
+    key_to_transpose = 5  # From generate key offset function.
+
+    full_bar.transpose(str(key_to_transpose), transpose_up_or_down)
+
+
+def save_as_midi(file_name, output_bar, user_tempo):
+    """TODO"""
+    midi_file_suffix = file_name + "-melodie.mid"
+    midi_save_location = "midi_output/" + midi_file_suffix
+
+    return midi_file_out.write_Bar(midi_save_location, output_bar,
+                                   user_tempo)
+
+
+def save_as_png(file_name, output_bar):
+    """This file generates a lilypond string from our mingus bar, and saves
+    it as a PNG file.
+        Keyword Arguments:
+            file_name: The user's chosen file name.png
+            output_bar: A full mingus bar.
+    """
+    lilypond_string = from_Bar(output_bar, showkey=True, showtime=True)
+
+    # This feature will only work with lilypond in path.
+
+    png_save_location = f"png_output/{file_name}-melodie"
+
+    return to_png(lilypond_string, png_save_location)
+
+
+service_2_url = "http://0.0.0.0:5002/"
+service_3_url = "http://0.0.0.0:5003/"
+
+s1_user_scale_key_pair = {"major blues": [1, 3, 4, 5, 8, 10, "r"]}
+s1_user_rhythm_key_pair = {"standard": [1, 2, 4, 8, 16, 32]}
+
+post_service2(service_2_url, s1_user_scale_key_pair)
+post_service3(service_3_url, s1_user_rhythm_key_pair)

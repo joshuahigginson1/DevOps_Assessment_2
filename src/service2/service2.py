@@ -125,7 +125,11 @@ def on_post_request():
     # TODO: Write unit test for on_post_request().
 
     received_data = request.get_json()
+    print(f"Received data = {received_data}")
+
     converted_data = list(received_data.values())
+    print(f"Converted data = {converted_data}")
+
     note_pitch_output = return_random_pitch(converted_data[0])
     print(f'Converted data: {converted_data[0]}')
     print(f'Note pitch output: {note_pitch_output}')
