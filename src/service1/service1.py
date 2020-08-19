@@ -217,7 +217,14 @@ def return_form():
 
     if homepage_form.validate_on_submit():
         json_data = validate_on_submit_func(homepage_form)
-        response = requests.post(service_4_url, json=json_data)
+        our_file = requests.post(service_4_url, json=json_data)
+
+        print(our_file.json)
+        print(our_file.content)
+        print(our_file.text.encode("utf-8"))
+
+        return our_file
+
 
         # This output is ready to send to S4.
 

@@ -1,7 +1,7 @@
 """This file contains the functions for service4 Implementation 1 & 2."""
 
 # Imports --------------------------------------------------------------
-from flask import Flask, send_from_directory, abort, request
+from flask import Flask, abort, request, send_from_directory
 from mingus.containers import Bar
 from mingus.midi import midi_file_out
 from mingus.extra.lilypond import to_png, from_Bar
@@ -15,7 +15,11 @@ import ast
 # Create our flask application.
 service4 = Flask(__name__)
 
+PNG_DIRECTORY = "/Users/mac/Documents/GitHub/DevOps_Assessment_2/src" \
+                "/service4/png_output/"
 
+MIDI_DIRECTORY = "/Users/mac/Documents/GitHub/DevOps_Assessment_2/src" \
+                 "/service4/midi_output/"
 # Functions ------------------------------------------------------------
 
 
@@ -168,15 +172,15 @@ def send_png_to_user(user_file_name):
          user_file_name: The file name set by our user in service 1.
          """
 
-    png_save_location = f"png_output/{user_file_name}-melodie"
-    file_name = f"{user_file_name}-melodie"
+    file_name = f"{user_file_name}-melodie.png"
 
     try:
-        return send_from_directory(png_save_location,
+        return send_from_directory(PNG_DIRECTORY,
                                    filename=file_name,
                                    as_attachment=True)
 
     except FileNotFoundError:
+        print("I could not find the file.")
         abort(404)
 
 
@@ -187,8 +191,8 @@ def send_midi_to_user(user_file_name):
          user_file_name: The file name set by our user in service 1.
          """
 
-    midi_save_location = f"midi_output/{user_file_name}-melodie"
-    file_name = f"{user_file_name}-melodie"
+    midi_save_location = f"midi_output/{user_file_name}-melodie.png"
+    file_name = f"{user_file_name}-melodie.png"
 
     try:
         return send_from_directory(midi_save_location,
@@ -256,32 +260,18 @@ def service4_post_request():
 
     # We transpose the bar.
 
-    transpose_bar(new_bar, s1_data.get("key"))
+    # transpose_bar(new_bar, s1_data.get("key"))
 
-    print(f"Transposed bar: {new_bar}")
+    # print(f"Transposed bar: {new_bar}")
 
     save_as_png(s1_data.get("file_name"), new_bar)
 
-    return "HELLO"
+    # Send file name to user.
+
+    send_png = send_png_to_user(s1_data.get("file_name"))
+
+    return send_png
 
 
 if __name__ == "__main__":
     service4.run(port=5004)
-
-""" def generate_key_offset(input_key, key_offset_dictionary):
-    A function which takes a given user's key, and offsets it to the key
-    of C chromatic.
-
-    We add our key_offset to the current pitch value.
-    We return a transposed index position (from the key of C chromatic).
-
-    Keyword Arguments:
-        input_key: The key of our musical phrase, set by the user in
-         service #1.
-
-        key_offset_dictionary: A mapping of each musical key in relation to
-         key of C. This should be in the form of a python dictionary.
-
-    return key_offset_dictionary.get(input_key)
-    
-    """
