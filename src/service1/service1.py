@@ -214,6 +214,8 @@ def return_form():
     if homepage_form.validate_on_submit():
         validate_on_submit_func(homepage_form)
 
+        # This output is ready to send to S4.
+
     return render_template('main_page.html', title='🎶 ~ Mélodie ~ 🎶',
                            form=homepage_form)
 

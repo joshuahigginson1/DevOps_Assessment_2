@@ -3,7 +3,6 @@
 # Imports --------------------------------------------------------------
 
 from src.service2.service2 import generate_random_note_pitch, get_note_name
-from unittest.mock import patch
 
 # Test Functions -------------------------------------------------------
 
