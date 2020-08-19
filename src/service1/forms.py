@@ -29,6 +29,9 @@ class MelodieForm(FlaskForm):  # Creates child class from parent 'FlaskForm'.
     service_2_url = "http://0.0.0.0:5002/"
     service_3_url = "http://0.0.0.0:5003/"
 
+    """ Our list gets sent backwards. We need to reverse it to display 
+    correctly in our form. """
+
     forward_s2_list = list(get_service_2_response(service_2_url).items())
     bward_s2_list = [(value, key) for (key, value) in forward_s2_list]
 

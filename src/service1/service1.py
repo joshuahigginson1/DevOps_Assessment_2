@@ -1,9 +1,10 @@
 # Task:
 
 # Imports --------------------------------------------------------------
+import ast
 
 import requests
-from flask import Flask, jsonify, render_template
+from flask import Flask, render_template
 
 # Flask ----------------------------------------------------------------
 
@@ -12,7 +13,15 @@ from flask import Flask, jsonify, render_template
 service1 = Flask(__name__)
 service1.config['SECRET_KEY'] = "selrkgjshglkjhgv345ksdhke4tdg"
 
+
 # Functions ------------------------------------------------------------
+
+
+def listify(input_string):
+    """This method converts our string representation of a list,
+    to an actual list."""
+    input_string = ast.literal_eval(input_string)
+    return input_string
 
 
 def convert_form_to_full_json_output(form_get_on_validation, full_dict):
@@ -26,18 +35,15 @@ def convert_form_to_full_json_output(form_get_on_validation, full_dict):
 
     """
     list_of_dict_items = list(full_dict.items())
-    print(list_of_dict_items)
+    output_form_list = listify(form_get_on_validation)
+    new_dict = {}
 
     for label, value in list_of_dict_items:
-        print(f"labeltype: {type(label)}")
-        print(f"{label}\n \n")
-        print(f"valuetype: {type(value)}")
-        print(f"{value}\n \n")
-        print(f"validformtype: {type(form_get_on_validation[0])}")
-        print(f"{form_get_on_validation} \n \n")
+        if value == output_form_list:
+            print("I am an NOT idiot sandwich. This works!")
+            new_dict = {label: value}
 
-        if value == form_get_on_validation:
-            print("I am an idiot sandwich.")
+    return new_dict
 
 
 def get_service_2_response(url):
@@ -51,8 +57,6 @@ def get_service_2_response(url):
     print("\n ----------- End of Service 2 GET Response ----------- \n")
     return decoded_service_2_response
 
-# Now, we need to find a way of using this in our form.
-
 
 def get_service_3_response(url):
     """This function returns a get request from service 3."""
@@ -65,8 +69,6 @@ def get_service_3_response(url):
     print("\n ----------- End of Service 3 GET Response ----------- \n")
 
     return decoded_service_3_response
-
-# Now, we need to find a way of using this in our form.
 
 
 def post_service_2_response(url, scale_key_pair):
@@ -93,10 +95,28 @@ def post_service_2_response(url, scale_key_pair):
     return json_response_data
 
 
-def post_service_3_response(url, data):
-    """This function returns a post request from service 2."""
-    # TODO: Add s3 post response functionality & tests.
-    return "hi"
+def post_service_3_response(url, length_key_pair):
+    """Using the user entry for length key-pair, we use this function to
+    send a post request to s3, for a new note length.
+
+    Keyword Arguments:
+        url: The url of service 2.
+        length_key_pair: A key pair scale list dictionary.
+
+    """
+
+    service_3_response = requests.post(url, json=length_key_pair)
+    json_response_data = service_3_response.json()
+    status_code_response = service_3_response.status_code
+
+    print("\n ----------- Service 3 POST Response ----------- \n")
+
+    print(f'Data: {json_response_data}')
+    print(f'Response Code: {status_code_response}')
+
+    print("\n ----------- End of Service 3 POST Response ----------- \n")
+
+    return json_response_data
 
 
 def post_service_4_response(url):
@@ -122,50 +142,81 @@ def service_1_json_bundle(key, time_signature, tempo, file_name,
 
     service1_dictionary = {
         "key": key,
-        "time_signature": (4, 4),  # From Service #1
+        "time_signature": time_signature,
         "tempo": tempo,
         "file_name": file_name,
-        "scale_key_pair": {"major blues": [1, 3, 4, 5, 8, 10, "r"]},
-        "rhythm_key_pair": {"standard": [1, 2, 4, 8, 16, 32]},
-
-        "first_note_pitch": "C",  # Pull a note pitch from service #2.
-        "first_note_length": 6,  # Pull a note length from service #3.
+        "scale_key_pair": scale_key_pair,
+        "rhythm_key_pair": rhythm_key_pair,
+        "first_note_pitch": first_note_pitch,
+        "first_note_length": first_note_length
     }
 
-    return jsonify(service1_dictionary)
+    return service1_dictionary
+
+
+def validate_on_submit_func(homepage_form):
+    """This function executes logic for creating a JSON dictionary for all
+    values, ready to be shipped onto service 4."""
+
+    service_2_url = "http://0.0.0.0:5002/"
+    service_3_url = "http://0.0.0.0:5003/"
+
+    # Retrieve the S2 dictionary with at GET request.
+    s2_dict = get_service_2_response(service_2_url)
+
+    # Convert the data from our form ready for JSON output.
+
+    s2_post_data = convert_form_to_full_json_output(
+        homepage_form.musical_scale.data,
+        s2_dict)
+
+    # Send post request to service 2 and get response.
+    s2_post_resp = post_service_2_response(service_2_url, s2_post_data)
+
+    print(f"s2_post_resp = {s2_post_resp}")
+
+    s3_dict = get_service_3_response(service_3_url)
+
+    s3_post_data = convert_form_to_full_json_output(
+        homepage_form.rhythm_length.data,
+        s3_dict)
+
+    s3_post_resp = post_service_3_response(service_3_url, s3_post_data)
+
+    print(f"s3_post_resp = {s3_post_resp}")
+
+    s1_data = service_1_json_bundle(
+        homepage_form.musical_key.data,
+        homepage_form.time_signature.data,
+        homepage_form.tempo.data,
+        homepage_form.file_name.data,
+        s2_post_data,
+        s3_post_data,
+        s2_post_resp,
+        s3_post_resp)
+
+    print("\n ----- s1_data ----- \n")
+
+    print(s1_data)
+
+    print("\n ----- End of S1 Data ----- \n")
+
+    return s1_data
 
 
 # Routes ---------------------------------------------------------------
 
 @service1.route("/", methods=["GET", "POST"])
 def return_form():
-
     from src.service1.forms import MelodieForm
     homepage_form = MelodieForm()  # Instantiate a new form.
 
-    service_2_url = "http://0.0.0.0:5002/"
-    service_3_url = "http://0.0.0.0:5003/"
-
     if homepage_form.validate_on_submit():
-
-        # post_service_2_response(service_2_url)
-        # post_service_3_response(service_3_url, data)
-
-        s2_dict = get_service_2_response(service_2_url)
-
-        aa = homepage_form.musical_scale.raw_data
-        print(convert_form_to_full_json_output(aa, s2_dict))
-
-
-        # s1_data = service_1_json_bundle(
-        #    homepage_form.musical_key.data,
-        #    homepage_form.time_signature.data,
-        #    homepage_form.tempo.data,
-        #    homepage_form.file_name.data)
-        # return #Something
+        validate_on_submit_func(homepage_form)
 
     return render_template('main_page.html', title='🎶 ~ Mélodie ~ 🎶',
                            form=homepage_form)
+
 
 # Run Service ----------------------------------------------------------
 
