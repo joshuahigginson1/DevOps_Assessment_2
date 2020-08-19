@@ -208,11 +208,16 @@ def validate_on_submit_func(homepage_form):
 
 @service1.route("/", methods=["GET", "POST"])
 def return_form():
+
     from src.service1.forms import MelodieForm
+
     homepage_form = MelodieForm()  # Instantiate a new form.
 
+    service_4_url = "http://0.0.0.0:5004"
+
     if homepage_form.validate_on_submit():
-        validate_on_submit_func(homepage_form)
+        json_data = validate_on_submit_func(homepage_form)
+        response = requests.post(service_4_url, json=json_data)
 
         # This output is ready to send to S4.
 

@@ -1,12 +1,14 @@
 """This file contains the functions for service4 Implementation 1 & 2."""
 
 # Imports --------------------------------------------------------------
-from flask import Flask, send_from_directory, abort
+from flask import Flask, send_from_directory, abort, request
 from mingus.containers import Bar
 from mingus.midi import midi_file_out
 from mingus.extra.lilypond import to_png, from_Bar
 
 import requests
+
+import ast
 
 # Flask ----------------------------------------------------------------
 
@@ -16,47 +18,13 @@ service4 = Flask(__name__)
 
 # Functions ------------------------------------------------------------
 
-def unpack_json():
-    """This function will unpack our JSON data into expected variables."""
 
-    s1_key = "C"  # From Service #1
-    s1_time_signature = 4, 4  # From Service #1
-    s1_tempo = 120  # From service #1
-    s1_file_name = "josh-test-midi-file"  # From service #1
-    s1_user_scale_key_pair = {"major blues": [1, 3, 4, 5, 8, 10, "r"]}
-    s1_user_rhythm_key_pair = {"standard": [1, 2, 4, 8, 16, 32]}
-    first_note_pitch = "C"  # Pull a note pitch from service #2.
-    first_note_length = 6  # Pull a note length from service #3.
-
-
-def create_bar(user_key, user_time_signature):
+def create_bar(user_time_signature):
     """This function returns a new Mingus bar object.
     Keyword Arguments:
-        user_key: The user's selected key signature from service 1.
         user_time_signature: The user's selected time signature from service 1.
         """
-    return Bar(user_key, user_time_signature)
-
-
-def generate_key_offset(input_key, key_offset_dictionary):
-    """ A function which takes a given user's key, and offsets it to the key
-    of C chromatic.
-
-    We add our key_offset to the current pitch value.
-    We return a transposed index position (from the key of C chromatic).
-
-    Keyword Arguments:
-        input_key: The key of our musical phrase, set by the user in
-         service #1.
-
-        key_offset_dictionary: A mapping of each musical key in relation to
-         key of C. This should be in the form of a python dictionary.
-    """
-
-    return key_offset_dictionary.get(input_key)
-
-
-# Our post request will send all of this data over in a neat json format.
+    return Bar("C", user_time_signature)
 
 
 def post_service2(url, scale_key_pair):
@@ -124,31 +92,42 @@ def initialise_bar(bar_object, note_length, note_pitch):
         return bar_object.place_notes(note_pitch, note_length)
 
 
-def add_notes_to_bar(initialised_bar):
+def add_notes_to_bar(initialised_bar,
+                     s2_url,
+                     s3_url,
+                     scale_key_pair,
+                     rhythm_key_pair):
+
     """This function fills an existing bar object with new notes, polled
     from service 2 and service 3.
     """
     # TODO: Test fill_bar_with_notes function
-    bar_object = initialised_bar
 
     # While the bar is not full, we try and add a new note to the bar.
-    while not bar_object.is_full():
+    while not initialised_bar.is_full():
         # We poll service 2 and 3 for a new note, and add to bar.
-        filled = initialised_bar(bar_object, post_service3(), post_service2())
+
+        new_note_pitch = post_service2(s2_url, scale_key_pair)
+        print(f"The new note pitch is: {new_note_pitch}")
+
+        new_note_length = post_service3(s3_url, rhythm_key_pair)
+        print(f"The new note length is: {new_note_length}")
+
+        initialise_bar(initialised_bar, new_note_length, new_note_pitch)
+
+        print(initialised_bar)
 
     # When the bar is full, it will break out of this loop, and return a
     # full bar.
 
-    return filled
+    return "filled"
 
 
-def transpose_bar(full_bar, key_to_transpose, transpose_up_or_down=True):
+def transpose_bar(bar, key_to_transpose, transpose_up_or_down=True):
     """This function transposes our full bar, dependent on the user's
     chosen key signature in service 1."""
 
-    key_to_transpose = 5  # From generate key offset function.
-
-    full_bar.transpose(str(key_to_transpose), transpose_up_or_down)
+    return bar.transpose(key_to_transpose, transpose_up_or_down)
 
 
 def save_as_midi(file_name, output_bar, user_tempo):
@@ -180,16 +159,6 @@ def save_as_png(file_name, output_bar):
     png_save_location = f"png_output/{file_name}-melodie"
 
     return to_png(lilypond_string, png_save_location)
-
-
-service_2_url = "http://0.0.0.0:5002/"
-service_3_url = "http://0.0.0.0:5003/"
-
-s1_user_scale_key_pair = {"major blues": [1, 3, 4, 5, 8, 10, "r"]}
-s1_user_rhythm_key_pair = {"standard": [1, 2, 4, 8, 16, 32]}
-
-post_service2(service_2_url, s1_user_scale_key_pair)
-post_service3(service_3_url, s1_user_rhythm_key_pair)
 
 
 def send_png_to_user(user_file_name):
@@ -232,5 +201,87 @@ def send_midi_to_user(user_file_name):
 
 # Run our service ------------------------------------------------------
 
+
+@service4.route("/", methods=["POST"])
+def service4_post_request():
+    """This function triggers on a post request to service 4."""
+
+    # When we get a post request from S1, we first take the data and unpack it
+    # into something useful to us.
+
+    s1_data = request.get_json()
+    print(f"Received from S1: {s1_data}")
+
+    # We create a new bar with this information.
+
+    encode_time_signature = s1_data.get("time_signature")
+    decode_time_signature = ast.literal_eval(encode_time_signature)
+
+    new_bar = create_bar(decode_time_signature)
+
+    # Then we initialise the bar.
+
+    # NB sting and int return as normal. Others, we have to do literal
+    # evaluation.
+
+    print(" \n ----- Note Before Initialisation ----- \n")
+
+    print(new_bar)
+
+    initialise_bar(new_bar,
+                   s1_data.get("first_note_length"),
+                   s1_data.get("first_note_pitch"))
+
+    print(" \n ----- Note After Initialisation ----- \n")
+
+    print(new_bar)
+
+    # We run our "poll s2 and s3" function to fill the bar.
+
+    service_2_url = "http://0.0.0.0:5002/"
+    service_3_url = "http://0.0.0.0:5003/"
+
+    scale_key_pair = s1_data.get("scale_key_pair")
+
+    rhythm_key_pair = s1_data.get("rhythm_key_pair")
+
+    # Keep adding notes to our bar.
+
+    add_notes_to_bar(new_bar, service_2_url,
+                     service_3_url, scale_key_pair, rhythm_key_pair)
+
+    print(" \n ----- Note after S2 S3 Polling ----- \n ")
+
+    print(new_bar)
+
+    # We transpose the bar.
+
+    transpose_bar(new_bar, s1_data.get("key"))
+
+    print(f"Transposed bar: {new_bar}")
+
+    save_as_png(s1_data.get("file_name"), new_bar)
+
+    return "HELLO"
+
+
 if __name__ == "__main__":
     service4.run(port=5004)
+
+""" def generate_key_offset(input_key, key_offset_dictionary):
+    A function which takes a given user's key, and offsets it to the key
+    of C chromatic.
+
+    We add our key_offset to the current pitch value.
+    We return a transposed index position (from the key of C chromatic).
+
+    Keyword Arguments:
+        input_key: The key of our musical phrase, set by the user in
+         service #1.
+
+        key_offset_dictionary: A mapping of each musical key in relation to
+         key of C. This should be in the form of a python dictionary.
+
+    return key_offset_dictionary.get(input_key)
+    
+    """
