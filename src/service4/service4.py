@@ -1,7 +1,7 @@
 """This file contains the functions for service4 Implementation 1 & 2."""
 
 # Imports --------------------------------------------------------------
-from flask import Flask, abort, request, send_from_directory, jsonify
+from flask import Flask, abort, request, send_from_directory
 from mingus.containers import Bar
 from mingus.midi import midi_file_out
 from mingus.extra.lilypond import to_png, from_Bar
@@ -191,11 +191,10 @@ def send_midi_to_user(user_file_name):
          user_file_name: The file name set by our user in service 1.
          """
 
-    midi_save_location = f"midi_output/{user_file_name}-melodie.png"
-    file_name = f"{user_file_name}-melodie.png"
+    file_name = f"{user_file_name}-melodie.mid"
 
     try:
-        return send_from_directory(midi_save_location,
+        return send_from_directory(MIDI_DIRECTORY,
                                    filename=file_name,
                                    as_attachment=False)
 
@@ -264,11 +263,21 @@ def service4_post_request():
 
     # print(f"Transposed bar: {new_bar}")
 
-    save_as_png(s1_data.get("file_name"), new_bar)
+    # === IF MIDI! ===
 
-    # Send file name to user.
+    save_as_midi(s1_data.get("file_name"), new_bar, s1_data.get("tempo"))
 
-    return send_png_to_user(s1_data.get("file_name"))
+    # Send midi file name to user.
+
+    return send_midi_to_user(s1_data.get("file_name"))
+
+    # === IF PNG! ===
+
+    # save_as_png(s1_data.get("file_name"), new_bar)
+
+    # Send png file name to user.
+
+    # return send_png_to_user(s1_data.get("file_name"))
 
 
 if __name__ == "__main__":

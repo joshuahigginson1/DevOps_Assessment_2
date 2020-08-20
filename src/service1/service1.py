@@ -23,7 +23,7 @@ def get_png_download_name(user_file_name):
 
 def get_midi_download_name(user_file_name):
     """TODO"""
-    return f"{user_file_name}-melodie.midi"
+    return f"{user_file_name}-melodie.mid"
 
 
 def listify(input_string):
@@ -239,7 +239,7 @@ def return_form():
         json_data = validate_on_submit_func(homepage_form)
         our_file = requests.post(service_4_url, json=json_data)
 
-        # Can we find the file name from our response object? I think so.
+        # Find the file name from user form.
 
         file_name = homepage_form.file_name.data
 
@@ -248,15 +248,32 @@ def return_form():
         png_file_dir = f"file_output/{png_download_name}"
         midi_file_dir = f"file_output/{midi_download_name}"
 
-        # Look at the requests header, and find the file type from this.
-        # Then we write the file name dependent on this.
+        # Gets the content type from the header of S4 response.
 
-        with open(png_file_dir, "wb") as file_to_write:
-            print("Writing bytes from service4 to new file in service1... \n")
-            file_to_write.write(our_file.content)
-            print("Written new file. \n")
+        s4_content_type = our_file.headers.get("Content-Type")
 
-        download_name = png_download_name
+        # Then we write the file dependent on content type.
+
+        if "png" in s4_content_type:  # MIDI File
+
+            with open(png_file_dir, "wb") as file_to_write:
+                print("Writing bytes from service4 to new png file in "
+                      "service1... \n")
+
+                file_to_write.write(our_file.content)
+                print("Written new file. \n")
+
+            download_name = png_download_name
+
+        else:  # Writes MIDI file.
+            with open(midi_file_dir, "wb") as file_to_write:
+                print("Writing bytes from service4 to new midi file in "
+                      "service1... \n")
+
+                file_to_write.write(our_file.content)
+                print("Written new file. \n")
+
+            download_name = midi_download_name
 
         return render_template('main_page_download.html',
                                title='🎶 ~ Download Ready! ~ 🎶',
