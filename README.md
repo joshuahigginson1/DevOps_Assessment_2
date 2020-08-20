@@ -15,7 +15,7 @@ _Created for QA Consulting by Joshua Higginson_
 
 
 ![GitHub](https://img.shields.io/github/license/joshuahigginson1/DevOps_Assessment_2?style=flat-square)
-![Coffee](https://img.shields.io/badge/Coffee%20Consumed-%E2%98%95%20%2001%20Cups%20%20%E2%98%95-yellow?style=flat-square)
+![Coffee](https://img.shields.io/badge/Coffee%20Consumed-%E2%98%95%20%2007%20Cups%20%20%E2%98%95-yellow?style=flat-square)
 
 ## Contents
 - [Pre-Project Reflection](#pre-project-reflection)
@@ -191,6 +191,10 @@ The only things we I haven’t currently automated is the ‘in progress and don
 
 
 ## Project Architecture
+
+sting and int return as normal. Others, we have to do literal evaluation
+ using the ast. 
+
 
 
 

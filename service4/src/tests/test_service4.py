@@ -2,7 +2,7 @@
 
 # Imports --------------------------------------------------------------
 
-from src.service4.service4 import generate_key_offset
+from service4 import generate_key_offset
 
 # Tests ----------------------------------------------------------------
 

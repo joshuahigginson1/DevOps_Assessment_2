@@ -229,7 +229,7 @@ def add_header(r):
 
 @service1.route("/", methods=["GET", "POST"])
 def return_form():
-    from src.service1.forms import MelodieForm
+    from service1 import MelodieForm
 
     homepage_form = MelodieForm()  # Instantiate a new form.
 
