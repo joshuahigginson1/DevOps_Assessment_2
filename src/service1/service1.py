@@ -219,12 +219,14 @@ def return_form():
         json_data = validate_on_submit_func(homepage_form)
         our_file = requests.post(service_4_url, json=json_data)
 
-        print(our_file.json)
-        print(our_file.content)
-        print(our_file.text.encode("utf-8"))
+        # Can we find the file name from our response object? I think so.
 
-        return our_file
+        file_name = f"file_output/magic.png"
 
+        with open(file_name, "wb") as file_to_write:
+            print("Writing bytes from service4 to new file in service1...")
+            file_to_write.write(our_file.content)
+            print("Written new file.")
 
         # This output is ready to send to S4.
 

@@ -1,7 +1,7 @@
 """This file contains the functions for service4 Implementation 1 & 2."""
 
 # Imports --------------------------------------------------------------
-from flask import Flask, abort, request, send_from_directory
+from flask import Flask, abort, request, send_from_directory, jsonify
 from mingus.containers import Bar
 from mingus.midi import midi_file_out
 from mingus.extra.lilypond import to_png, from_Bar
@@ -177,7 +177,7 @@ def send_png_to_user(user_file_name):
     try:
         return send_from_directory(PNG_DIRECTORY,
                                    filename=file_name,
-                                   as_attachment=True)
+                                   as_attachment=False)
 
     except FileNotFoundError:
         print("I could not find the file.")
@@ -197,7 +197,7 @@ def send_midi_to_user(user_file_name):
     try:
         return send_from_directory(midi_save_location,
                                    filename=file_name,
-                                   as_attachment=True)
+                                   as_attachment=False)
 
     except FileNotFoundError:
         abort(404)
@@ -268,9 +268,7 @@ def service4_post_request():
 
     # Send file name to user.
 
-    send_png = send_png_to_user(s1_data.get("file_name"))
-
-    return send_png
+    return send_png_to_user(s1_data.get("file_name")).next
 
 
 if __name__ == "__main__":
