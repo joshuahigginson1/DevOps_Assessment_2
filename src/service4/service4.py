@@ -268,7 +268,7 @@ def service4_post_request():
 
     # Send file name to user.
 
-    return send_png_to_user(s1_data.get("file_name")).next
+    return send_png_to_user(s1_data.get("file_name"))
 
 
 if __name__ == "__main__":

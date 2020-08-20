@@ -7,7 +7,8 @@ A template which lays out the basic syntax for a forms.py file with WTForms.
 from flask_wtf import FlaskForm  # Import our Flask Form.
 from wtforms import StringField, SelectField, SubmitField
 from wtforms.fields.html5 import IntegerRangeField
-from wtforms.validators import DataRequired, Length, NumberRange
+from wtforms.validators import DataRequired, Length, NumberRange, \
+    ValidationError
 
 from src.service1.service1 import get_service_2_response, \
     get_service_3_response
@@ -111,3 +112,10 @@ class MelodieForm(FlaskForm):  # Creates child class from parent 'FlaskForm'.
                                      message="Pick a time signature.")])
 
     go = SubmitField('Go')
+
+    def validate_file_name(self, file_name):
+        cannot_contain = ["/", ".", "{", "}", "[", "]", "=", "$"]
+        for character in cannot_contain:
+            if character in file_name.data:
+                raise ValidationError(
+                    'Your file name contains illegal characters.')

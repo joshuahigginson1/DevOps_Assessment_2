@@ -4,7 +4,7 @@
 import ast
 
 import requests
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory, abort
 
 # Flask ----------------------------------------------------------------
 
@@ -15,6 +15,15 @@ service1.config['SECRET_KEY'] = "selrkgjshglkjhgv345ksdhke4tdg"
 
 
 # Functions ------------------------------------------------------------
+
+def get_png_download_name(user_file_name):
+    """TODO"""
+    return f"{user_file_name}-melodie.png"
+
+
+def get_midi_download_name(user_file_name):
+    """TODO"""
+    return f"{user_file_name}-melodie.midi"
 
 
 def listify(input_string):
@@ -208,7 +217,6 @@ def validate_on_submit_func(homepage_form):
 
 @service1.route("/", methods=["GET", "POST"])
 def return_form():
-
     from src.service1.forms import MelodieForm
 
     homepage_form = MelodieForm()  # Instantiate a new form.
@@ -221,17 +229,50 @@ def return_form():
 
         # Can we find the file name from our response object? I think so.
 
-        file_name = f"file_output/magic.png"
+        file_name = homepage_form.file_name.data
 
-        with open(file_name, "wb") as file_to_write:
-            print("Writing bytes from service4 to new file in service1...")
+        png_download_name = get_png_download_name(file_name)
+        midi_download_name = get_midi_download_name(file_name)
+        png_file_dir = f"file_output/{png_download_name}"
+        midi_file_dir = f"file_output/{midi_download_name}"
+
+        # Look at the requests header, and find the file type from this.
+        # Then we write the file name dependent on this.
+
+        with open(png_file_dir, "wb") as file_to_write:
+            print("Writing bytes from service4 to new file in service1... \n")
             file_to_write.write(our_file.content)
-            print("Written new file.")
+            print("Written new file. \n")
 
-        # This output is ready to send to S4.
+        download_name = png_download_name
 
-    return render_template('main_page.html', title='🎶 ~ Mélodie ~ 🎶',
+        return render_template('main_page_download.html',
+                               title='🎶 ~ Download Ready! ~ 🎶',
+                               form=homepage_form,
+                               download=download_name)
+
+    return render_template('main_page.html',
+                           title='🎶 ~ Mélodie ~ 🎶',
                            form=homepage_form)
+
+
+@service1.route("/<download_name>", methods=["GET", "POST"])
+def download_png(download_name):
+    """This function downloads our file upon post request."""
+
+    files_directory = "/Users/mac/Documents/GitHub/DevOps_Assessment_2/src" \
+                      "/service1/file_output/"
+
+    print(f" The file directory is: {files_directory}")
+    print(f" The filename is: {download_name}")
+
+    try:
+        return send_from_directory(files_directory,
+                                   filename=download_name,
+                                   as_attachment=True)
+
+    except FileNotFoundError:
+        abort(404)
 
 
 # Run Service ----------------------------------------------------------
