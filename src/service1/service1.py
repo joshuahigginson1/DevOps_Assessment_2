@@ -213,6 +213,20 @@ def validate_on_submit_func(homepage_form):
     return s1_data
 
 
+@service1.after_request
+def add_header(r):
+    """
+    Add headers to both force delete our cache.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
+
+
+
+
 # Routes ---------------------------------------------------------------
 
 @service1.route("/", methods=["GET", "POST"])
