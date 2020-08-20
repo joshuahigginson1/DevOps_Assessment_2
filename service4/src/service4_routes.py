@@ -87,9 +87,6 @@ def service4_post_request():
 
     midi_file_name = f"{s1_data.get('file_name')}-melodie.mid"
 
-    print(midi_file_name)
-    print(MIDI_DIRECTORY)
-
     return send_midi_to_user(midi_file_name, MIDI_DIRECTORY)
 
     # === IF PNG! ===

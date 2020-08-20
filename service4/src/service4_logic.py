@@ -176,11 +176,9 @@ def send_midi_to_user(user_file_name, midi_directory):
          user_file_name: The file name set by our user in service 1.
          """
 
-    file_name = f"{user_file_name}-melodie.mid"
-
     try:
         return send_from_directory(midi_directory,
-                                   filename=file_name,
+                                   filename=user_file_name,
                                    as_attachment=False)
 
     except FileNotFoundError:
