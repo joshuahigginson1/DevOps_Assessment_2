@@ -45,25 +45,25 @@ class MelodieForm(FlaskForm):
                                        max=30)])
 
     musical_key = SelectField('Key Root',
-                              default=(1, 'C'),
+                              default=(0, 'C'),
                               choices=[
-                                  (1, 'C'),
-                                  (2, 'C#'),
-                                  (2, 'Db'),
-                                  (3, 'D'),
-                                  (4, 'D#'),
-                                  (4, 'Eb'),
-                                  (5, 'E'),
-                                  (6, 'F'),
-                                  (7, 'F#'),
-                                  (7, 'Gb'),
-                                  (8, 'G'),
-                                  (9, 'G#'),
-                                  (9, 'Ab'),
-                                  (10, 'A'),
-                                  (11, 'A#'),
-                                  (11, "Bb"),
-                                  (12, "B")
+                                  (0, 'C'),
+                                  (1, 'C#'),
+                                  (1, 'Db'),
+                                  (2, 'D'),
+                                  (3, 'D#'),
+                                  (3, 'Eb'),
+                                  (4, 'E'),
+                                  (5, 'F'),
+                                  (6, 'F#'),
+                                  (6, 'Gb'),
+                                  (7, 'G'),
+                                  (8, 'G#'),
+                                  (8, 'Ab'),
+                                  (9, 'A'),
+                                  (10, 'A#'),
+                                  (10, "Bb"),
+                                  (11, "B")
                               ],
                               validators=[
                                   DataRequired(message="Please pick a key.")])

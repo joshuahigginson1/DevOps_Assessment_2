@@ -112,11 +112,15 @@ def add_notes_to_bar(initialised_bar,
     return "The bar has been filled!"
 
 
-def transpose_bar(bar, key_to_transpose, transpose_up_or_down=True):
+def transpose_bar(bar, key_to_transpose):
     """This function transposes our full bar, dependent on the user's
     chosen key signature in service 1."""
 
-    return bar.transpose(key_to_transpose, transpose_up_or_down)
+    for note_container in bar:
+        if note_container[2] is not None:
+            note_container[2].transpose(key_to_transpose, True)
+
+    return bar
 
 
 def save_as_midi(file_name, output_bar, user_tempo):

@@ -75,9 +75,9 @@ def service4_post_request():
 
     # We transpose the bar.
 
-    # transpose_bar(new_bar, s1_data.get("key"))
+    transpose_bar(new_bar, s1_data.get("key"))
 
-    # print(f"Transposed bar: {new_bar}")
+    print(f"Transposed bar: {new_bar}")
 
     # === IF MIDI! ===
 

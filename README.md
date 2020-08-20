@@ -195,6 +195,13 @@ The only things we I haven’t currently automated is the ‘in progress and don
 sting and int return as normal. Others, we have to do literal evaluation
  using the ast. 
 
+Transposing note containers. Built in transpose function broke if you
+ attempted to transpose a bar with rests on. What a ballache, had to go
+  override the method - for every note in the bar, if there are are any
+   rests with None type, continue, if there are any notes with int type, add
+    the key offset.'
+  each
+  file.
 
 
 
