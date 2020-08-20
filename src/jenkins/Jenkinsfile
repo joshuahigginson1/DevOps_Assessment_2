@@ -1,0 +1,145 @@
+/* A file which configures our full Jenkins pipeline for DevOps Assessment 2 */
+pipeline{
+
+    agent any
+
+    environment {
+
+    // Set our global environment variables here.
+
+        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+    }
+
+        stages{
+
+            stage('Configure Test Environment'){
+
+                 steps{
+
+                 sh './scripts/configure_test_environment.sh'
+
+                 }
+
+            }
+
+            stage('Run Tests'){
+
+                steps{
+
+                 sh './scripts/run_test_service_1.sh'
+                 sh '/scripts/run_test_service_2.sh'
+                 sh '/scripts/run_test_service_3.sh'
+                 sh '/scripts/run_test_service_4.sh'
+
+                 }
+
+            stage('Build Docker Images'){
+
+                 steps{
+
+                 sh './scripts/build_docker_images.sh'
+
+                 }
+
+
+            stage('Deploy Swarm Stack to Testing Environment'){
+
+                 steps{
+
+                 sh './scripts/deploy_test_environment.sh'
+
+                 }
+
+            }
+
+            stage('Deploy to Staging Environment'){
+
+                 steps{
+
+                 sh './scripts/deploy_staging_environment.sh'
+
+                 }
+
+            }
+
+
+            stage('Deploy to Production Environment'){
+
+                 steps{
+
+                 sh './scripts/deploy_production_environment.sh'
+
+                 }
+
+            }
+
+        }
+
+        }
+
+        post {
+
+            always {
+                echo 'One way or another, I have finished'
+
+                chuckNorris()  // Chuck Norris. All Day, Every Day.
+
+                // Service 1 Tests
+
+                junit(testResults: '/test_service_1.xml')
+
+                recordIssues(
+                healthy: 20,
+                unhealthy: 50
+                tools: [pep8(pattern: '/tests/test_results/pep8.log'),
+                        pyLint(pattern: '/tests/test_results/pylint.log')]
+                )
+
+                // Service 2 Tests
+
+                junit(testResults: '/test_service_2.xml')
+
+                recordIssues(
+                healthy: 20,
+                unhealthy: 50
+                tools: [pep8(pattern: '/tests/test_results/pep8.log'),
+                        pyLint(pattern: '/tests/test_results/pylint.log')]
+                )
+
+                // Service 3 Tests
+
+                junit(testResults: '/test_service_3.xml')
+
+                recordIssues(
+                healthy: 20,
+                unhealthy: 50
+                tools: [pep8(pattern: '/tests/test_results/pep8.log'),
+                        pyLint(pattern: '/tests/test_results/pylint.log')]
+                )
+
+                // Service 4 Tests
+
+                junit(testResults: '/test_service_4.xml')
+
+                recordIssues(
+                healthy: 20,
+                unhealthy: 50
+                tools: [pep8(pattern: '/tests/test_results/pep8.log'),
+                        pyLint(pattern: '/tests/test_results/pylint.log')]
+                )
+
+            }
+
+            success {
+                echo 'This build was a success.'
+            }
+
+            unstable {
+                echo 'This build is unstable.'
+            }
+
+            failure {
+                echo 'This build failed.'
+        }
+}
