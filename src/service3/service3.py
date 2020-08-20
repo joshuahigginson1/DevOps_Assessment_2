@@ -34,10 +34,10 @@ def return_rhythms_dictionary():
     # TODO: Write unit test for return_rhythms_dict() with API functionality.
 
     rhythms_dictionary = {
-        "short": [8, 16, 32, 64],
+        "short": [4, 8, 16, 32, 64],
         "long": [1, 2, 4],
-        "standard": [1, 2, 4, 8, 16, 32],
-        "extremes": [0.25, 0.5, 64, 128]
+        "standard": [2, 4, 8, 16],
+        "extremes": [1, 32, 64, 128]
     }
 
     return rhythms_dictionary

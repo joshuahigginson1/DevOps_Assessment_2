@@ -89,7 +89,7 @@ class MelodieForm(FlaskForm):  # Creates child class from parent 'FlaskForm'.
     rhythm_length = SelectField("Rhythm",
                                 choices=bward_s3_list,
 
-                                default=[1, 2, 4, 8, 16, 32],
+                                default=[2, 4, 8, 16],
 
                                 validators=[
                                     DataRequired(message="Pick a rhythm.")])
