@@ -145,9 +145,10 @@ def save_as_png(file_name, output_bar):
 
     # This feature will only work with lilypond in path.
 
-    png_save_location = f"png_output/{file_name}-melodie"
+    png_save_location = f"src/png_output/{file_name}-melodie.png"
 
-    return to_png(lilypond_string, png_save_location)
+
+    to_png(lilypond_string, png_save_location)
 
 
 def send_png_to_user(user_file_name, png_directory):
@@ -157,11 +158,9 @@ def send_png_to_user(user_file_name, png_directory):
          user_file_name: The file name set by our user in service 1.
          """
 
-    file_name = f"{user_file_name}-melodie.png"
-
     try:
         return send_from_directory(png_directory,
-                                   filename=file_name,
+                                   filename=user_file_name,
                                    as_attachment=False)
 
     except FileNotFoundError:
