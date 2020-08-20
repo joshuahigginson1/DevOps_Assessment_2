@@ -9,12 +9,25 @@ On a POST request, we want out program to return a random note length..
 # Imports --------------------------------------------------------------
 
 import random
+
+from os import environ
+
 from flask import Flask, request, jsonify
 
 # Flask ----------------------------------------------------------------
 
 # Create our flask application.
+
 service3 = Flask(__name__)
+
+if environ.get("ENVIRONMENT") == 'production':
+    service3.config.from_object('service3_config.ProductionConfig')
+
+elif environ.get("ENVIRONMENT") == 'testing':
+    service3.config.from_object('service3_config.TestingConfig')  #
+
+else:
+    service3.config.from_object('service3_config.DevelopmentConfig')
 
 
 # On GET Request -------------------------------------------------------
@@ -91,9 +104,3 @@ def on_post_request():
     converted_data = list(received_data.values())
     note_length_output = random_note_length(converted_data[0])
     return jsonify(note_length_output)
-
-
-# Run our service ------------------------------------------------------
-
-if __name__ == "__main__":
-    service3.run(port=5003)

@@ -2,7 +2,7 @@
 
 # Imports --------------------------------------------------------------
 
-from service3.service3 import random_note_length
+from src.service3 import random_note_length
 
 # Test Functions -------------------------------------------------------
 
