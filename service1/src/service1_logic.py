@@ -1,46 +1,61 @@
-# Task:
+"""This script contains all of our service 1 logic."""
 
 # Imports --------------------------------------------------------------
+
 import ast
 
 import requests
-from flask import Flask, render_template, send_from_directory, abort
-
-# Flask ----------------------------------------------------------------
-
-# Create our flask application.
-
-service1 = Flask(__name__)
-service1.config['SECRET_KEY'] = "selrkgjshglkjhgv345ksdhke4tdg"
 
 
 # Functions ------------------------------------------------------------
 
+
 def get_png_download_name(user_file_name):
-    """TODO"""
+    """This function takes the user's input file name,
+     and returns the corresponding output png file name.
+
+    Keyword Arguments:
+        user_file_name: The file name entered by the user.
+    """
     return f"{user_file_name}-melodie.png"
 
 
 def get_midi_download_name(user_file_name):
-    """TODO"""
+    """This function takes the user's input file name,
+    and returns the corresponding output midi file name.
+
+    Keyword Arguments:
+        user_file_name: The file name entered by the user.
+    """
     return f"{user_file_name}-melodie.mid"
 
 
 def listify(input_string):
-    """This method converts our string representation of a list,
-    to an actual list."""
+    """WTForms annoyingly converts lists and tuples to string type.
+    This function uses literal evaluation to redefine a list from a given
+    string input.
+
+    Keyword Arguments:
+        input_string: A literal string which is masquerading as a list.
+    """
     input_string = ast.literal_eval(input_string)
     return input_string
 
 
 def convert_form_to_full_json_output(form_get_on_validation, full_dict):
-    """This is a helper function for our forms.
-    Our forms can only return one part of our dictionary. Here, we do a
+    """WTForms cannot return dictionary key value pairs. This function... TODO
+
+    performs a look-up function of a dictionary.
+    Our forms only return one part of our dictionary. Here, we do a
     lookup, retrieve the other half of the key-value pair, then stick them
     back together in a python dictionary, ready for jsonification.
+
     Keyword Arguments:
-        full_dict: A full python dictionary of every key-value pair.
-        form_get_on_validation: The value from our user.
+        full_dict: The full dictionary in which we will be 'looking up'
+        our key-value pairs.
+
+        form_get_on_validation: TODO The value from our user is not a good
+        enough explanation..
 
     """
     list_of_dict_items = list(full_dict.items())
@@ -49,14 +64,20 @@ def convert_form_to_full_json_output(form_get_on_validation, full_dict):
 
     for label, value in list_of_dict_items:
         if value == output_form_list:
-            print("I am an NOT idiot sandwich. This works!")
             new_dict = {label: value}
 
     return new_dict
 
 
 def get_service_2_response(url):
-    """This function returns a get response from service 2."""
+    """This function posts a get response to service 2, and returns the
+    output.
+
+    Keyword Arguments:
+        url: The url of service 2.
+
+    """
+
     # TODO: Add s2 get response test.
     service_2_response = requests.get(url)
     decoded_service_2_response = service_2_response.json()
@@ -68,7 +89,13 @@ def get_service_2_response(url):
 
 
 def get_service_3_response(url):
-    """This function returns a get request from service 3."""
+    """This function posts a get request to service 3, and returns the
+    output.
+
+    Keyword Arguments:
+        url: The url of service 3.
+    """
+
     # TODO: Add s3 get response test.
     service_3_response = requests.get(url)
     decoded_service_3_response = service_3_response.json()
@@ -126,11 +153,6 @@ def post_service_3_response(url, length_key_pair):
     print("\n ----------- End of Service 3 POST Response ----------- \n")
 
     return json_response_data
-
-
-def post_service_4_response(url):
-    """This function sends our collected data as post request to service 4."""
-    pass
 
 
 def service_1_json_bundle(key, time_signature, tempo, file_name,
@@ -211,100 +233,3 @@ def validate_on_submit_func(homepage_form):
     print("\n ----- End of S1 Data ----- \n")
 
     return s1_data
-
-
-@service1.after_request
-def add_header(r):
-    """
-    Add headers to force delete our cache.
-    """
-    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    r.headers["Pragma"] = "no-cache"
-    r.headers["Expires"] = "0"
-    r.headers['Cache-Control'] = 'public, max-age=0'
-    return r
-
-
-# Routes ---------------------------------------------------------------
-
-@service1.route("/", methods=["GET", "POST"])
-def return_form():
-    from service1 import MelodieForm
-
-    homepage_form = MelodieForm()  # Instantiate a new form.
-
-    service_4_url = "http://0.0.0.0:5004"
-
-    if homepage_form.validate_on_submit():
-        json_data = validate_on_submit_func(homepage_form)
-        our_file = requests.post(service_4_url, json=json_data)
-
-        # Find the file name from user form.
-
-        file_name = homepage_form.file_name.data
-
-        png_download_name = get_png_download_name(file_name)
-        midi_download_name = get_midi_download_name(file_name)
-        png_file_dir = f"file_output/{png_download_name}"
-        midi_file_dir = f"file_output/{midi_download_name}"
-
-        # Gets the content type from the header of S4 response.
-
-        s4_content_type = our_file.headers.get("Content-Type")
-
-        # Then we write the file dependent on content type.
-
-        if "png" in s4_content_type:  # MIDI File
-
-            with open(png_file_dir, "wb") as file_to_write:
-                print("Writing bytes from service4 to new png file in "
-                      "service1... \n")
-
-                file_to_write.write(our_file.content)
-                print("Written new file. \n")
-
-            download_name = png_download_name
-
-        else:  # Writes MIDI file.
-            with open(midi_file_dir, "wb") as file_to_write:
-                print("Writing bytes from service4 to new midi file in "
-                      "service1... \n")
-
-                file_to_write.write(our_file.content)
-                print("Written new file. \n")
-
-            download_name = midi_download_name
-
-        return render_template('main_page_download.html',
-                               title='🎶 ~ Download Ready! ~ 🎶',
-                               form=homepage_form,
-                               download=download_name)
-
-    return render_template('main_page.html',
-                           title='🎶 ~ Mélodie ~ 🎶',
-                           form=homepage_form)
-
-
-@service1.route("/<download_name>", methods=["GET", "POST"])
-def download_png(download_name):
-    """This function downloads our file upon post request."""
-
-    files_directory = "/Users/mac/Documents/GitHub/DevOps_Assessment_2/src" \
-                      "/service1/file_output/"
-
-    print(f" The file directory is: {files_directory}")
-    print(f" The filename is: {download_name}")
-
-    try:
-        return send_from_directory(files_directory,
-                                   filename=download_name,
-                                   as_attachment=True)
-
-    except FileNotFoundError:
-        abort(404)
-
-
-# Run Service ----------------------------------------------------------
-
-if __name__ == "__main__":
-    service1.run(port=5001)

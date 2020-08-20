@@ -1,5 +1,5 @@
 """
-A template which lays out the basic syntax for a forms.py file with WTForms.
+A template which lays out the basic syntax for a service1_forms.py file with WTForms.
 """
 
 # Imports --------------------------------------------------------------
@@ -10,8 +10,7 @@ from wtforms.fields.html5 import IntegerRangeField
 from wtforms.validators import DataRequired, Length, NumberRange, \
     ValidationError
 
-from service1 import get_service_2_response, \
-    get_service_3_response
+from service1.src.service1_logic import get_service_2_response, get_service_3_response
 
 
 # Classes --------------------------------------------------------------

@@ -9,12 +9,25 @@ On a POST request, we want out program to return a random note.
 # Imports --------------------------------------------------------------
 
 import random
+
+from os import environ
+
 from flask import Flask, jsonify, request
 
 # Flask ----------------------------------------------------------------
 
 # Create our flask application.
+
 service2 = Flask(__name__)
+
+if environ.get("ENVIRONMENT") == 'production':
+    service2.config.from_object('service2_config.ProductionConfig')
+
+elif environ.get("ENVIRONMENT") == 'testing':
+    service2.config.from_object('service2_config.TestingConfig')  #
+
+else:
+    service2.config.from_object('service2_config.DevelopmentConfig')
 
 
 # On GET Request -------------------------------------------------------
@@ -135,8 +148,3 @@ def on_post_request():
     print(f'Note pitch output: {note_pitch_output}')
     return jsonify(note_pitch_output)
 
-
-# Run Service ----------------------------------------------------------
-
-if __name__ == "__main__":
-    service2.run(port=5002)

@@ -1,4 +1,4 @@
-"""This file initialises our service 4 app."""
+"""This file initialises our service 1 app."""
 
 # Import Flask ---------------------------------------------------------
 
@@ -8,17 +8,17 @@ from flask import Flask
 
 # Create Flask App -----------------------------------------------------
 
-service4 = Flask(__name__)
+service1 = Flask(__name__)
 
 if environ.get("ENVIRONMENT") == 'production':
-    service4.config.from_object('service4_config.ProductionConfig')
+    service1.config.from_object('service1_config.ProductionConfig')
 
 elif environ.get("ENVIRONMENT") == 'testing':
-    service4.config.from_object('service4_config.TestingConfig')  #
+    service1.config.from_object('service1_config.TestingConfig')  #
 
 else:
-    service4.config.from_object('service4_config.DevelopmentConfig')
+    service1.config.from_object('service1_config.DevelopmentConfig')
 
 # Import Routes --------------------------------------------------------
 
-from src import service4_routes
+from src import service1_routes

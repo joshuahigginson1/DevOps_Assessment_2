@@ -1,4 +1,4 @@
-"""Config file for service 3."""
+"""Config file for service 1."""
 
 # imports ------------------------------
 
@@ -11,17 +11,25 @@ from dotenv import load_dotenv
 basedir = path.abspath(path.dirname(__file__))
 
 # Load our specific .env file from the root directory of our current file.
-load_dotenv(path.join(basedir, 'service3.env'))
+load_dotenv(path.join(basedir, 'service1.env'))
 
 
 # Declare Classes ------------------------------------------------------
 
 class Config(object):  # General Config
 
-    FLASK_APP = 'service3_wsgi.py'
+    FLASK_APP = 'service1_wsgi.py'
 
     DEBUG = False
     TESTING = False
+
+    PNG_DIRECTORY = path.join(basedir, environ.get("PNG_DIRECTORY"))
+    MIDI_DIRECTORY = path.join(basedir, environ.get("MIDI_DIRECTORY"))
+
+    SERVICE_2_URL = environ.get("SERVICE_2_URL")
+    SERVICE_3_URL = environ.get("SERVICE_3_URL")
+
+    SECRET_KEY = environ.get("PRODUCTION_SECRET_KEY")
 
 
 class ProductionConfig(Config):
@@ -31,9 +39,13 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     DEBUG = True
 
+    SECRET_KEY = environ.get("DEV_SECRET_KEY")
+
 
 class TestingConfig(Config):
     TESTING = True
+
+    SECRET_KEY = environ.get("TESTING_SECRET_KEY")
 
 
 # It is good practice to specify configurations for different environments.

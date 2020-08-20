@@ -2,7 +2,7 @@
 
 # Imports --------------------------------------------------------------
 
-from service2.service2 import generate_random_note_pitch, get_note_name
+from service2.src.service2 import generate_random_note_pitch, get_note_name
 
 # Test Functions -------------------------------------------------------
 
