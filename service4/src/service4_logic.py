@@ -147,7 +147,6 @@ def save_as_png(file_name, output_bar):
 
     png_save_location = f"src/png_output/{file_name}-melodie.png"
 
-
     to_png(lilypond_string, png_save_location)
 
 
