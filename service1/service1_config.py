@@ -23,11 +23,11 @@ class Config(object):  # General Config
     DEBUG = False
     TESTING = False
 
-    PNG_DIRECTORY = path.join(basedir, environ.get("PNG_DIRECTORY"))
-    MIDI_DIRECTORY = path.join(basedir, environ.get("MIDI_DIRECTORY"))
+    FILES_DIRECTORY = path.join(basedir, environ.get("FILES_DIRECTORY"))
 
     SERVICE_2_URL = environ.get("SERVICE_2_URL")
     SERVICE_3_URL = environ.get("SERVICE_3_URL")
+    SERVICE_4_URL = environ.get("SERVICE_4_URL")
 
     SECRET_KEY = environ.get("PRODUCTION_SECRET_KEY")
 

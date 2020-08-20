@@ -10,24 +10,20 @@ from wtforms.fields.html5 import IntegerRangeField
 from wtforms.validators import DataRequired, Length, NumberRange, \
     ValidationError
 
-from service1.src.service1_logic import get_service_2_response, get_service_3_response
+from service1.src.service1_logic import get_service_2_response,\
+    get_service_3_response
 
+from service1.src.service1_init import service1
 
 # Classes --------------------------------------------------------------
 
-# We need to grab the json dictionary from service 2, and turn it into a
-# list of tuples.
 
-# hen you do dict.items() in python3, you return a
-# 'dictionary_view object.
+class MelodieForm(FlaskForm):
 
+    """This is the main form for the front page of service 1."""
 
-class MelodieForm(FlaskForm):  # Creates child class from parent 'FlaskForm'.
-
-    """This is the main form for our front page of service #1."""
-
-    service_2_url = "http://0.0.0.0:5002/"
-    service_3_url = "http://0.0.0.0:5003/"
+    service_2_url = service1.config["SERVICE_2_URL"]
+    service_3_url = service1.config["SERVICE_3_URL"]
 
     """ Our list gets sent backwards. We need to reverse it to display 
     correctly in our form. """
@@ -111,6 +107,8 @@ class MelodieForm(FlaskForm):  # Creates child class from parent 'FlaskForm'.
                                      message="Pick a time signature.")])
 
     go = SubmitField('Go')
+
+    # Custom Validators ------------------------------------------------
 
     def validate_file_name(self, file_name):
         cannot_contain = ["/", ".", "{", "}", "[", "]", "=", "$"]

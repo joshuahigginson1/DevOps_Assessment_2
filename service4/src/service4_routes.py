@@ -18,14 +18,11 @@ import ast
 # Global Variables -----------------------------------------------------
 
 
-PNG_DIRECTORY = "/Users/mac/Documents/GitHub/DevOps_Assessment_2/src" \
-                "/service4/png_output/"
+PNG_DIRECTORY = service4.config["PNG_DIRECTORY"]
+MIDI_DIRECTORY = service4.config["MIDI_DIRECTORY"]
 
-MIDI_DIRECTORY = "/Users/mac/Documents/GitHub/DevOps_Assessment_2/src" \
-                 "/service4/midi_output/"
-
-SERVICE_2_URL = "http://0.0.0.0:5002/"
-SERVICE_3_URL = "http://0.0.0.0:5003/"
+SERVICE_2_URL = service4.config["SERVICE_2_URL"]
+SERVICE_3_URL = service4.config["SERVICE_3_URL"]
 
 
 # Routes ---------------------------------------------------------------

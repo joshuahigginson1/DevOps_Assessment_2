@@ -6,6 +6,8 @@ import ast
 
 import requests
 
+from service1.src.service1_init import service1
+
 
 # Functions ------------------------------------------------------------
 
@@ -43,24 +45,26 @@ def listify(input_string):
 
 
 def convert_form_to_full_json_output(form_get_on_validation, full_dict):
-    """WTForms cannot return dictionary key value pairs. This function... TODO
-
-    performs a look-up function of a dictionary.
-    Our forms only return one part of our dictionary. Here, we do a
-    lookup, retrieve the other half of the key-value pair, then stick them
-    back together in a python dictionary, ready for jsonification.
+    """WTForms cannot return dictionary key value pairs. This function
+    takes the output of our WTForms and converts it to a dictionary format,
+    relative to the original dictionary.
 
     Keyword Arguments:
         full_dict: The full dictionary in which we will be 'looking up'
         our key-value pairs.
 
-        form_get_on_validation: TODO The value from our user is not a good
-        enough explanation..
-
+        form_get_on_validation: The output of a form object after validation.
     """
+
+    # Create a list of all key-value pairs from our full dictionary.
     list_of_dict_items = list(full_dict.items())
     output_form_list = listify(form_get_on_validation)
+
+    # Initialise a new_dictionary.
     new_dict = {}
+
+    """ If a value in this dictionary matches the returned value 
+    from our form, then we return a new dictionary object. """
 
     for label, value in list_of_dict_items:
         if value == output_form_list:
@@ -75,7 +79,6 @@ def get_service_2_response(url):
 
     Keyword Arguments:
         url: The url of service 2.
-
     """
 
     # TODO: Add s2 get response test.
@@ -187,10 +190,14 @@ def service_1_json_bundle(key, time_signature, tempo, file_name,
 
 def validate_on_submit_func(homepage_form):
     """This function executes logic for creating a JSON dictionary for all
-    values, ready to be shipped onto service 4."""
+    values, ready to be shipped onto service 4.
 
-    service_2_url = "http://0.0.0.0:5002/"
-    service_3_url = "http://0.0.0.0:5003/"
+    Keyword Values:
+        homepage_form: The form on our homepage.
+    """
+
+    service_2_url = service1.config['SERVICE_2_URL']
+    service_3_url = service1.config['SERVICE_3_URL']
 
     # Retrieve the S2 dictionary with at GET request.
     s2_dict = get_service_2_response(service_2_url)
@@ -230,6 +237,6 @@ def validate_on_submit_func(homepage_form):
 
     print(s1_data)
 
-    print("\n ----- End of S1 Data ----- \n")
+    print("\n ----- End of s1_data ----- \n")
 
     return s1_data

@@ -1,17 +1,28 @@
-# Task:
+"""This script contains all of our service 1 routes & endpoints."""
 
 # Imports --------------------------------------------------------------
 
 import requests
 from flask import render_template, send_from_directory, abort
 
+from service1.src.service1_init import service1
+
+from service1_logic import validate_on_submit_func, get_midi_download_name, \
+    get_png_download_name
+
+# Cache Control --------------------------------------------------------
 
 
 @service1.after_request
 def add_header(r):
+    """ The add_header wrapper 'hijacks' our send_files request,
+    and deliberately adds a number of headers to prevent our browser from
+    caching our file output.
+
+    Keyword Arguments:
+        r: a request response.
     """
-    Add headers to force delete our cache.
-    """
+
     r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     r.headers["Pragma"] = "no-cache"
     r.headers["Expires"] = "0"
@@ -23,11 +34,11 @@ def add_header(r):
 
 @service1.route("/", methods=["GET", "POST"])
 def return_form():
-    from src import MelodieForm
+    from service1_forms import MelodieForm
 
     homepage_form = MelodieForm()  # Instantiate a new form.
 
-    service_4_url = "http://0.0.0.0:5004"
+    service_4_url = service1.config["SERVICE_4_URL"]
 
     if homepage_form.validate_on_submit():
         json_data = validate_on_submit_func(homepage_form)
@@ -83,8 +94,7 @@ def return_form():
 def download_png(download_name):
     """This function downloads our file upon post request."""
 
-    files_directory = "/Users/mac/Documents/GitHub/DevOps_Assessment_2/src" \
-                      "/service1/file_output/"
+    files_directory = service1.config["FILES_DIRECTORY"]
 
     print(f" The file directory is: {files_directory}")
     print(f" The filename is: {download_name}")
@@ -96,9 +106,3 @@ def download_png(download_name):
 
     except FileNotFoundError:
         abort(404)
-
-
-# Run Service ----------------------------------------------------------
-
-if __name__ == "__main__":
-    service1.run(port=5001)

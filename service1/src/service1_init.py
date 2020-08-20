@@ -3,8 +3,8 @@
 # Import Flask ---------------------------------------------------------
 
 from os import environ
-from flask import Flask
 
+from flask import Flask
 
 # Create Flask App -----------------------------------------------------
 
@@ -14,11 +14,11 @@ if environ.get("ENVIRONMENT") == 'production':
     service1.config.from_object('service1_config.ProductionConfig')
 
 elif environ.get("ENVIRONMENT") == 'testing':
-    service1.config.from_object('service1_config.TestingConfig')  #
+    service1.config.from_object('service1_config.TestingConfig')
 
 else:
     service1.config.from_object('service1_config.DevelopmentConfig')
 
 # Import Routes --------------------------------------------------------
 
-from src import service1_routes
+from service1.src import service1_routes
