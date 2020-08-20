@@ -81,16 +81,25 @@ def service4_post_request():
 
     # === IF MIDI! ===
 
-    save_as_midi(s1_data.get("file_name"), new_bar, s1_data.get("tempo"))
+    save_as_midi(s1_data.get('file_name'), new_bar, s1_data.get("tempo"))
 
     # Send midi file name to user.
 
-    return send_midi_to_user(s1_data.get("file_name",), MIDI_DIRECTORY)
+    midi_file_name = f"{s1_data.get('file_name')}-melodie.mid"
+
+    print(midi_file_name)
+    print(MIDI_DIRECTORY)
+
+    return send_midi_to_user(midi_file_name, MIDI_DIRECTORY)
 
     # === IF PNG! ===
+
+    # png_file_name = f"{s1_data.get('file_name')}-melodie.png"
 
     # save_as_png(s1_data.get("file_name"), new_bar)
 
     # Send png file name to user.
 
-    # return send_png_to_user(s1_data.get("file_name"), PNG_DIRECTORY)
+    # print(png_file_name)
+
+    # return send_png_to_user(png_file_name, PNG_DIRECTORY)

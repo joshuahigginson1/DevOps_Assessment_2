@@ -128,7 +128,7 @@ def save_as_midi(file_name, output_bar, user_tempo):
             user_tempo: The user's selected tempo in BPM.
     """
     midi_file_suffix = file_name + "-melodie.mid"
-    midi_save_location = "midi_output/" + midi_file_suffix
+    midi_save_location = "src/midi_output/" + midi_file_suffix
 
     return midi_file_out.write_Bar(midi_save_location, output_bar,
                                    user_tempo)

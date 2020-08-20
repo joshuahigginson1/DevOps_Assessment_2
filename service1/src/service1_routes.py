@@ -50,8 +50,10 @@ def return_form():
 
         png_download_name = get_png_download_name(file_name)
         midi_download_name = get_midi_download_name(file_name)
-        png_file_dir = f"service1/src/file_output/{png_download_name}"
-        midi_file_dir = f"service1/src/file_output/{midi_download_name}"
+
+
+        png_file_dir = f"{service1.config['FILES_DIRECTORY']}{png_download_name}"
+        midi_file_dir = f"{service1.config['FILES_DIRECTORY']}{midi_download_name}"
 
         # Gets the content type from the header of S4 response.
 
