@@ -34,17 +34,17 @@ class MelodieForm(FlaskForm):
     forward_s3_list = list(get_service_3_response(service_3_url).items())
     bward_s3_list = [(value, key) for (key, value) in forward_s3_list]
 
-    file_name = StringField('File Name',
-                            default="my_first_melodie",
-                            validators=[
+    file_name = StringField('File Name: ', validators=[
+
                                 DataRequired(
                                     message="Please enter a file name."),
+
                                 Length(message="File names should be between "
                                                "between 4 and 30 characters.",
                                        min=4,
                                        max=30)])
 
-    musical_key = SelectField('Key Root',
+    musical_key = SelectField('Key Root: ',
                               default=(0, 'C'),
                               choices=[
                                   (0, 'C'),
@@ -70,7 +70,7 @@ class MelodieForm(FlaskForm):
 
     # Get Musical Scale info from get request to service 2.
 
-    musical_scale = SelectField('Scale',
+    musical_scale = SelectField('Scale: ',
                                 choices=bward_s2_list,
 
                                 default=[1, 2, 3, 4, 5, 6, 7, 8,
@@ -81,7 +81,7 @@ class MelodieForm(FlaskForm):
 
     # Get list of rhythms using a get request to service 3.
 
-    rhythm_length = SelectField("Rhythm",
+    rhythm_length = SelectField("Rhythm: ",
                                 choices=bward_s3_list,
 
                                 default=[2, 4, 8, 16],
@@ -89,11 +89,11 @@ class MelodieForm(FlaskForm):
                                 validators=[
                                     DataRequired(message="Pick a rhythm.")])
 
-    tempo = IntegerRangeField('Tempo',
+    tempo = IntegerRangeField('Tempo: ',
                               default=120,
                               validators=[NumberRange(min=60, max=220)])
 
-    time_signature = SelectField('Time Signature',
+    time_signature = SelectField('Time Signature: ',
                                  default=((4, 4), "4/4"),
                                  choices=[
                                      ((4, 4), "4/4"),
@@ -106,7 +106,7 @@ class MelodieForm(FlaskForm):
                                  validators=[DataRequired(
                                      message="Pick a time signature.")])
 
-    go = SubmitField('Go')
+    go = SubmitField("Let's go!")
 
     # Custom Validators ------------------------------------------------
 

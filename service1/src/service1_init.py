@@ -6,6 +6,8 @@ from os import environ
 
 from flask import Flask
 
+from flask_bootstrap import Bootstrap
+
 # Create Flask App -----------------------------------------------------
 
 service1 = Flask(__name__)
@@ -20,5 +22,7 @@ else:
     service1.config.from_object('service1_config.DevelopmentConfig')
 
 # Import Routes --------------------------------------------------------
+
+bootstrap = Bootstrap(service1)
 
 from service1.src import service1_routes

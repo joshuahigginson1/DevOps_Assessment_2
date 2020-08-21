@@ -1,55 +1,99 @@
 <!-- This html file represents our form front end for Melodie --->
 
-{% block body_content %}
-
-    <div class='form'>
-
-        <form method='POST' action=''>
+        <form method='POST' action='' class="form-horizontal">
 
             {{ form.hidden_tag() }}
 
             <br>
 
-            {{ form.file_name.label }}
-            {{ form.file_name }}
+                <div class="form-group row">
 
-            <br> <br> <br>
+                    <div class="col-md-10 mx-auto">
 
-            {{ form.tempo.label }}
-            {{ form.tempo(min=60, max=220, oninput="sliderId.value =
-            form.tempo.value") }}
-            <output name="sliderLabel" id="sliderId">120</output>
+                        {{
 
+                        form.file_name(placeholder="Enter a file name here.",
+                                       class_="form-control text-center")
+                        }}
 
-            <br> <br>
+                    </div>
 
-            {{ form.rhythm_length.label}}
-            {{ form.rhythm_length }}
+                </div>
 
             <br> <br>
 
-            {{ form.time_signature.label }}
-            {{ form.time_signature }}
+            <div class="row text-center">
 
-            <br> <br> <br>
+                <div class="form-group col-md-10 mx-auto">
 
-            {{ form.musical_key.label }}
-            {{ form.musical_key }}
+                    {{ form.tempo(class_="form-control-range", min=60, max=220,
+                    oninput="sliderId.value = form.tempo.value") }}
 
-            <br> <br>
+                    <br>
 
-            {{ form.musical_scale.label }}
-            {{ form.musical_scale }}
+                    {{ form.tempo.label(class_="control-label") }}
 
-            <br> <br> <br>
+                    <output name="sliderLabel" id="sliderId">Wiggle me!</output>
 
-            {{ form.go.label }}  {{ form.go }}
+                </div>
+
+            </div>
 
             <br>
-            <br>
+
+            <div class="row">
+
+                <div class="form-group col-md-6">
+
+                    {{ form.rhythm_length.label(class_="control-label col-md-3")}}
+                    {{ form.rhythm_length(
+                    class_="form-control text-align-center") }}
+
+                </div>
+
+                <br>
+
+                <div class="form-group col-md-6">
+
+                    {{ form.time_signature.label(class_="control-label") }}
+                    {{ form.time_signature(
+                    class_="form-control text-align-center") }}
+
+                </div>
+
+            </div>
+
+            <br> <br>
+
+            <div class="row">
+
+                <div class="form-group col-md-6">
+
+                {{ form.musical_key.label(class_="control-label") }}
+                {{ form.musical_key(
+                    class_="form-control text-align-center") }}
+
+                </div>
+
+                <br>
+
+                <div class="form-group col-md-6">
+
+
+                {{ form.musical_scale.label(class_="control-label") }}
+                {{ form.musical_scale(
+                    class_="form-control text-align-center") }}
+
+                </div>
+
+            </div>
+
+            <br> <br>
+
+            <div class="btn">
+
+                {{ form.go(class_="btn btn-success") }}
+
+            </div>
 
         </form>
-
-    </div>
-
-{% endblock %}
