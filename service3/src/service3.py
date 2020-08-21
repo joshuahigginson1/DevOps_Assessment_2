@@ -47,7 +47,7 @@ def return_rhythms_dictionary():
     # TODO: Write unit test for return_rhythms_dict() with API functionality.
 
     rhythms_dictionary = {
-        "short": [4, 8, 16, 32, 64],
+        "short": [4, 8, 16, 32],
         "long": [1, 2, 4],
         "standard": [2, 4, 8, 16],
         "extremes": [1, 32, 64, 128]
@@ -62,7 +62,7 @@ def return_rhythms_dictionary():
 @service3.route('/', methods=['GET'])
 def on_get_request():
     """This function triggers after every get request to the endpoint '/'"""
-    # TODO: Write unit test for GET req API functionality.
+
     return jsonify(return_rhythms_dictionary())
 
 
@@ -98,7 +98,6 @@ def on_post_request():
     We then run this data through our random function, to return a note length.
 
     """
-    # TODO: Write unit test for POST req API functionality.
     received_data = request.get_json()
 
     converted_data = list(received_data.values())

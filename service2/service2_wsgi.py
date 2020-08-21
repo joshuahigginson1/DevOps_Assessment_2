@@ -1,5 +1,4 @@
-
-"""Serving as service 1's entry point."""
+"""Serving as service 2's entry point."""
 
 # Imports --------------------------------------------------------------
 
