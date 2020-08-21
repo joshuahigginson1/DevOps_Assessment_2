@@ -116,9 +116,11 @@ def overwrite_transpose_bar(bar, key_to_transpose):
     """This function transposes our full bar, dependent on the user's
     chosen key signature in service 1."""
 
-    for note_container in bar:
-        if note_container[2] is not None:
-            note_container[2].transpose(key_to_transpose, True)
+    if key_to_transpose > 1:
+
+        for note_container in bar:
+            if note_container[2] is not None:
+                note_container[2].transpose(key_to_transpose, True)
 
     return bar
 
