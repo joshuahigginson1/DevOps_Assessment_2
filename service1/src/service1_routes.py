@@ -5,10 +5,12 @@
 import requests
 from flask import render_template, send_from_directory, abort
 
-from service1.src.service1_init import service1
+from service1_init import service1
 
-from service1_logic import validate_on_submit_func, get_midi_download_name, \
+from service1_logic import validate_on_submit_func, \
+    get_midi_download_name, \
     get_png_download_name
+
 
 # Cache Control --------------------------------------------------------
 
@@ -51,44 +53,53 @@ def return_form():
         png_download_name = get_png_download_name(file_name)
         midi_download_name = get_midi_download_name(file_name)
 
+        png_file_dir = f"{service1.config['FILES_DIRECTORY']}" \
+                       f"{png_download_name}"
 
-        png_file_dir = f"{service1.config['FILES_DIRECTORY']}{png_download_name}"
-        midi_file_dir = f"{service1.config['FILES_DIRECTORY']}{midi_download_name}"
+        midi_file_dir = f"{service1.config['FILES_DIRECTORY']}" \
+                        f"{midi_download_name}"
 
         # Gets the content type from the header of S4 response.
 
-        s4_content_type = our_file.headers.get("Content-Type")
+        if our_file.status_code == 200:
 
-        # Then we write the file dependent on content type.
+            s4_content_type = our_file.headers.get("Content-Type")
 
-        if "png" in s4_content_type:  # MIDI File
+            # Then we write the file dependent on content type.
 
-            with open(png_file_dir, "wb") as file_to_write:
-                print("Writing bytes from service4 to new png file in "
-                      "service1... \n")
+            if "png" in s4_content_type:  # MIDI File
 
-                file_to_write.write(our_file.content)
-                print("Written new file. \n")
+                with open(png_file_dir, "wb") as file_to_write:
+                    print("Writing bytes from service4 to new png file in "
+                          "service1... \n")
 
-            download_name = png_download_name
+                    file_to_write.write(our_file.content)
+                    print("Written new file. \n")
 
-        else:  # Writes MIDI file.
-            with open(midi_file_dir, "wb") as file_to_write:
-                print("Writing bytes from service4 to new midi file in "
-                      "service1... \n")
+                download_name = png_download_name
 
-                file_to_write.write(our_file.content)
-                print("Written new file. \n")
+            else:  # Writes MIDI file.
+                with open(midi_file_dir, "wb") as file_to_write:
+                    print("Writing bytes from service4 to new midi file in "
+                          "service1... \n")
 
-            download_name = midi_download_name
+                    file_to_write.write(our_file.content)
+                    print("Written new file. \n")
 
-        return render_template('main_page_download.html',
-                               title='🎶 ~ Download Ready! ~ 🎶',
-                               form=homepage_form,
-                               download=download_name)
+                download_name = midi_download_name
+
+            return render_template('main_page_download.html',
+                                   title=' ~ Download Ready! 🎶',
+                                   form=homepage_form,
+                                   download=download_name)
+
+        else:
+
+            # TODO: Add a flash message to user.
+            print("There has been an error. File not saved.")
 
     return render_template('main_page.html',
-                           title='🎶 ~ Mélodie ~ 🎶',
+                           title=' ~ Mélodie 🎶',
                            form=homepage_form)
 
 

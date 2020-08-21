@@ -3,7 +3,7 @@
 
 # Imports --------------------------------------------------------------
 
-from service3.src.service3 import service3
+from service3 import service3
 
 # Run our App ----------------------------------------------------------
 

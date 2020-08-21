@@ -112,7 +112,7 @@ def add_notes_to_bar(initialised_bar,
     return "The bar has been filled!"
 
 
-def transpose_bar(bar, key_to_transpose):
+def overwrite_transpose_bar(bar, key_to_transpose):
     """This function transposes our full bar, dependent on the user's
     chosen key signature in service 1."""
 

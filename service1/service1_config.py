@@ -46,13 +46,3 @@ class TestingConfig(Config):
     TESTING = True
 
     SECRET_KEY = environ.get("TESTING_SECRET_KEY")
-
-
-# It is good practice to specify configurations for different environments.
-# Below, we consolidate these configuration names into a dictionary.
-
-app_config = {
-    'development': DevelopmentConfig,
-    'production': ProductionConfig,
-    'testing': TestingConfig
-}

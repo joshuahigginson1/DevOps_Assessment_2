@@ -2,7 +2,7 @@
 
 # Imports --------------------------------------------------------------
 
-from service2.src.service2 import return_scale_dictionary, \
+from service2 import return_scale_dictionary, \
     return_random_pitch, generate_random_note_pitch, get_note_name, \
     on_get_request, on_post_request
 
@@ -64,7 +64,7 @@ def test_get_note_name(note_names_in_c):
 def test_return_random_pitch(note_names_in_c, common_scales):
     """This test checks our 'return random pitch' function.
 
-        This test utilises our the pytest fixtures:
+        This test utilises the pytest fixtures:
         'note_names_in_c' & 'common_scales'.
 
     - The output note name must be in our note_names_in_c dictionary.
@@ -81,8 +81,23 @@ def test_return_random_pitch(note_names_in_c, common_scales):
 # Test API Requests ----------------------------------------------------
 
 
-def test_on_get_request():
-    """This function tests our GET request functionality for our API."""
+def test_on_get_request(common_scales):
+    """This function tests our GET request functionality for our API.
+
+        This test utilises the pytest fixture 'common_scales'.
+
+    When we send a get req to service 2, we should:
+    - GET a status code 200.
+    - GET a JSON file, containing a list of our common scales.
+
+
+
+
+
+
+
+
+    """
     # TODO: Write unit test for on_get_request().
     assert True
 

@@ -5,12 +5,12 @@
 from flask import request
 
 # Import our application.
-from service4.src.service4_init import service4
+from service4_init import service4
 
 # Import our Logic
-from src.service4_logic import create_bar, initialise_bar, add_notes_to_bar,\
-    transpose_bar, save_as_png, save_as_midi, send_png_to_user,\
-    send_midi_to_user
+from service4_logic import create_bar, initialise_bar, add_notes_to_bar,\
+    save_as_png, save_as_midi, send_png_to_user,\
+    send_midi_to_user, overwrite_transpose_bar
 
 # Import AST to perform literal evaluation.
 import ast
@@ -75,7 +75,7 @@ def service4_post_request():
 
     # We transpose the bar.
 
-    transpose_bar(new_bar, s1_data.get("key"))
+    overwrite_transpose_bar(new_bar, s1_data.get("key"))
 
     print(f"Transposed bar: {new_bar}")
 
@@ -96,7 +96,5 @@ def service4_post_request():
     save_as_png(s1_data.get("file_name"), new_bar)
 
     #Send png file name to user.
-
-    print(png_file_name)
 
     return send_png_to_user(png_file_name, PNG_DIRECTORY)

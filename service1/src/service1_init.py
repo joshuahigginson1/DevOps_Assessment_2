@@ -25,4 +25,4 @@ else:
 
 bootstrap = Bootstrap(service1)
 
-from service1.src import service1_routes
+import service1_routes

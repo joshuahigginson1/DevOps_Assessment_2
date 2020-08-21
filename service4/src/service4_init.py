@@ -21,4 +21,4 @@ else:
 
 # Import Routes --------------------------------------------------------
 
-from service4.src import service4_routes
+import service4_routes

@@ -3,7 +3,7 @@
 
 # Imports --------------------------------------------------------------
 
-from service4.src.service4_init import service4
+from service4_init import service4
 
 # Run our App ----------------------------------------------------------
 

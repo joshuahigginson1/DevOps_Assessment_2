@@ -6,7 +6,7 @@ import ast
 
 import requests
 
-from service1.src.service1_init import service1
+from service1_init import service1
 
 
 # Functions ------------------------------------------------------------

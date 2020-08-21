@@ -3,6 +3,13 @@
 # Imports --------------------------------------------------------------
 
 
+
+# If 404 error, don't attempt to write a new file.
+
+
+
+# If 200 status code, write the new file.
+
 # Classes --------------------------------------------------------------
 
 
