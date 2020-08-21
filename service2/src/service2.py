@@ -44,8 +44,6 @@ def return_scale_dictionary():
     When Service #2 receives a GET request, it will send the output.
     """
 
-    # TODO: Write unit test for return_scale_dictionary().
-
     scale_list = {
         "chromatic": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "r"],
         "major": [1, 3, 5, 6, 8, 10, 12, "r"],
@@ -119,8 +117,6 @@ def return_random_pitch(user_chosen_scale):
         12: 'B',
         "r": "r"
     }
-
-    # TODO: Write unit test for return_random_pitch().
 
     rand_note_pitch = generate_random_note_pitch(user_chosen_scale)
     return get_note_name(rand_note_pitch, c_chromatic_dictionary)

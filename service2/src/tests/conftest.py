@@ -16,6 +16,7 @@ import pytest
 # Fixtures are a great place to store data to use for testing.
 # You can return anything.
 
+
 @pytest.fixture(name='all_pitches', scope='function', autouse=False)
 def melodie_proprietary_pitches():
     """A fixture which returns the notes in a chromatic musical scale,
@@ -45,27 +46,6 @@ def common_scales():
     return common_scales
 
 
-@pytest.fixture(name='all_rhythms', scope='function', autouse=False)
-def mingus_rhythms():
-    """A fixture which only returns the standard variations of pitch in
-    mingus convention."""
-
-    return [0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, 128]
-
-
-@pytest.fixture(name='common_rhythms', scope='function', autouse=False)
-def common_rhythms():
-    """A fixture to test all subsets of common musical rhythm."""
-
-    common_rhythms_dictionary = {
-        "short": [8, 16, 32, 64],
-        "long": [1, 2, 4],
-        "standard": [1, 2, 4, 8, 16, 32],
-        "extremes": [0.25, 0.5, 64, 128]
-    }
-    return common_rhythms_dictionary
-
-
 @pytest.fixture(name='note_names_in_c', scope='function', autouse=False)
 def note_names_in_c():
 
@@ -86,44 +66,3 @@ def note_names_in_c():
     }
 
     return c_chromatic_dictionary
-
-
-@pytest.fixture(name='key_offset_dict', scope='function', autouse=False)
-def key_offset():
-    """A fixture which returns the key offset values for every musical key,
-    in relation to F. Returns values as key-value pairs.
-
-    NB: A musical sharp is denoted by the suffix 'is'.
-    NB: A flat pitch is denoted by the suffix 'es'.
-    """
-
-    key_offset_dictionary = {
-        'C': 0,
-        'C#': 1,
-        'Db': 1,
-        'D': 2,
-        'D#': 3,
-        'Eb': 3,
-        'E': 4,
-        'F': 5,
-        'F#': 6,
-        'Gb': 6,
-        'G': 7,
-        'G#': 8,
-        'Ab': 8,
-        'A': 9,
-        'A#': 10,
-        'Bb': 10,
-        'B': 11
-    }
-
-    return key_offset_dictionary
-
-# Depreciated Fixtures -------------------------------------------------
-
-
-@pytest.fixture(name='all_keys', scope='function', autouse=False)
-def all_lilypond_keys():
-    """A list of every possible music key root."""
-    return ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb',
-            'G', 'A#', 'Ab', 'A', 'A#', 'Bb', 'B']
