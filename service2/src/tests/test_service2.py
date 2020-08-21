@@ -2,9 +2,35 @@
 
 # Imports --------------------------------------------------------------
 
+import json
+from os import environ
+
 from service2 import return_scale_dictionary, \
     return_random_pitch, generate_random_note_pitch, get_note_name, \
-    on_get_request, on_post_request
+    on_get_request, on_post_request, service2
+
+
+# Test Flask App Config ------------------------------------------------
+
+def test_production_config():
+    """This app checks the functionality of our .config file switcher."""
+
+    client = service2.test_client()
+
+    service2.config.from_object('service2_config.TestingConfig')
+
+    assert service2.config.get("TESTING") is True
+    assert service2.config.get("DEBUG") is False
+
+    service2.config.from_object('service2_config.ProductionConfig')
+
+    assert service2.config.get("TESTING") is False
+    assert service2.config.get("DEBUG") is False
+
+    service2.config.from_object('service2_config.DevelopmentConfig')
+
+    assert service2.config.get("TESTING") is False
+    assert service2.config.get("DEBUG") is True
 
 
 # Test Functions -------------------------------------------------------
@@ -90,20 +116,43 @@ def test_on_get_request(common_scales):
     - GET a status code 200.
     - GET a JSON file, containing a list of our common scales.
 
+    """
+
+    client = service2.test_client()
+
+    response = client.get('/')
+
+    # Converts our JSON response to a python dictionary.
+    decode_response = json.loads(response.get_data())
+
+    assert response.status_code == 200
+    assert decode_response == common_scales
 
 
+def test_on_post_request(all_pitches, note_names_in_c):
+    """
+    This function tests our POST request functionality for our API.
 
+    This test will utilise the pytest fixtures 'note_names_in_c'.
 
+    When we receive a post request to service 2, we expect:
 
+    - To receive data in a scale key-pair format.
 
+    - To return a status code of 200.
+
+    - To return to get back a single note, as string.
 
     """
-    # TODO: Write unit test for on_get_request().
-    assert True
 
+    client = service2.test_client()
 
-def test_on_post_request():
-    """This function tests our POST request functionality for our API."""
-    # TODO: Write unit test for on_post_request().
+    scale_key_pair = {'chromatic': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+                                    'r']}
 
-    assert True
+    response = client.post('/', json=scale_key_pair)
+    response_data = response.get_data().decode("utf-8")
+    response_data = response_data.rstrip("\n").strip('"')
+
+    assert response_data in note_names_in_c.values()
+    assert response.status_code == 200

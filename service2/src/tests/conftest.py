@@ -16,7 +16,6 @@ import pytest
 # Fixtures are a great place to store data to use for testing.
 # You can return anything.
 
-
 @pytest.fixture(name='all_pitches', scope='function', autouse=False)
 def melodie_proprietary_pitches():
     """A fixture which returns the notes in a chromatic musical scale,
@@ -48,7 +47,6 @@ def common_scales():
 
 @pytest.fixture(name='note_names_in_c', scope='function', autouse=False)
 def note_names_in_c():
-
     c_chromatic_dictionary = {
         1: 'C',
         2: 'C#',

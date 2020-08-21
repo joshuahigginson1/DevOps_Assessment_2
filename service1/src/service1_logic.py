@@ -3,7 +3,8 @@
 # Imports --------------------------------------------------------------
 
 import ast
-from random import random
+
+import random
 
 import requests
 
@@ -85,6 +86,8 @@ def convert_form_to_full_json_output(form_get_on_validation, full_dict):
     for label, value in list_of_dict_items:
         if value == output_form_list:
             new_dict = {label: value}
+
+            print(f"new_dict: {new_dict}")
 
     return new_dict
 
