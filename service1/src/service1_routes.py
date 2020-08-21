@@ -8,8 +8,7 @@ from flask import render_template, send_from_directory, abort
 from service1_init import service1
 
 from service1_logic import validate_on_submit_func, \
-    get_midi_download_name, \
-    get_png_download_name
+    get_midi_download_name, get_png_download_name, random_download_text
 
 
 # Cache Control --------------------------------------------------------
@@ -78,6 +77,8 @@ def return_form():
 
                 download_name = png_download_name
 
+                dl_text = random_download_text()
+
             else:  # Writes MIDI file.
                 with open(midi_file_dir, "wb") as file_to_write:
                     print("Writing bytes from service4 to new midi file in "
@@ -91,7 +92,8 @@ def return_form():
             return render_template('main_page_download.html',
                                    title=' ~ Download Ready! 🎶',
                                    form=homepage_form,
-                                   download=download_name)
+                                   download=download_name,
+                                   dl_text=dl_text)
 
         else:
 

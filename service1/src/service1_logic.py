@@ -3,6 +3,7 @@
 # Imports --------------------------------------------------------------
 
 import ast
+from random import random
 
 import requests
 
@@ -10,6 +11,21 @@ from service1_init import service1
 
 
 # Functions ------------------------------------------------------------
+
+def random_download_text():
+    """When I was testing out the download button functionality, I found it
+    difficult to know if a second or third file had been generated. This
+    function alters the 'your file is ready' button randomly, to aid with
+    user feedback."""
+
+    dl_text_list = ["Your file is ready!",
+                    "Your new file is ready to download!",
+                    "Let's make some music - Download Now.",
+                    "Let the music play! Your download link.",
+                    "Download now!",
+                    "Download here!"]
+
+    return random.choice(dl_text_list)
 
 
 def get_png_download_name(user_file_name):

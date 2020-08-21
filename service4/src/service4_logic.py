@@ -116,13 +116,17 @@ def overwrite_transpose_bar(bar, key_to_transpose):
     """This function transposes our full bar, dependent on the user's
     chosen key signature in service 1."""
 
-    if key_to_transpose > 1:
+    print(key_to_transpose)
 
+    if key_to_transpose != 0:
+        return bar
+
+    else:
         for note_container in bar:
             if note_container[2] is not None:
                 note_container[2].transpose(key_to_transpose, True)
 
-    return bar
+        return bar
 
 
 def save_as_midi(file_name, output_bar, user_tempo):
