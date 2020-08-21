@@ -26,14 +26,17 @@
 
                 <div class="form-group col-md-10 mx-auto">
 
-                    {{ form.tempo(class_="form-control-range", min=60, max=220,
-                    oninput="sliderId.value = form.tempo.value") }}
 
-                    <br>
+
 
                     {{ form.tempo.label(class_="control-label") }}
 
                     <output name="sliderLabel" id="sliderId">Wiggle me!</output>
+
+                    <br>
+
+                    {{ form.tempo(class_="form-control-range", min=60, max=220,
+                    oninput="sliderId.value = form.tempo.value") }}
 
                 </div>
 
