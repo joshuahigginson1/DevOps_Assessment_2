@@ -15,7 +15,7 @@ from service2 import return_scale_dictionary, \
 def test_production_config():
     """This app checks the functionality of our .config file switcher."""
 
-    client = service2.test_client()
+    assert service2.config['ENV'] == environ.get('ENV')
 
     service2.config.from_object('service2_config.TestingConfig')
 
@@ -31,7 +31,6 @@ def test_production_config():
 
     assert service2.config.get("TESTING") is False
     assert service2.config.get("DEBUG") is True
-
 
 # Test Functions -------------------------------------------------------
 

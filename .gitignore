@@ -4,6 +4,8 @@
 *.mid
 *.midi
 
+!test-file-melodie.png
+!test-file-melodie.mid
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

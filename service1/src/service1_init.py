@@ -12,14 +12,19 @@ from flask_bootstrap import Bootstrap
 
 service1 = Flask(__name__)
 
-if environ.get("ENVIRONMENT") == 'production':
+print(f"The current environment is: {environ.get('ENV')}")
+
+if environ.get("ENV") == 'production':
     service1.config.from_object('service1_config.ProductionConfig')
 
-elif environ.get("ENVIRONMENT") == 'testing':
+elif environ.get("ENV") == 'testing':
     service1.config.from_object('service1_config.TestingConfig')
 
 else:
     service1.config.from_object('service1_config.DevelopmentConfig')
+
+print(f"The service1 config mode is: {service1.config['ENV']}")
+print(f"The secret key is: {service1.config['SECRET_KEY']}")
 
 # Import Routes --------------------------------------------------------
 

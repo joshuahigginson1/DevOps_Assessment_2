@@ -16,12 +16,26 @@ import pytest
 # Fixtures are a great place to store data to use for testing.
 # You can return anything.
 
-@pytest.fixture(name='all_pitches', scope='function', autouse=False)
-def melodie_proprietary_pitches():
-    """A fixture which returns the notes in a chromatic musical scale,
-    into our own proprietary format."""
+@pytest.fixture(name='dl_text_list', scope='function', autouse=False)
+def dl_text_list():
+    """A fixture which contains all of the text options that we
+     want to show our user upon downloading a file."""
 
-    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "r"]
+    return ["Your file is ready!",
+            "Your new file is ready to download!",
+            "Let's make some music - Download Now.",
+            "Let the music play! Your download link.",
+            "Download now!",
+            "Download here!"]
+
+
+@pytest.fixture(name='mingus_pitches', scope='function', autouse=False)
+def mingus_pitches():
+    """A fixture which returns the notes in a chromatic musical scale,
+    into mingus format."""
+
+    return ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb',
+            'G', 'A#', 'Ab', 'A', 'A#', 'Bb', 'B', "r"]
 
 
 @pytest.fixture(name='common_scales', scope='function', autouse=False)
@@ -42,6 +56,7 @@ def common_scales():
         "minor pentatonic": [1, 4, 6, 8, 11, "r"],
         "minor blues": [1, 4, 6, 7, 8, 11, "r"]
     }
+
     return common_scales
 
 
@@ -58,17 +73,17 @@ def common_rhythms():
     """A fixture to test all subsets of common musical rhythm."""
 
     common_rhythms_dictionary = {
-        "short": [8, 16, 32, 64],
+        "short": [4, 8, 16, 32],
         "long": [1, 2, 4],
-        "standard": [1, 2, 4, 8, 16, 32],
-        "extremes": [0.25, 0.5, 64, 128]
+        "standard": [2, 4, 8, 16],
+        "extremes": [1, 32, 64, 128]
     }
+
     return common_rhythms_dictionary
 
 
 @pytest.fixture(name='note_names_in_c', scope='function', autouse=False)
 def note_names_in_c():
-
     c_chromatic_dictionary = {
         1: 'C',
         2: 'C#',
@@ -118,6 +133,7 @@ def key_offset():
     }
 
     return key_offset_dictionary
+
 
 # Depreciated Fixtures -------------------------------------------------
 

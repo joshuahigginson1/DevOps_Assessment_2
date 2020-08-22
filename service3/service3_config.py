@@ -25,12 +25,19 @@ class Config(object):  # General Config
 
 
 class ProductionConfig(Config):
-    pass
+
+    ENV = 'production'
 
 
 class DevelopmentConfig(Config):
+
+    ENV = 'testing'
+
     DEBUG = True
 
 
 class TestingConfig(Config):
+
+    ENV = 'development'
+
     TESTING = True

@@ -8,7 +8,9 @@ from flask import render_template, send_from_directory, abort
 from service1_init import service1
 
 from service1_logic import validate_on_submit_func, \
-    get_midi_download_name, get_png_download_name, random_download_text
+    get_midi_download_name, get_png_download_name, random_download_text,\
+    listify, \
+    service_1_json_bundle, convert_form_to_full_json_output
 
 
 # Cache Control --------------------------------------------------------
@@ -105,8 +107,8 @@ def return_form():
                            form=homepage_form)
 
 
-@service1.route("/<download_name>", methods=["GET", "POST"])
-def download_png(download_name):
+@service1.route("/<download_name>", methods=["GET"])
+def download_file(download_name):
     """This function downloads our file upon post request."""
 
     files_directory = service1.config["FILES_DIRECTORY"]

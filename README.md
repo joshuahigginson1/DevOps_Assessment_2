@@ -15,7 +15,7 @@ _Created for QA Consulting by Joshua Higginson_
 
 
 ![GitHub](https://img.shields.io/github/license/joshuahigginson1/DevOps_Assessment_2?style=flat-square)
-![Coffee](https://img.shields.io/badge/Coffee%20Consumed-%E2%98%95%20%2007%20Cups%20%20%E2%98%95-yellow?style=flat-square)
+![Coffee](https://img.shields.io/badge/Coffee%20Consumed-%E2%98%95%20%2011%20Cups%20%20%E2%98%95-yellow?style=flat-square)
 
 ## Contents
 - [Pre-Project Reflection](#pre-project-reflection)
@@ -253,6 +253,12 @@ For this project, I did some detailed research on tools for unit testing. For th
 
 Unit testing of our services took longer to write than the actual MVP code...
 ...But that's okay, I was reading information, and this challenged me to think about TDD with a professional understanding.
+
+I chose to write the justification for each unit test using docstings
+, abiding by professional practice and to pep8 standards. 
+
+Below is a brief summary.
+
 
 #### Unit Testing Service #1
 

@@ -100,7 +100,6 @@ def get_service_2_response(url):
         url: The url of service 2.
     """
 
-    # TODO: Add s2 get response test.
     service_2_response = requests.get(url)
     decoded_service_2_response = service_2_response.json()
 
@@ -118,7 +117,6 @@ def get_service_3_response(url):
         url: The url of service 3.
     """
 
-    # TODO: Add s3 get response test.
     service_3_response = requests.get(url)
     decoded_service_3_response = service_3_response.json()
 
@@ -141,12 +139,12 @@ def post_service_2_response(url, scale_key_pair):
 
     service_2_response = requests.post(url, json=scale_key_pair)
     json_response_data = service_2_response.json()
-    status_code_response = service_2_response.status_code
 
     print("\n ----------- Service 2 POST Response ----------- \n")
 
+    print(f'Service 2 Response: {service_2_response}')
+    print(f'Response Code: {service_2_response.status_code}')
     print(f'Data: {json_response_data}')
-    print(f'Response Code: {status_code_response}')
 
     print("\n ----------- End of Service 2 POST Response ----------- \n")
 

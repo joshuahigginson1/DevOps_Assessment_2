@@ -24,7 +24,7 @@ if environ.get("ENVIRONMENT") == 'production':
     service3.config.from_object('service3_config.ProductionConfig')
 
 elif environ.get("ENVIRONMENT") == 'testing':
-    service3.config.from_object('service3_config.TestingConfig')  #
+    service3.config.from_object('service3_config.TestingConfig')
 
 else:
     service3.config.from_object('service3_config.DevelopmentConfig')
