@@ -3,7 +3,8 @@
 # Imports --------------------------------------------------------------
 import json
 
-from service3 import random_note_length, service3, return_rhythms_dictionary
+from src.service3 import random_note_length, service3, \
+    return_rhythms_dictionary
 
 # Test Flask App Config ------------------------------------------------
 

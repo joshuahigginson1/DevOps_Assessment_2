@@ -10,6 +10,6 @@ WORKDIR /
 COPY . .
 
 RUN apt-get update
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r s3_requirements.txt
 
 ENTRYPOINT ["/usr/local/bin/python", "service3_wsgi.py"]

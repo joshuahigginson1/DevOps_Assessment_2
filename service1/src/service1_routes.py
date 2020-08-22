@@ -5,12 +5,12 @@
 import requests
 from flask import render_template, send_from_directory, abort
 
-from service1_init import service1
+from src.service1_init import service1
 
-from service1_logic import validate_on_submit_func, \
+from src.service1_logic import validate_on_submit_func, \
     get_midi_download_name, get_png_download_name, random_download_text,\
-    listify, \
-    service_1_json_bundle, convert_form_to_full_json_output
+    listify, service_1_json_bundle, convert_form_to_full_json_output, \
+    get_service_3_response, get_service_2_response
 
 
 # Cache Control --------------------------------------------------------
@@ -37,7 +37,7 @@ def add_header(r):
 
 @service1.route("/", methods=["GET", "POST"])
 def return_form():
-    from service1_forms import MelodieForm
+    from src.service1_forms import MelodieForm
 
     homepage_form = MelodieForm()  # Instantiate a new form.
 

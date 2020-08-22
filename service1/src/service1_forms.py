@@ -8,10 +8,10 @@ from wtforms.fields.html5 import IntegerRangeField
 from wtforms.validators import DataRequired, Length, NumberRange, \
     ValidationError
 
-from service1_logic import get_service_2_response,\
+from service1.src.service1_logic import get_service_2_response,\
     get_service_3_response
 
-from service1_init import service1
+from src.service1_init import service1
 
 # Classes --------------------------------------------------------------
 

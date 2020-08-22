@@ -5,10 +5,10 @@
 from flask import request
 
 # Import our application.
-from service4_init import service4
+from src.service4_init import service4
 
 # Import our Logic
-from service4_logic import create_bar, initialise_bar, add_notes_to_bar,\
+from src.service4_logic import create_bar, initialise_bar, add_notes_to_bar,\
     save_as_png, save_as_midi, send_png_to_user,\
     send_midi_to_user, overwrite_transpose_bar
 

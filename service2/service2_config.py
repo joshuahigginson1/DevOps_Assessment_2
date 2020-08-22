@@ -26,28 +26,18 @@ class Config(object):  # General Config
 
 class ProductionConfig(Config):
 
-    ENV = 'production'
+    ENVIRONMENT = 'production'
 
 
 class DevelopmentConfig(Config):
 
-    ENV = 'development'
+    ENVIRONMENT = 'development'
 
     DEBUG = True
 
 
 class TestingConfig(Config):
 
-    ENV = 'testing'
+    ENVIRONMENT = 'testing'
 
     TESTING = True
-
-
-# It is good practice to specify configurations for different environments.
-# Below, we consolidate these configuration names into a dictionary.
-
-app_config = {
-    'development': DevelopmentConfig,
-    'production': ProductionConfig,
-    'testing': TestingConfig
-}

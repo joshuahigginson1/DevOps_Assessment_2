@@ -1,19 +1,15 @@
 """This file contains the functions for service1."""
 
 # Imports --------------------------------------------------------------
+
 import json
-
-from os import environ
-
 from os import environ
 from dotenv import load_dotenv
 
-import requests
 from requests import Response
 
-from service1_routes import service1, add_header
-
-from service1_routes import random_download_text, get_png_download_name, \
+from src.service1_routes import service1, add_header, get_service_2_response, \
+    get_service_3_response, random_download_text, get_png_download_name, \
     listify, get_midi_download_name, convert_form_to_full_json_output, \
     service_1_json_bundle
 
@@ -212,26 +208,37 @@ def test_add_header():
 # Test Return Form -----------------------------------------------------
 
 
-def test_return_form():
+def test_return_form(common_rhythms, common_scales):
+    """
 
-    # On a get request, we expect to return our Jinja template.
+
+    This test utilises the pytest fixtures:
+    'common_rhythms' & 'common_scales'.
+
+    This test mocks:
+        an s2 GET request as response -> common_scales..
+        an s3 GET request as response -> common_rhythms.
+
+    """
 
     client = service1.test_client()
+
+    # We should always be able to reach the homepage, so a get request
+    # should return 200.
+
+
+
 
 
 def test_download_file():
     """This function tests the ability for our service to download a file."""
 
-    # On a get request 200
-
-    # On a get request, if file not found, then we return 404.
-
     client = service1.test_client()
 
     file_not_found = client.get('/there_are_no_files_with_this_name')
-    png_file_found = client.get('/test_file-melodie.png')
-    midi_file_found = client.get('/test_file-melodie.mid')
+    png_file_found = client.get('/test-file-melodie.png')
+    midi_file_found = client.get('/test-file-melodie.mid')
 
     assert file_not_found.status_code == 404
     assert png_file_found.status_code == 200
-    assert mi
+    assert midi_file_found.status_code == 200

@@ -1,0 +1,48 @@
+---
+version: "3.8"
+services:
+  service1:
+
+    build:
+      context: ./service1
+
+    ports:
+      - target: 5001
+        published: 5001
+        protocol: tcp
+
+    depends_on:
+      - service2
+      - service3
+      - service4
+
+  service2:
+
+    build:
+      context: ./service2
+
+    ports:
+      - target: 5002
+        published: 5002
+        protocol: tcp
+
+  service3:
+
+    build:
+      context: ./service3
+
+    ports:
+      - target: 5003
+        published: 5003
+        protocol: tcp
+
+  service4:
+
+    build:
+      context: ./service4
+
+    ports:
+      - target: 5004
+        published: 5004
+        protocol: tcp
+...

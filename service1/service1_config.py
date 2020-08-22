@@ -34,7 +34,7 @@ class Config(object):  # General Config
 
 class ProductionConfig(Config):
 
-    ENV = 'production'
+    ENVIRONMENT = 'production'
 
     pass
 
@@ -42,7 +42,7 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     DEBUG = True
 
-    ENV = 'development'
+    ENVIRONMENT = 'development'
 
     SECRET_KEY = environ.get("DEV_SECRET_KEY")
 
@@ -50,6 +50,6 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
 
-    ENV = 'testing'
+    ENVIRONMENT = 'testing'
 
     SECRET_KEY = environ.get("TESTING_SECRET_KEY")

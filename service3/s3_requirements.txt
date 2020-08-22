@@ -2,18 +2,8 @@
 Flask==1.1.2
 python-dotenv==0.14.0
 
-# Bootstrap
-Flask-Bootstrap==3.3.7.1
-
-# Forms
-WTForms==2.3.3
-Flask-WTF==0.14.3
-
 # APIs
 requests==2.24.0
-
-# Music Analysis
-mingus==0.6.0
 
 # Python Code Testing
 pytest==6.0.1
