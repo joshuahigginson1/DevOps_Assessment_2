@@ -1,4 +1,4 @@
-FROM python:3.8-buster
+FROM fnndsc/ubuntu-python3:18.04
 
 LABEL version="1.0"
 LABEL description="Melodie - Service 4 Container."
