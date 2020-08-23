@@ -11,7 +11,6 @@ COPY . .
 
 RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y python3 python3-pip
-RUN apt-get build-dep lilypond
 RUN pip3 install -r s2_requirements.txt
 
 ENTRYPOINT ["/usr/local/bin/python", "service2_wsgi.py"]
