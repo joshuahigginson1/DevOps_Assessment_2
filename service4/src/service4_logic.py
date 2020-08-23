@@ -1,6 +1,7 @@
 """This script contains our logic for service 4"""
 
 # Imports --------------------------------------------------------------
+from os import environ
 
 from flask import abort, send_from_directory
 from mingus.containers import Bar
@@ -10,6 +11,20 @@ from mingus.extra import lilypond
 from time import sleep
 
 import requests
+
+from src.service4_init import service4
+
+
+# Global Variables -----------------------------------------------------
+
+
+PNG_DIRECTORY = service4.config["PNG_DIRECTORY"]
+
+print(f"s4 logic .png dir: {PNG_DIRECTORY}")
+
+MIDI_DIRECTORY = service4.config["MIDI_DIRECTORY"]
+
+print(f"s4 logic .mid dir: {MIDI_DIRECTORY}")
 
 
 # Functions ------------------------------------------------------------
@@ -110,11 +125,13 @@ def add_notes_to_bar(initialised_bar,
         # We need to set a sleep value, otherwise docker thinks that the
         # service is being DDOS'ed and actively refuses a connection.
 
-        sleep(1)
+        # sleep(0.3)
 
         print(initialised_bar)
 
     # When the bar is full, break out loop. It will return a full bar.
+
+    print("\n ---------- THE BAR HAS BEEN FILLED ---------- \n")
 
     return "The bar has been filled!"
 
@@ -123,7 +140,7 @@ def overwrite_transpose_bar(bar, key_to_transpose):
     """This function transposes our full bar, dependent on the user's
     chosen key signature in service 1."""
 
-    print(key_to_transpose)
+    print(f'\nTransposing our file by {key_to_transpose} semitones...\n')
 
     if key_to_transpose != 0:
         return bar
@@ -145,7 +162,9 @@ def save_as_midi(file_name, output_bar, user_tempo):
             user_tempo: The user's selected tempo in BPM.
     """
     midi_file_suffix = file_name + "-melodie.mid"
-    midi_save_location = "src/midi_output/" + midi_file_suffix
+    midi_save_location = f"{MIDI_DIRECTORY}{midi_file_suffix}"
+
+    print(f'The .mid save location is: {midi_save_location} \n')
 
     return midi_file_out.write_Bar(midi_save_location, output_bar,
                                    user_tempo)
@@ -154,6 +173,7 @@ def save_as_midi(file_name, output_bar, user_tempo):
 def save_as_png(file_name, output_bar):
     """This file generates a lilypond string from our mingus bar, and saves
     it as a PNG file.
+
         Keyword Arguments:
             file_name: The user's chosen file name.png
             output_bar: A full mingus bar.
@@ -161,43 +181,68 @@ def save_as_png(file_name, output_bar):
     lilypond_string = lilypond.from_Bar(output_bar, showkey=True,
                                         showtime=True)
 
-    print(f"The lilypond string is: {lilypond_string}")
+    print('\n ---------- THE FILE HAS BEEN SAVED AS LILYPOND ---------- \n')
+
+    print(f"The lilypond string is: {lilypond_string}\n")
 
     # This feature will only work with lilypond in path.
 
-    png_save_location = f"src/png_output/{file_name}-melodie.png"
+    png_file_suffix = file_name + "-melodie.png"
 
-    lilypond.to_png(lilypond_string, png_save_location)
+    png_save_location = f"{PNG_DIRECTORY}{png_file_suffix}"
+
+    print(f'The .png save location is: {png_save_location} \n')
+
+    return lilypond.to_png(lilypond_string, png_save_location)
 
 
-def send_png_to_user(user_file_name, png_directory):
+def send_png_to_user(user_file_name):
     """This function returns our png file to the user if it has saved
     correctly.
+
      Keyword Arguments:
          user_file_name: The file name set by our user in service 1.
          """
 
+    png_directory = service4.config["PNG_DIRECTORY"]
+
+    print(f"Check PNG dir before sending: {png_directory}")
+
+    print('\n ---------- THE PNG FILE IS SENDING... ---------- \n')
+
     try:
+        print("I am trying to send the file... \n")
+
         return send_from_directory(png_directory,
                                    filename=user_file_name,
                                    as_attachment=False)
 
-    except FileNotFoundError:
-        print("I could not find the file.")
+    except FileNotFoundError("THE FILE COULD NOT BE FOUND."):
         abort(404)
 
 
-def send_midi_to_user(user_file_name, midi_directory):
+def send_midi_to_user(user_file_name):
     """This function returns our midi file to the user if it has saved
     correctly.
+
      Keyword Arguments:
          user_file_name: The file name set by our user in service 1.
+
          """
 
+    midi_directory = service4.config["MIDI_DIRECTORY"]
+
+    print(f"Check MIDI dir before sending: {midi_directory}")
+
+    print('\n ---------- THE MIDI FILE IS SENDING... ---------- \n')
+
     try:
+
+        print("I am trying to send the file... \n")
+
         return send_from_directory(midi_directory,
                                    filename=user_file_name,
                                    as_attachment=False)
 
-    except FileNotFoundError:
+    except FileNotFoundError("THE FILE COULD NOT BE FOUND."):
         abort(404)

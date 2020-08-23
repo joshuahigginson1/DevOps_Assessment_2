@@ -20,11 +20,16 @@ from os import environ
 # Global Variables -----------------------------------------------------
 
 
-PNG_DIRECTORY = environ.get("PNG_DIRECTORY")
-MIDI_DIRECTORY = environ.get("MIDI_DIRECTORY")
+PNG_DIRECTORY = service4.config["PNG_DIRECTORY"]
 
-SERVICE_2_URL = environ.get("SERVICE_2_URL")
-SERVICE_3_URL = environ.get("SERVICE_3_URL")
+print(f"s4 routes .png dir: {PNG_DIRECTORY}")
+
+MIDI_DIRECTORY = service4.config["MIDI_DIRECTORY"]
+
+print(f"s4 routes .mid dir: {MIDI_DIRECTORY}")
+
+SERVICE_2_URL = service4.config["SERVICE_2_URL"]
+SERVICE_3_URL = service4.config["SERVICE_3_URL"]
 
 
 # Routes ---------------------------------------------------------------
@@ -71,7 +76,7 @@ def service4_post_request():
     add_notes_to_bar(new_bar, SERVICE_2_URL,
                      SERVICE_3_URL, scale_key_pair, rhythm_key_pair)
 
-    print(" \n ----- Note after S2 S3 Polling ----- \n ")
+    print(" \n ----- THE BAR IS FULL ----- \n ")
 
     print(new_bar)
 
@@ -83,13 +88,15 @@ def service4_post_request():
 
     # === IF MIDI! ===
 
-    #save_as_midi(s1_data.get('file_name'), new_bar, s1_data.get("tempo"))
+    # save_as_midi(s1_data.get('file_name'), new_bar, s1_data.get("tempo"))
+
+    # print('\n ---------- THE FILE HAS BEEN SAVED AS MIDI ---------- \n')
 
     # Send midi file name to user.
 
-    #midi_file_name = f"{s1_data.get('file_name')}-melodie.mid"
+    # midi_file_name = f"{s1_data.get('file_name')}-melodie.mid"
 
-    #return send_midi_to_user(midi_file_name, MIDI_DIRECTORY)
+    # return send_midi_to_user(midi_file_name)
 
     # === IF PNG! ===
 
@@ -97,6 +104,6 @@ def service4_post_request():
 
     save_as_png(s1_data.get("file_name"), new_bar)
 
-    #Send png file name to user.
+    print('\n ---------- THE FILE HAS BEEN SAVED AS PNG ---------- \n')
 
-    return send_png_to_user(png_file_name, PNG_DIRECTORY)
+    return send_png_to_user(png_file_name)

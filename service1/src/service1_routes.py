@@ -45,7 +45,7 @@ def return_form():
 
     if homepage_form.validate_on_submit():
         json_data = validate_on_submit_func(homepage_form)
-        our_file = requests.post(service_4_url, json=json_data)
+        our_file = requests.post(service_4_url, json=json_data, timeout=20)
 
         # Find the file name from user form.
 
@@ -54,11 +54,10 @@ def return_form():
         png_download_name = get_png_download_name(file_name)
         midi_download_name = get_midi_download_name(file_name)
 
-        png_file_dir = f"{service1.config['FILES_DIRECTORY']}" \
-                       f"{png_download_name}"
+        file_dir = service1.config['FILES_DIRECTORY']
 
-        midi_file_dir = f"{service1.config['FILES_DIRECTORY']}" \
-                        f"{midi_download_name}"
+        png_file_dir = f"{file_dir}{png_download_name}"
+        midi_file_dir = f"{file_dir}{midi_download_name}"
 
         # Gets the content type from the header of S4 response.
 
@@ -79,8 +78,6 @@ def return_form():
 
                 download_name = png_download_name
 
-                dl_text = random_download_text()
-
             else:  # Writes MIDI file.
                 with open(midi_file_dir, "wb") as file_to_write:
                     print("Writing bytes from service4 to new midi file in "
@@ -90,6 +87,8 @@ def return_form():
                     print("Written new file. \n")
 
                 download_name = midi_download_name
+
+            dl_text = random_download_text()
 
             return render_template('main_page_download.html',
                                    title=' ~ Download Ready! 🎶',

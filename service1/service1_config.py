@@ -23,7 +23,7 @@ class Config(object):  # General Config
     DEBUG = False
     TESTING = False
 
-    FILES_DIRECTORY = f"{basedir}{environ.get('FILES_DIRECTORY')}"
+    FILES_DIRECTORY = path.join(basedir, environ.get('FILES_DIRECTORY'))
 
     SERVICE_2_URL = environ.get("SERVICE_2_URL")
     SERVICE_3_URL = environ.get("SERVICE_3_URL")
