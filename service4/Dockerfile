@@ -1,4 +1,4 @@
-FROM fnndsc/ubuntu-python3:18.04
+FROM joshuahigginson1/ubuntu-python-lilypond:3.8
 
 LABEL version="1.0"
 LABEL description="Melodie - Service 4 Container."
