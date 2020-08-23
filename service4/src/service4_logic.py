@@ -5,7 +5,7 @@
 from flask import abort, send_from_directory
 from mingus.containers import Bar
 from mingus.midi import midi_file_out
-from mingus.extra.lilypond import to_png, from_Bar
+from mingus.extra import lilypond
 
 import requests
 
@@ -151,13 +151,16 @@ def save_as_png(file_name, output_bar):
             file_name: The user's chosen file name.png
             output_bar: A full mingus bar.
     """
-    lilypond_string = from_Bar(output_bar, showkey=True, showtime=True)
+    lilypond_string = lilypond.from_Bar(output_bar, showkey=True,
+                                        showtime=True)
+
+    print(f"The lilypond string is: {lilypond_string}")
 
     # This feature will only work with lilypond in path.
 
     png_save_location = f"src/png_output/{file_name}-melodie.png"
 
-    to_png(lilypond_string, png_save_location)
+    lilypond.to_png(lilypond_string, png_save_location)
 
 
 def send_png_to_user(user_file_name, png_directory):
