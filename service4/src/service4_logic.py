@@ -217,7 +217,9 @@ def send_png_to_user(user_file_name):
                                    filename=user_file_name,
                                    as_attachment=False)
 
-    except FileNotFoundError("THE FILE COULD NOT BE FOUND."):
+    except FileNotFoundError:
+
+        print("THE FILE COULD NOT BE FOUND.")
         abort(404)
 
 
