@@ -15,14 +15,16 @@ from src.service4_logic import create_bar, initialise_bar, add_notes_to_bar,\
 # Import AST to perform literal evaluation.
 import ast
 
+from os import environ
+
 # Global Variables -----------------------------------------------------
 
 
-PNG_DIRECTORY = service4.config["PNG_DIRECTORY"]
-MIDI_DIRECTORY = service4.config["MIDI_DIRECTORY"]
+PNG_DIRECTORY = environ.get("PNG_DIRECTORY")
+MIDI_DIRECTORY = environ.get("MIDI_DIRECTORY")
 
-SERVICE_2_URL = service4.config["SERVICE_2_URL"]
-SERVICE_3_URL = service4.config["SERVICE_3_URL"]
+SERVICE_2_URL = environ.get("SERVICE_2_URL")
+SERVICE_3_URL = environ.get("SERVICE_3_URL")
 
 
 # Routes ---------------------------------------------------------------

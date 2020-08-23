@@ -10,14 +10,15 @@ from flask import Flask
 
 service4 = Flask(__name__)
 
-if environ.get("ENVIRONMENT") == 'production':
+if environ.get("FLASK_ENV") == 'production':
     service4.config.from_object('service4_config.ProductionConfig')
 
-elif environ.get("ENVIRONMENT") == 'testing':
+elif environ.get("FLASK_ENV") == 'testing':
     service4.config.from_object('service4_config.TestingConfig')
 
 else:
     service4.config.from_object('service4_config.DevelopmentConfig')
+
 
 # Import Routes --------------------------------------------------------
 

@@ -12,10 +12,10 @@ from flask_bootstrap import Bootstrap
 
 service1 = Flask(__name__)
 
-if environ.get("ENVIRONMENT") == 'production':
+if environ.get("FLASK_ENV") == 'production':
     service1.config.from_object('service1_config.ProductionConfig')
 
-elif environ.get("ENVIRONMENT") == 'testing':
+elif environ.get("FLASK_ENV") == 'testing':
     service1.config.from_object('service1_config.TestingConfig')
 
 else:

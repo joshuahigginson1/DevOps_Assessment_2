@@ -10,7 +10,6 @@ WORKDIR /
 COPY . .
 
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y python3 python3-pip
 RUN pip3 install -r s1_requirements.txt
 
 ENTRYPOINT ["/usr/local/bin/python", "service1_wsgi.py"]

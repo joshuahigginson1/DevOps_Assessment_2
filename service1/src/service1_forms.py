@@ -11,7 +11,7 @@ from wtforms.validators import DataRequired, Length, NumberRange, \
 from src.service1_logic import get_service_2_response,\
     get_service_3_response
 
-from src.service1_init import service1
+from os import environ
 
 # Classes --------------------------------------------------------------
 
@@ -20,8 +20,8 @@ class MelodieForm(FlaskForm):
 
     """This is the main form for the front page of service 1."""
 
-    service_2_url = service1.config["SERVICE_2_URL"]
-    service_3_url = service1.config["SERVICE_3_URL"]
+    service_2_url = environ.get("SERVICE_2_URL")
+    service_3_url = environ.get("SERVICE_3_URL")
 
     """ Our list gets sent backwards. We need to reverse it to display 
     correctly in our form. """
