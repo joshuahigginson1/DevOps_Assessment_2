@@ -1,6 +1,7 @@
-FROM ubuntu:18.04
+# FROM ubuntu:18.04
+FROM python:3.8.5-buster
 
-LABEL "Ubuntu Version: "="Ubuntu 18-04"
+LABEL "Debian Version: "="Debian Buster"
 LABEL "Lilypond Version: "="Lilypond 2.20.0-1 Stable"
 
 MAINTAINER joshuahigginson1 joshuahigginson1@gmail.com

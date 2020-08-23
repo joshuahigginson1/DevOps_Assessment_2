@@ -1,4 +1,4 @@
-FROM joshuahigginson1/python-ubuntu-lilypond:python-3.8
+FROM joshuahigginson1/ubuntu-lilypond:python-3.8.5
 
 LABEL version="1.0"
 LABEL description="Melodie - Service 4 Container."

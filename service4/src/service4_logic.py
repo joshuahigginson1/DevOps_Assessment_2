@@ -7,6 +7,8 @@ from mingus.containers import Bar
 from mingus.midi import midi_file_out
 from mingus.extra import lilypond
 
+from time import sleep
+
 import requests
 
 
@@ -104,6 +106,11 @@ def add_notes_to_bar(initialised_bar,
         print(f"The new note length is: {new_note_length}")
 
         initialise_bar(initialised_bar, new_note_length, new_note_pitch)
+
+        # We need to set a sleep value, otherwise docker thinks that the
+        # service is being DDOS'ed and actively refuses a connection.
+
+        sleep(1)
 
         print(initialised_bar)
 
