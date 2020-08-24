@@ -32,9 +32,15 @@ class Config(object):  # General Config
     SECRET_KEY = environ.get("PRODUCTION_SECRET_KEY")
 
 
+
+
 class ProductionConfig(Config):
 
     ENV = 'production'
+
+    DATABASE_USERNAME = ""
+    DATABASE_PASSWORD = ""
+    DATABASE_URI = f"mysql+pymysql://username:password@23.45.65.76:3306/flaskappdb"
 
     pass
 
@@ -43,6 +49,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
     ENV = 'development'
+    DATABASE_URI = f''
 
     SECRET_KEY = environ.get("DEV_SECRET_KEY")
 
@@ -51,5 +58,6 @@ class TestingConfig(Config):
     TESTING = True
 
     ENV = 'testing'
+    DATABASE_URI = f''
 
     SECRET_KEY = environ.get("TESTING_SECRET_KEY")

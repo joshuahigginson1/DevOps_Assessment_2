@@ -1,16 +1,19 @@
 """This script contains all of our service 1 routes & endpoints."""
 
 # Imports --------------------------------------------------------------
+from datetime import date
 
 import requests
 from flask import render_template, send_from_directory, abort
 
-from src.service1_init import service1
+from src.service1_init import service1, db
 
 from src.service1_logic import validate_on_submit_func, \
     get_midi_download_name, get_png_download_name, random_download_text,\
     listify, service_1_json_bundle, convert_form_to_full_json_output, \
     get_service_3_response, get_service_2_response
+
+from src.service1_schema import Downloads
 
 
 # Cache Control --------------------------------------------------------
@@ -90,6 +93,21 @@ def return_form():
 
             dl_text = random_download_text()
 
+            # We add this information to our database.
+
+            add_to_db = Downloads(
+                date=date.today(),
+                file_name=homepage_form.musical_scale.data,
+                musical_key=homepage_form.musical_scale.data,
+                musical_scale=homepage_form.musical_scale.data,
+                rhythm_length=homepage_form.rhythm_length.data,
+                tempo=homepage_form.tempo.data,
+                time_signature=homepage_form.time_signature.data
+            )
+
+            db.session.add(add_to_db)
+            db.session.commit()
+
             return render_template('main_page_download.html',
                                    title=' ~ Download Ready! 🎶',
                                    form=homepage_form,
@@ -101,9 +119,14 @@ def return_form():
             # TODO: Add a flash message to user.
             print("There has been an error. File not saved.")
 
+    # Get the number of file downloads from our database.
+
+    num_downloads = str(db.session.query(Downloads.id).count())
+
     return render_template('main_page.html',
                            title=' ~ Mélodie 🎶',
-                           form=homepage_form)
+                           form=homepage_form,
+                           num_downloads=num_downloads)
 
 
 @service1.route("/<download_name>", methods=["GET"])

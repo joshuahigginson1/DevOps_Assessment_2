@@ -8,6 +8,8 @@ from flask import Flask
 
 from flask_bootstrap import Bootstrap
 
+from flask_sqlalchemy import SQLAlchemy
+
 # Create Flask App -----------------------------------------------------
 
 service1 = Flask(__name__)
@@ -24,5 +26,6 @@ else:
 # Import Routes --------------------------------------------------------
 
 bootstrap = Bootstrap(service1)
+db = SQLAlchemy(service1)
 
 import src.service1_routes
