@@ -1,0 +1,8 @@
+[test]
+IP_ADDRESS1
+IP_ADDRESS2
+
+[test:vars]
+ansible_user=USER
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+ansible_ssh_private_key_file=~/.ssh/ansible_id_rsa

@@ -230,6 +230,14 @@ Chose to write my jenkins shell scripts in sh, then executing them within the Je
 
 We finally run the 'pytest-cov' equivalent command, which outputs a Junit Test, for reading with Jenkins.
 
+#### Docker
+
+
+
+
+#### Ansible
+
+We use ansible to configure the environment for our project.
 
 ### Front End Development
 
