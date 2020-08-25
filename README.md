@@ -235,6 +235,16 @@ We finally run the 'pytest-cov' equivalent command, which outputs a Junit Test, 
 
 
 
+
+##### Gluster and Persistent Data Volumes in Docker Swarm
+
+Out of the box, docker only provides support for local volumes.
+
+This is where running MySQL as a container falls short.
+
+
+
+
 #### Ansible
 
 We use ansible to configure the environment for our project.
@@ -308,6 +318,9 @@ Lilypond has a set of distinct markers which indicate note length. I created a P
 ### Acknowledgements
 Acknowledging Brian Okken for his book "Python Testing with PyTest", really
  helping me to nail my lack of TDD knowledge.
+ 
+Jack Wallen from thenewstack.io, for the insightful article:"Create a
+ Docker Swarm with Persistent Storage Using GlusterFS".
  
 Cheers to Mark Atherton for imbuing your MIDI knowledge throughout Uni and
  inspiring this project.
