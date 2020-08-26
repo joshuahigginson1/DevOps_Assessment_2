@@ -1,12 +1,10 @@
 - hosts: all
   become: true
   vars:
-    - gluster_brick_dirs:
-    - /srv/gluster/brick0
-    - /srv/gluster/brick1
-    - gluster_mount_dir: /mnt/gluster
-    - gluster_volume_name: gv0
-    - gluster_replicas: 2
+    gluster_brick_dirs: '/srv/gluster/brick0', '/srv/gluster/brick1'
+    gluster_mount_dir: '/mnt/gluster'
+    gluster_volume_name: 'gv0'
+    gluster_replicas: 2
 
   roles:
     - common
