@@ -1,0 +1,40 @@
+---
+
+- name: "Initialise a new swarm on the master node."
+  docker_swarm:
+    state: present
+
+  register: docker_swarm_info
+
+- name: "DEBUG our docker swarm info BEFORE assigning it to a host."
+  debug:
+    var: docker_swarm_info
+
+- name: "Add a host, which stores our docker_swarm_info as a variable."
+  add_host:
+    name: docker-swarm-info-host
+    dockerinfo: docker_swarm_info
+    dockertokendictworker: docker_swarm_info.swarm_facts.JoinTokens.Worker
+    dockertokendictmanager: docker_swarm_info.swarm_facts.JoinTokens.Manager
+    dockertokenstrworker: "{{ docker_swarm_info.swarm_facts.JoinTokens.Worker }}"
+    dockertokenstrmanager: "{{ docker_swarm_info.swarm_facts.JoinTokens.Manager }}"
+
+- name: "DEBUG -> RETRIEVE the SWARM INFO from our new host."
+  debug:
+    var: "{{ hostvars['docker-swarm-info-host']['dockerinfo'] }}"
+
+- name: "DEBUG -> RETRIEVE the WORKER token AS DICT."
+  debug:
+    var: "{{ hostvars['docker-swarm-info-host']['dockertokendictworker'] }}"
+
+- name: "DEBUG -> RETRIEVE the MANAGER token AS DICT."
+  debug:
+    var: "{{ hostvars['docker-swarm-info-host']['dockertokendictmanager'] }}"
+
+- name: "DEBUG -> RETRIEVE the WORKER token AS STRING."
+  debug:
+    msg: "{{ hostvars['docker-swarm-info-host']['dockertokenstrworker'] }}"
+
+- name: "DEBUG -> RETRIEVE the MANAGER token AS STRING."
+  debug:
+    msg: "{{ hostvars['docker-swarm-info-host']['dockertokenstrmanager'] }}"

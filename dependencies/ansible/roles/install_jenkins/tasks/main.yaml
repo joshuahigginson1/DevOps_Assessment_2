@@ -1,0 +1,18 @@
+---
+- name: Add our official GPG keys.
+  apt_key:
+    url: "{{ item }}"
+    state: present
+
+  with_items:
+    - https://pkg.jenkins.io/debian-stable/jenkins.io.key
+
+- name: Install Jenkins & its dependencies.
+  apt:
+    name: "{{ item }}"
+    update_cache: true
+
+  with_items:
+    - openjdk-11-jre
+    - jenkins
+...

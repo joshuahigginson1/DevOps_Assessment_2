@@ -1,0 +1,22 @@
+
+- name: Install GlusterFS
+  apt:
+    name: {{ item }}
+    state: latest
+    update_cache: yes
+
+  with_items:
+    - glusterfs-server
+    - glusterfs-client
+    - glusterfs-common
+    - nfs-kernel-server
+
+- name: Enable GlusterFS on Boot
+  service: "name={{ glusterfs_daemon }} state=started enabled=yes"
+
+- name: Probe GlusterFS Nodes
+  shell: "gluster peer probe {{ item }}"
+
+  with_items:
+    - "glusterfs-node-1"
+    - "glusterfs-node-2"

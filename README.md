@@ -184,6 +184,18 @@ The only things we I haven’t currently automated is the ‘in progress and don
 
 ### Requirements
 
+## Project Setup
+
+#### Ansible
+Map IP addresses in /etc/hosts/
+
+
+#### Gluster
+Ensure that TCP and UDP ports 24007 and 24008 are open on all Gluster servers.
+You also need to open one port for each brick starting from port 49152.
+For example: if you have five bricks, you need to have ports 49152 to 49156 open.
+
+
 ## Project Approach
 
 

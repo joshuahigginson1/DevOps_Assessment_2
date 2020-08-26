@@ -1,0 +1,9 @@
+---
+- name: "Add a new worker node to our swarm."
+  docker_swarm:
+    state: join
+    debug: yes
+    remote_addrs: "{{ hostvars[groups.docker_swarm_init_master[0]]['ansible_default_ipv4']['address'] }}"
+    advertise_addr: "{{ ansible_default_ipv4['address'] }}"
+    join_token: "{{ hostvars['docker-swarm-info-host']['dockertokenstrworker'] }}"
+...

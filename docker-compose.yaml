@@ -7,8 +7,8 @@ services:
     image: mysql:5.7
 
     volumes:
-      - type: volume
-        source: mysql-service1-data
+      - type: bind
+        source: /mnt/gluster
         target: /var/lib/mysql
 
     environment:
