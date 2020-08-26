@@ -186,8 +186,12 @@ The only things we I haven’t currently automated is the ‘in progress and don
 
 ## Project Setup
 
+
+
 #### Ansible
-Map IP addresses in /etc/hosts/
+
+Add ssh public key to all nodes.
+Map all IP addresses to /etc/hosts/
 
 
 #### Gluster
