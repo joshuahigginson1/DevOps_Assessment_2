@@ -40,7 +40,7 @@
   with_items: groups.all
 
     with_items:
-      - "{{ gluster_brick_dirs }}"
+      - "{{ gluster_brick_dir_dict }}"
       - "{{ gluster_mount_dir }}"
 
   - name: Configure our Gluster volume.
