@@ -31,6 +31,9 @@ pipeline{
         TESTING_DB_USERPASS = credentials('DB_USERPASS')
         TESTING_DATABASE_ADDRESS = credentials('DB_ADDRESS')
 
+        DOCKER_USERNAME = credentials('DOCKER_USERNAME')
+        DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+
     }
 
     stages{
