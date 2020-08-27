@@ -1,3 +1,17 @@
+- name: Add common APT repositories.
+  apt_repository:
+    repo: ppa:gluster/glusterfs-7
+
+- name: "Remove any older, conflicting Gluster packages."
+  apt:
+    name: "{{ item }}"
+    state: absent
+
+  with_items:
+    - glusterfs-server
+    - glusterfs-client
+    - glusterfs-common
+    - nfs-kernel-server
 
 - name: Install GlusterFS
   apt:
@@ -10,11 +24,56 @@
     - glusterfs-common
     - nfs-kernel-server
 
-- name: Enable GlusterFS on Boot
-  service: "name={{ glusterfs_daemon }} state=started enabled=yes"
+- name: Enable GlusterFS on Boot.
+  service:
+    name: glusterd
+    state: restarted
+    enabled: yes
 
-- name: Probe GlusterFS Nodes
-  shell: "gluster peer probe {{ item }}"
+- name: Add peers to our GlusterFS pool.
+  gluster_peer:
+    state: present
+    nodes: "{{ play_hosts }}"
+  delegate_to: "{{ play_hosts | first }}"
+
+- name: Probe our delegate with each other glusterFS node.
+  gluster_peer:
+    state: present
+    nodes: "{{ play_hosts | first }}"
+  delegate_to: "{{ play_hosts }}"
+
+- name: Ensure that our Gluster brick and mount directories exist.
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: www-data
+    mode: u=rw,g=rw,o=r
+
   with_items:
-    - "glusterfs-node-1"
-    - "glusterfs-node-2"
+    - "{{ gluster_brick_dir_dict }}"
+    - "{{ gluster_mount_dir }}"
+
+- name: Configure our Gluster volume, before starting it.
+  gluster_volume:
+    state: present
+    name: gv0
+    bricks: "{{ gluster_brick_dirs }}"
+    rebalance: yes
+    cluster: "{{ play_hosts }}"
+    force: yes  # Bricks are being created in our root partition.
+  run_once: true
+
+- name: Start our Gluster volume.
+  gluster_volume:
+    state: started
+    name: gv0
+  run_once: true
+
+- name: Ensure that the Gluster volume is mounted.
+  mount:
+    name: "{{ gluster_mount_dir }}"
+    src: "{{ inventory_hostname }}:/{{ gluster_volume_name }}"
+    fstype: glusterfs
+    opts: "defaults,_netdev"
+    state: mounted
