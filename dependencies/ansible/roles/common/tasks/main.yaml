@@ -34,14 +34,14 @@
 - name: Add peers to our GlusterFS pool.
   gluster_peer:
     state: present
-    nodes: "{{ groups['glusterfs'] }}"
-  delegate_to: "{{ groups['jenkins_ansible_driver'] | first }}"
+    nodes: "{{ play_hosts }}"
+  delegate_to: "{{ play_hosts | first }}"
 
 - name: Probe our delegate with each other glusterFS node.
   gluster_peer:
     state: present
-    nodes: "{{ groups['jenkins_ansible_driver'] | first }}"
-  delegate_to: "{{ groups['glusterfs'] }}"
+    nodes: "{{ play_hosts | first }}"
+  delegate_to: "{{ play_hosts }}"
 
 - name: Ensure that our Gluster brick and mount directories exist.
   file:
