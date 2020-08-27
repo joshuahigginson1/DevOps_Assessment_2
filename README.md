@@ -186,6 +186,29 @@ The only things we I haven’t currently automated is the ‘in progress and don
 
 ## Project Setup
 
+1. Create 4 new VM instances, and 1 Database instance in GCP:
+
+- Jenkins-Ansible-Driver
+- Melodie-Manager-1
+- Melodie-Worker-1
+- Melodie-Worker-2
+- Melodie-MySQL-Database
+
+2. Run our Jenkins install script on Jenkins-Ansible-Driver.
+
+3. We add our IP aliases to the Jenkins-Ansible-Driver /etc/hosts file.
+ 
+4. Add the SSH public key of Jenkins-Ansible-Driver to each other VM node.
+ 
+5. Add our environment variables to Jenkins.
+ 
+6. We configure a new pipeline project, pulling down our git repo, and
+ targeting the Jenkinsfile.
+
+7. Configure a new git SCM webhook.
+
+
+
 
 #### Ansible
 
@@ -194,11 +217,6 @@ Install ansible on ansible driver
 Add ssh public key to all nodes.
 Map all IP addresses to /etc/hosts/
 
-
-#### Gluster
-Ensure that TCP and UDP ports 24007 and 24008 are open on all Gluster servers.
-You also need to open one port for each brick starting from port 49152.
-For example: if you have five bricks, you need to have ports 49152 to 49156 open.
 
 
 ## Project Approach

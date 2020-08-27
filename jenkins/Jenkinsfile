@@ -39,6 +39,8 @@ pipeline{
 
         stages{
 
+            }
+
             stage('Configure our Test Environment'){
                 steps{
                     sh './scripts/configure_test_environment.sh'
