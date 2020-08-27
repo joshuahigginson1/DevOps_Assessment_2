@@ -4,6 +4,9 @@
 
 docker login -u"$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
+pwd
+ls
+
 sudo cd ~/DevOps_Assessment_2/service1
 docker build -t joshuahigginson1/melodie_service1:latest .
 docker push joshuahigginson1/melodie_service1:latest
