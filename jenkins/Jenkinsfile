@@ -15,11 +15,6 @@ pipeline{
         PNG_DIRECTORY = "src/png_output/"
         MIDI_DIRECTORY = "src/midi_output/"
 
-        SERVICE_1_URL = credentials('SERVICE_1_URL')
-        SERVICE_2_URL = credentials('SERVICE_2_URL')
-        SERVICE_3_URL = credentials('SERVICE_3_URL')
-        SERVICE_4_URL = credentials('SERVICE_4_URL')
-
         PRODUCTION_DB = "production_melodie_db"
         PRODUCTION_DB_USERNAME = credentials('DB_USERNAME')
         PRODUCTION_DB_USERPASS = credentials('DB_USERPASS')
