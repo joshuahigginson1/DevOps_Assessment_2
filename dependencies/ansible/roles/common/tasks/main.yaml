@@ -19,7 +19,7 @@
 
 - name: Enable GlusterFS on Boot
   service:
-    name: "{{ glusterfs_daemon }}"
+    name: gusterd
     state: started
     enabled: yes
 
@@ -31,13 +31,18 @@
     group: www-data
     mode: u=rw,g=rw,o=r
 
-    with_items:
-      - "{{ gluster_brick_dirs }}"
-      - "{{ gluster_mount_dir }}"
+  with_items:
+    - "{{ gluster_brick_dirs }}"
+    - "{{ gluster_mount_dir }}"
 
-- name: Probe GlusterFS Nodes
-  shell: "gluster peer probe {{ item }}"
-  with_items: groups.all
+# - name: Probe GlusterFS Nodes
+#   shell: "gluster peer probe {{ item }}"
+#   with_items: groups.all
+
+- name: Probe each node, and add them to our GlusterFS stack.
+  gluster_peer:
+    state: present
+    nodes: "{{ groups['all'] }}"
 
 - name: Configure our Gluster volume.
   gluster_volume:
