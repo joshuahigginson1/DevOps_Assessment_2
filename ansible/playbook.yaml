@@ -13,10 +13,15 @@
   roles:
     - install_docker
 
-- hosts: docker_swarm_master
+- hosts: docker_swarm_init_master
   become: true
   roles:
     - docker_swarm_init_on_master
+    - join_swarm_as_manager
+
+- hosts: docker_swarm_managers
+    become: true
+    roles:
     - join_swarm_as_manager
 
 - hosts: docker_swarm_workers
