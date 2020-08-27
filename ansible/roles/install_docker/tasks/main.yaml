@@ -77,6 +77,6 @@
 
 - name: "Change the ownership of the Docker socket file."
   shell:
-    cmd: sudo sh "chmod 775 /run/docker.sock"
+    cmd: sh "chmod 775 /var/run/docker.sock"
 
 ...
