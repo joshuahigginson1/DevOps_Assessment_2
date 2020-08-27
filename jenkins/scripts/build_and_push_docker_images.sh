@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# A script to build and push docker images to our personal repo.
+
 docker login --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
 
 cd ~/DevOps_Assessment_2/service1

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # This script will install ansible on an ubuntu machine.
 
 sudo apt update

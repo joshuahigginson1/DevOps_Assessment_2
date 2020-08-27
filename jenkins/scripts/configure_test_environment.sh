@@ -1,4 +1,5 @@
-# Melodie Jenkins Pipeline
+#!/bin/bash
+
 # A script to configure our test environment.
 
 # Update dependencies.
