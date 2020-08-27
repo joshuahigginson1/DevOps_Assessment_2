@@ -12,7 +12,10 @@
     - nfs-kernel-server
 
 - name: Enable GlusterFS on Boot
-  service: "name={{ glusterfs_daemon }} state=started enabled=yes"
+  service:
+    name: gusterd
+    state: started
+    enabled: yes
 
 - name: Probe GlusterFS Nodes
   shell: "gluster peer probe {{ item }}"
