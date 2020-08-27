@@ -5,7 +5,7 @@ ls
 
 cd service3/src/tests
 
-sudo pytest --junit-xml=<PATH>/tests/test_results/junit_results.xml
+sudo pytest --junit-xml=test_results/junit_results.xml
 
 printf "\n"
 printf "\n"
@@ -17,9 +17,9 @@ printf "\n"
 
 # So instead, we use the 'pylint-fail-under' plugin.
 
-sh -c "pylint-fail-under --fail_under 1 -f parseable src > src/tests/test_results/pylint_report.log"
+sh -c "pylint-fail-under --fail_under 1 -f parseable src > test_results/pylint_report.log"
 
 # Run our Pep8 function, and saves the output to a new .txt file.
 # We just want the style report, not for the program to fail our build.
 
-sh -c "pycodestyle src > src/tests/test_results/pep8_report.txt || exit 0"
+sh -c "pycodestyle src > service1/src/tests/test_results/pep8_report.txt || exit 0"
