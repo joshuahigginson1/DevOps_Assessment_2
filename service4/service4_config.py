@@ -25,13 +25,16 @@ class Config(object):  # General Config
     print(f"The PNG_DIR is: {PNG_DIRECTORY}")
     print(f"The MIDI_DIR is: {PNG_DIRECTORY}")
 
-    SERVICE_2_URL = environ.get("SERVICE_2_URL")
-    SERVICE_3_URL = environ.get("SERVICE_3_URL")
+    SERVICE_2_URL = "0.0.0.0:5002"
+    SERVICE_3_URL = "0.0.0.0:5003"
 
 
 class ProductionConfig(Config):
 
     ENV = 'production'
+
+    SERVICE_2_URL = environ.get("SERVICE_2_URL")
+    SERVICE_3_URL = environ.get("SERVICE_3_URL")
 
 
 class DevelopmentConfig(Config):

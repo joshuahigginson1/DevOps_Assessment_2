@@ -21,11 +21,11 @@ class Config(object):  # General Config
 
     FILES_DIRECTORY = path.join(basedir, environ.get('FILES_DIRECTORY'))
 
-    SERVICE_2_URL = environ.get("SERVICE_2_URL")
-    SERVICE_3_URL = environ.get("SERVICE_3_URL")
-    SERVICE_4_URL = environ.get("SERVICE_4_URL")
-
     SECRET_KEY = environ.get("PRODUCTION_SECRET_KEY")
+
+    SERVICE_2_URL = "0.0.0.0:5002"
+    SERVICE_3_URL = "0.0.0.0:5003"
+    SERVICE_4_URL = "0.0.0.0:5004"
 
 
 class ProductionConfig(Config):
@@ -38,6 +38,10 @@ class ProductionConfig(Config):
     DB_NAME = environ.get('PRODUCTION_DB')
 
     DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
+
+    SERVICE_2_URL = environ.get("SERVICE_2_URL")
+    SERVICE_3_URL = environ.get("SERVICE_3_URL")
+    SERVICE_4_URL = environ.get("SERVICE_4_URL")
 
 class DevelopmentConfig(Config):
     DEBUG = True

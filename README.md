@@ -196,6 +196,11 @@ The only things we I haven’t currently automated is the ‘in progress and don
 
 2. Run our Jenkins install script on Jenkins-Ansible-Driver.
 
+2a. Install required Jenkins plugins for this project:
+- ChuckNorris
+- Warnings Next Generation (For Pylint Test Reporting)
+- Performance (For Junit Test Reporting)
+
 3. We add our IP aliases to the Jenkins-Ansible-Driver /etc/hosts file.
  
 4. Add the SSH public key of Jenkins-Ansible-Driver to each other VM node.
