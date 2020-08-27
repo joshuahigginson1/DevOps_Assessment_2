@@ -1,8 +1,8 @@
 #!/bin/sh
 
-cd ~/src/tests
+cd src/tests
 
-pytest --junit-xml=<PATH>/tests/test_results/junit_results.xml
+sudo pytest --junit-xml=<PATH>/tests/test_results/junit_results.xml
 
 printf "\n"
 printf "\n"
