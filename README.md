@@ -201,6 +201,8 @@ The only things we I haven’t currently automated is the ‘in progress and don
 - Warnings Next Generation (For Pylint Test Reporting)
 - Performance (For Junit Test Reporting)
 
+2b. Add Jenkins user to sudoers.
+
 3. We add our IP aliases to the Jenkins-Ansible-Driver /etc/hosts file.
  
 4. Add the SSH public key of Jenkins-Ansible-Driver to each other VM node.
