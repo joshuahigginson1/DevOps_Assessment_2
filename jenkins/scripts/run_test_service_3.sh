@@ -3,7 +3,7 @@
 pwd
 ls
 
-cd src/tests
+cd service3/src/tests
 
 sudo pytest --junit-xml=<PATH>/tests/test_results/junit_results.xml
 
