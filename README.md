@@ -203,6 +203,8 @@ The only things we I haven’t currently automated is the ‘in progress and don
 
 2b. Add Jenkins user to sudoers. Changed permissions of script created on my
  local computer.
+ 
+2c. Add Jenkins user to the docker group and restart systemctl jenkins.
 
 3. We add our IP aliases to the Jenkins-Ansible-Driver /etc/hosts file.
  

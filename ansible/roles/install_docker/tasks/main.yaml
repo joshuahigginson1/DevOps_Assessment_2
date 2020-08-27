@@ -74,9 +74,4 @@
     append: yes  # Ensures that we don't remove from any other group.
     name: "{{ ansible_user }}"
     group: docker
-
-- name: "Restart our Jenkins client systemctl for changes to take effect."
-  service:
-    name: jenkins
-    state: restarted
 ...
