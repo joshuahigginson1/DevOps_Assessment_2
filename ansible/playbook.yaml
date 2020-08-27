@@ -20,8 +20,8 @@
     - join_swarm_as_manager
 
 - hosts: docker_swarm_managers
-    become: true
-    roles:
+  become: true
+  roles:
     - join_swarm_as_manager
 
 - hosts: docker_swarm_workers
