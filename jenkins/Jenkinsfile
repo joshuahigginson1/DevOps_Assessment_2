@@ -5,66 +5,80 @@ pipeline{
 
     environment {
 
-    // Set our global environment variables here.
-    // TODO: THESE ARE PLACEHOLDER ENVIRONMENT VARIABLES.
-    // AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        FLASK_ENV = "testing"
+
+        TESTING_SECRET_KEY = credentials('TESTING_SECRET_KEY')
+        DEV_SECRET_KEY = credentials('DEV_SECRET_KEY')
+        PRODUCTION_SECRET_KEY = credentials('PRODUCTION_SECRET_KEY')
+
+        FILES_DIRECTORY = "src/file_output/"
+        PNG_DIRECTORY = "src/png_output/"
+        MIDI_DIRECTORY = "src/midi_output/"
+
+        SERVICE_1_URL = credentials('SERVICE_1_URL')
+        SERVICE_2_URL = credentials('SERVICE_2_URL')
+        SERVICE_3_URL = credentials('SERVICE_3_URL')
+        SERVICE_4_URL = credentials('SERVICE_4_URL')
+
+        PRODUCTION_DB = "production_melodie_db"
+        PRODUCTION_DB_USERNAME = credentials('PRODUCTION_DB_USERNAME')
+        PRODUCTION_DB_USERPASS = credentials('PRODUCTION_DB_USERPASS')
+        PRODUCTION_DATABASE_ADDRESS = credentials('PRODUCTION_DB_ADDRESS')
+
+        DEVELOPMENT_DB = "dev_melodie_db"
+        DEVELOPMENT_DB_USERNAME = credentials('DEVELOPMENT_DB_USERNAME')
+        DEVELOPMENT_DB_USERPASS = credentials('DEVELOPMENT_DB_USERPASS')
+        DEVELOPMENT_DATABASE_ADDRESS = credentials('DEVELOPMENT_DATABASE_ADDRESS')
+
+        TESTING_DB = "dev_melodie_db"
+        TESTING_DB_USERNAME = credentials('TESTING_DB_USERNAME')
+        TESTING_DB_USERPASS = credentials('TESTING_DB_USERPASS')
+        TESTING_DATABASE_ADDRESS = credentials('TESTING_DATABASE_ADDRESS')
 
     }
 
         stages{
 
-            stage('Configure Test Environment'){
-
-                 steps{
-
-                 sh './scripts/configure_test_environment.sh'
-
+            stage('Configure our Test Environment'){
+                steps{
+                    sh './scripts/configure_test_environment.sh'
                  }
-
             }
 
             stage('Run Tests'){
-
                 steps{
 
-                 sh './scripts/run_test_service_1.sh'
-                 sh '/scripts/run_test_service_2.sh'
-                 sh '/scripts/run_test_service_3.sh'
-                 sh '/scripts/run_test_service_4.sh'
+                    withEnv(["FLASK_ENV=testing"]){
+
+                     sh './scripts/run_test_service_1.sh'
+                     sh '/scripts/run_test_service_2.sh'
+                     sh '/scripts/run_test_service_3.sh'
+                     sh '/scripts/run_test_service_4.sh'
+
+                     }
 
                  }
+
+            stage('Install Ansible'){
+                steps{
+                    sh './scripts/install_ansible.sh'
+                }
+            }
+
+            stage('Run Ansible Playbook'){
+                steps{
+                    sh './scripts/run_ansible_playbook.sh'
+                }
+            }
 
             stage('Build Docker Images'){
 
                  steps{
-
-                 sh './scripts/build_docker_images.sh'
-
+                    withEnv(["FLASK_ENV=production"]){
+                         sh './scripts/build_and_push_docker_images.sh'
                  }
 
-
-            stage('Deploy Swarm Stack to Testing Environment'){
-
-                 steps{
-
-                 sh './scripts/deploy_test_environment.sh'
-
-                 }
-
-            }
-
-            stage('Deploy to Staging Environment'){
-
-                 steps{
-
-                 sh './scripts/deploy_staging_environment.sh'
-
-                 }
-
-            }
-
-
-            stage('Deploy to Production Environment'){
+            stage('Deploy Swarm Stack'){
 
                  steps{
 

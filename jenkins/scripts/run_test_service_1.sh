@@ -1,7 +1,4 @@
-# Melodie Jenkins Pipeline
-# A script which runs our test suite.
-
-# Run Pytest.
+cd ~/src/tests
 
 sudo pytest --junit-xml=<PATH>/tests/test_results/junit_results.xml
 

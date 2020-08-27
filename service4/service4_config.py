@@ -1,7 +1,6 @@
 # imports ------------------------------
 
 from os import environ, path
-from dotenv import load_dotenv
 
 # .env location ------------------------
 
@@ -9,11 +8,6 @@ from dotenv import load_dotenv
 basedir = path.abspath(path.dirname(__file__))
 
 print(f"The basedir is: {basedir} \n")
-
-# Load our specific .env file from the root directory of our current file.
-load_dotenv(path.join(basedir, 'service4.env'))
-
-print("The env file has been loaded. \n")
 
 
 # Declare Classes ------------------------------------------------------

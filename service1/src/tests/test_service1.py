@@ -227,9 +227,6 @@ def test_return_form(common_rhythms, common_scales):
     # should return 200.
 
 
-
-
-
 def test_download_file():
     """This function tests the ability for our service to download a file."""
 

@@ -4,6 +4,8 @@ services:
 
   service1:
 
+    image: joshuahigginson1/melodie_service_1:latest
+
     build:
       context: ./service1
 
@@ -19,6 +21,8 @@ services:
 
   service2:
 
+    image: joshuahigginson1/melodie_service_2:latest
+
     build:
       context: ./service2
 
@@ -29,6 +33,8 @@ services:
 
   service3:
 
+    image: joshuahigginson1/melodie_service_3:latest
+
     build:
       context: ./service3
 
@@ -38,6 +44,8 @@ services:
         protocol: tcp
 
   service4:
+
+    image: joshuahigginson1/melodie_service_4:latest
 
     build:
       context: ./service4

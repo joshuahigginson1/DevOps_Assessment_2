@@ -1,5 +1,4 @@
 ---
-
 - name: Install common Git and GlusterFS dependencies.
   apt:
     name: "{{ item }}"
@@ -8,5 +7,4 @@
 
   with_items:
     - git
-
 ...

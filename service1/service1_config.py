@@ -3,15 +3,11 @@
 # imports ------------------------------
 
 from os import environ, path
-from dotenv import load_dotenv
 
 # .env location ------------------------
 
 # We find the absolute path of the root directory of our current file.
 basedir = path.abspath(path.dirname(__file__))
-
-# Load our specific .env file from the root directory of our current file.
-load_dotenv(path.join(basedir, 'service1.env'))
 
 
 # Declare Classes ------------------------------------------------------
@@ -32,24 +28,28 @@ class Config(object):  # General Config
     SECRET_KEY = environ.get("PRODUCTION_SECRET_KEY")
 
 
-
-
 class ProductionConfig(Config):
 
     ENV = 'production'
 
-    DATABASE_USERNAME = ""
-    DATABASE_PASSWORD = ""
-    DATABASE_URI = f"mysql+pymysql://username:password@23.45.65.76:3306/flaskappdb"
+    DB_USER = environ.get('PRODUCTION_DB_USERNAME')
+    DB_PASS = environ.get('PRODUCTION_DB_USERPASS')
+    DB_ADD = environ.get('PRODUCTION_DATABASE_ADDRESS')
+    DB_NAME = environ.get('PRODUCTION_DB')
 
-    pass
-
+    DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
 class DevelopmentConfig(Config):
     DEBUG = True
 
     ENV = 'development'
-    DATABASE_URI = f''
+
+    DB_USER = environ.get('DEVELOPMENT_DB_USERNAME')
+    DB_PASS = environ.get('DEVELOPMENT_DB_USERPASS')
+    DB_ADD = environ.get('DEVELOPMENT_DATABASE_ADDRESS')
+    DB_NAME = environ.get('DEVELOPMENT_DB')
+
+    DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
     SECRET_KEY = environ.get("DEV_SECRET_KEY")
 
@@ -58,6 +58,12 @@ class TestingConfig(Config):
     TESTING = True
 
     ENV = 'testing'
-    DATABASE_URI = f''
+
+    DB_USER = environ.get('TESTING_DB_USERNAME')
+    DB_PASS = environ.get('TESTING_DB_USERPASS')
+    DB_ADD = environ.get('TESTING_DATABASE_ADDRESS')
+    DB_NAME = environ.get('TESTING_DB')
+
+    DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
     SECRET_KEY = environ.get("TESTING_SECRET_KEY")
