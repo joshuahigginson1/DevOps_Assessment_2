@@ -19,7 +19,7 @@
 
 - name: Enable GlusterFS on Boot
   service:
-    name: gusterd
+    name: glusterd
     state: started
     enabled: yes
 
@@ -43,17 +43,22 @@
   gluster_peer:
     state: present
     nodes: "{{ groups['all'] }}"
+  delegate_to: "{{ groups['all'][0] }}"
 
-- name: Configure our Gluster volume.
+- name: Configure our Gluster volume, before starting it.
   gluster_volume:
-    state: started
-    name: "{{ gluster_volume_name }}"
+    state: present
+    name: "gv0"
     brick: "{{ gluster_brick_dirs }}"
     rebalance: yes
-    replicas: "{{ gluster_replicas }}"
+    replicas: 2
     cluster: "{{ groups['all'] }}"
-    host: "{{ inventory_hostname }}"
-    force: yes
+  run_once: true
+
+- name: Start our Gluster volume.
+  gluster_volume:
+    state: started
+    name: "gv0"
   run_once: true
 
 - name: Ensure that the Gluster volume is mounted.
