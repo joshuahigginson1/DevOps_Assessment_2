@@ -39,9 +39,9 @@ class ProductionConfig(Config):
 
     DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
-    SERVICE_2_URL = environ.get("SERVICE_2_URL")
-    SERVICE_3_URL = environ.get("SERVICE_3_URL")
-    SERVICE_4_URL = environ.get("SERVICE_4_URL")
+    SERVICE_2_URL = environ.get('SERVICE_2_URL')
+    SERVICE_3_URL = environ.get('SERVICE_3_URL')
+    SERVICE_4_URL = environ.get('SERVICE_4_URL')
 
 class DevelopmentConfig(Config):
     DEBUG = True
