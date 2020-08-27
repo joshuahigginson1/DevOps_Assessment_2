@@ -2,8 +2,6 @@
 
 cd service1/src/tests
 
-pwd
-
 sudo pytest --junit-xml=test_results/junit_results.xml
 
 printf "\n"
@@ -21,4 +19,4 @@ sudo sh -c "pylint-fail-under --fail_under 1 -f parseable src > test_results/pyl
 # Run our Pep8 function, and saves the output to a new .txt file.
 # We just want the style report, not for the program to fail our build.
 
-sudo sh -c "pycodestyle src > service1/src/tests/test_results/pep8_report.txt || exit 0"
+sudo sh -c "pycodestyle src > test_results/pep8_report.txt || exit 0"
