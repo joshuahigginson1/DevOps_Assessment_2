@@ -3,11 +3,6 @@
   roles:
     - common
 
-- hosts: jenkins
-  become: true
-  roles:
-    - install_jenkins
-
 - hosts: docker_install_group
   become: true
   roles:
