@@ -46,10 +46,10 @@ pipeline{
 
                 withEnv(["FLASK_ENV=testing"]){
 
-                    sh './scripts/run_test_service_1.sh'
-                    sh '/scripts/run_test_service_2.sh'
-                    sh '/scripts/run_test_service_3.sh'
-                    sh '/scripts/run_test_service_4.sh'
+                    sh 'jenkins/scripts/run_test_service_1.sh'
+                    sh 'jenkins/scripts/run_test_service_2.sh'
+                    sh 'jenkins/scripts/run_test_service_3.sh'
+                    sh 'jenkins/scripts/run_test_service_4.sh'
 
                 }
             }
