@@ -224,6 +224,44 @@ Transposing note containers. Built in transpose function broke if you
 
 ### Database Structure
 
+I first approached my database wanting to run it as a container from within
+ our swarm. The Dockerfile for running a mySQL container is as follows:
+  
+
+`  service1_db:
+  
+    image: mysql:5.7
+
+    volumes:
+      - type: bind
+        source: /mnt/gluster
+        target: /var/lib/mysql
+
+    environment:
+
+      MYSQL_DATABASE: "NOT_THE_DATABASE"
+      MYSQL_ROOT_PASSWORD: "NOT_THE_PASSWORD"
+
+    ports:
+
+      - target: 3306
+        published: 3306
+        protocol: tcp`
+  
+  
+I soon found out that this was a rather unreliable way of hosting a database,
+due to a lack of a distributed volume option within docker swarm.
+
+In order to get around this issue, I tried to run a GlusterFS distributed
+file server over my nodes, however, I could not get this system functioning
+with Ansible. 
+  
+I did not want to waste any further time or energy on this configuration!
+As far as I am aware, the next most secure way of running a database server
+is on it's own dedicated hardware machine, with backups cared for by a cloud
+ provider. 
+    
+
 
 
 ### CI Pipeline
