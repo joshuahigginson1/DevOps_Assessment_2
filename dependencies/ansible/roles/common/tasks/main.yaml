@@ -20,13 +20,8 @@
 - name: Enable GlusterFS on Boot.
   service:
     name: glusterd
-    state: started
-    enabled: yes
-
-- name: Restart our Gluster servers.
-  service:
-    name: glusterfs-server
     state: restarted
+    sleep: 3
     enabled: yes
 
 - name: Ensure that our Gluster brick and mount directories exist.
@@ -45,11 +40,17 @@
 #   shell: "gluster peer probe {{ item }}"
 #   with_items: groups.all
 
-- name: Probe each node, and add them to our GlusterFS stack.
+- name: Probe each node from our driver, to add them to our GlusterFS stack.
   gluster_peer:
     state: present
     nodes: "{{ groups['all'] }}"
   delegate_to: "{{ groups['jenkins_ansible_driver'][0] }}"
+
+- name: Probe our GlusterFS driver from another node to initialise stack.
+  gluster_peer:
+    state: present
+    nodes: "{{ groups['jenkins_ansible_driver'][0] }}"
+  delegate_to: "{{ groups['glusterfs'][0] }}"
 
 - name: Configure our Gluster volume, before starting it.
   gluster_volume:
