@@ -1,4 +1,5 @@
     /* A file which configures our full Jenkins pipeline for DevOps Assessment 2 */
+
 pipeline{
 
     agent any
