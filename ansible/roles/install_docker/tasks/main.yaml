@@ -75,8 +75,8 @@
     name: "{{ ansible_user }}"
     group: docker
 
-- name: "Change the ownership of the Docker socket file."
-  shell:
-    cmd: sh "chmod 775 /var/run/docker.sock"
-
+- name: "Restart our Jenkins client systemctl for changes to take effect."
+  service:
+    name: jenkins
+    state: restarted
 ...
