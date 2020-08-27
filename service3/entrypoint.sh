@@ -1,0 +1,1 @@
+exec gunicorn -c service3_gunicorn_config.py service3_wsgi:service3

@@ -2,6 +2,9 @@
 Flask==1.1.2
 python-dotenv==0.14.0
 
+# Gunicorn
+gunicorn==20.0.4
+
 # Bootstrap
 Flask-Bootstrap==3.3.7.1
 

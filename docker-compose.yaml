@@ -46,8 +46,4 @@ services:
       - target: 5004
         published: 5004
         protocol: tcp
-
-
-volumes:
-  mysql-service1-data:
 ...

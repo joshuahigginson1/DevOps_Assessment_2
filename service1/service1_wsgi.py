@@ -7,4 +7,4 @@ from src.service1_init import service1
 # Run our App ----------------------------------------------------------
 
 if __name__ == "__main__":
-    service1.run(host="0.0.0.0", port=5001)
+    service1.run()

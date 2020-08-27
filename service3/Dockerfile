@@ -10,6 +10,7 @@ WORKDIR /
 COPY . .
 
 RUN apt-get update && apt-get -y upgrade
+RUN apt install gunicorn -y
 RUN pip3 install -r s3_requirements.txt
 
-ENTRYPOINT ["/usr/local/bin/python", "service3_wsgi.py"]
+ENTRYPOINT ["/bin/bash", "entrypoint.sh"]

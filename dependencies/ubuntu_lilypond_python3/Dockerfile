@@ -13,10 +13,6 @@ RUN apt-get update
 # Install Python3.8
 RUN apt-get install python3.8
 
-
-
-
-
 # Ensure that python is installed in the local path.
 
 ENV PATH /usr/local/bin:$PATH
@@ -25,6 +21,4 @@ RUN apt-get update && apt-get -y upgrade
 
 RUN apt-get install
 
-
-
-ENTRYPOINT ["python3"]
+ENTRYPOINT ["python3.8"]
