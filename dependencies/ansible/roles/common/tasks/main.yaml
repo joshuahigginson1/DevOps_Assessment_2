@@ -17,9 +17,15 @@
     - glusterfs-common
     - nfs-kernel-server
 
-- name: Enable GlusterFS on Boot
+- name: Enable GlusterFS on Boot.
   service:
     name: glusterd
+    state: started
+    enabled: yes
+
+- name: Restart our Gluster servers.
+  service:
+    name: glusterfs-server
     state: restarted
     enabled: yes
 
@@ -43,7 +49,7 @@
   gluster_peer:
     state: present
     nodes: "{{ groups['all'] }}"
-  delegate_to: "{{ groups['jenkins-ansible-driver'][0] }}"
+  delegate_to: "{{ groups['jenkins_ansible_driver'][0] }}"
 
 - name: Configure our Gluster volume, before starting it.
   gluster_volume:
