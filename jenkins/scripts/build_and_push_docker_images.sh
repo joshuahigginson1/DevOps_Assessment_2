@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # A script to build and push docker images to our personal repo.
 

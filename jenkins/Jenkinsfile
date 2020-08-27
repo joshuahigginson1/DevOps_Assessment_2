@@ -36,7 +36,7 @@ pipeline{
 
         stage('Configure our Test Environment'){
             steps{
-                bash 'jenkins/scripts/configure_test_environment.sh'
+                sh 'jenkins/scripts/configure_test_environment.sh'
             }
         }
 
@@ -45,10 +45,10 @@ pipeline{
 
                 withEnv(["FLASK_ENV=testing"]){
 
-                    bash './scripts/run_test_service_1.sh'
-                    bash '/scripts/run_test_service_2.sh'
-                    bash '/scripts/run_test_service_3.sh'
-                    bash '/scripts/run_test_service_4.sh'
+                    sh './scripts/run_test_service_1.sh'
+                    sh '/scripts/run_test_service_2.sh'
+                    sh '/scripts/run_test_service_3.sh'
+                    sh '/scripts/run_test_service_4.sh'
 
                 }
             }
@@ -62,7 +62,7 @@ pipeline{
 
         stage('Run Ansible Playbook'){
             steps{
-                bash 'jenkins/scripts/run_ansible_playbook.sh'
+                sh 'jenkins/scripts/run_ansible_playbook.sh'
             }
         }
 
@@ -70,7 +70,7 @@ pipeline{
 
             steps{
                 withEnv(["FLASK_ENV=production"]){
-                    bash 'jenkins/scripts/build_and_push_docker_images.sh'
+                    sh 'jenkins/scripts/build_and_push_docker_images.sh'
                 }
             }
         }
@@ -78,7 +78,7 @@ pipeline{
         stage('Deploy Swarm Stack'){
 
             steps{
-                bash 'jenkins/scripts/deploy_production_environment.sh'
+                sh 'jenkins/scripts/deploy_production_environment.sh'
                 }
         }
     }
