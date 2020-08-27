@@ -75,4 +75,8 @@
     name: "{{ ansible_user }}"
     group: docker
 
+- name: "Change the ownership of the Docker socket file."
+  shell:
+    cmd: sudo sh "sudo chown root:jenkins /run/docker.sock"
+
 ...
