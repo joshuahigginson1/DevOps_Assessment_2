@@ -1,5 +1,7 @@
 #!/bin/sh
 
+pwd
+
 cd src/tests
 
 sudo pytest --junit-xml=<PATH>/tests/test_results/junit_results.xml
