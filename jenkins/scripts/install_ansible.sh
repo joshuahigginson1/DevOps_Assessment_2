@@ -2,10 +2,12 @@
 
 # This script will install ansible on an ubuntu machine.
 
-apt update
+sudo apt update
 
-apt install software-properties-common
+sudo apt upgrade -y
 
-apt-add-repository -y --update ppa:ansible/ansible
+sudo apt install software-properties-common
 
-apt install ansible
+sudo apt-add-repository -y --update ppa:ansible/ansible
+
+sudo apt install ansible

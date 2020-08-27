@@ -57,7 +57,7 @@ pipeline{
 
         stage('Install Ansible'){
             steps{
-                bash 'jenkins/scripts/install_ansible.sh'
+                sh 'jenkins/scripts/install_ansible.sh'
             }
         }
 
