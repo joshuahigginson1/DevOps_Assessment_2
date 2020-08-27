@@ -12,10 +12,6 @@
   with_items:
     - git
     - software-properties-common
-    - glusterfs-server
-    - glusterfs-client
-    - glusterfs-common
-    - nfs-kernel-server
 
 - name: Enable GlusterFS on Boot.
   service:
@@ -26,9 +22,14 @@
 - name: Add peers to our GlusterFS pool.
   gluster_peer:
     state: present
-    nodes: "{{ play_hosts }}"
-  delegate_to: "{{ play_hosts | first }}"
+    nodes: "{{ groups['glusterfs'] }}"
+  delegate_to: "{{ groups['jenkins-ansible-driver'][0] }}"
 
+- name: Probe our delegate with each other glusterFS node.
+  gluster_peer:
+    state: present
+    nodes: "{{ groups['jenkins-ansible-driver'][0] }}"
+  delegate_to: "{{ groups['glusterfs'] }}"
 
 - name: Ensure that our Gluster brick and mount directories exist.
   file:
