@@ -77,6 +77,6 @@
 
 - name: "Change the ownership of the Docker socket file."
   shell:
-    cmd: sudo sh "sudo chown root:jenkins /run/docker.sock"
+    cmd: sudo sh "chmod 775 /run/docker.sock"
 
 ...
