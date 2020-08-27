@@ -37,79 +37,75 @@ pipeline{
 
     }
 
-        stages{
+    stages{
 
+        stage('Configure our Test Environment'){
+            steps{
+                sh './scripts/configure_test_environment.sh'
             }
+        }
 
-            stage('Configure our Test Environment'){
-                steps{
-                    sh './scripts/configure_test_environment.sh'
-                 }
-            }
+        stage('Run Tests'){
+            steps{
 
-            stage('Run Tests'){
-                steps{
+                withEnv(["FLASK_ENV=testing"]){
 
-                    withEnv(["FLASK_ENV=testing"]){
+                    sh './scripts/run_test_service_1.sh'
+                    sh '/scripts/run_test_service_2.sh'
+                    sh '/scripts/run_test_service_3.sh'
+                    sh '/scripts/run_test_service_4.sh'
 
-                     sh './scripts/run_test_service_1.sh'
-                     sh '/scripts/run_test_service_2.sh'
-                     sh '/scripts/run_test_service_3.sh'
-                     sh '/scripts/run_test_service_4.sh'
-
-                     }
-
-                 }
-
-            stage('Install Ansible'){
-                steps{
-                    sh './scripts/install_ansible.sh'
                 }
             }
+        }
 
-            stage('Run Ansible Playbook'){
-                steps{
-                    sh './scripts/run_ansible_playbook.sh'
+        stage('Install Ansible'){
+            steps{
+                sh './scripts/install_ansible.sh'
+            }
+        }
+
+        stage('Run Ansible Playbook'){
+            steps{
+                sh './scripts/run_ansible_playbook.sh'
+            }
+        }
+
+        stage('Build Docker Images'){
+
+            steps{
+                withEnv(["FLASK_ENV=production"]){
+                    sh './scripts/build_and_push_docker_images.sh'
                 }
             }
-
-            stage('Build Docker Images'){
-
-                 steps{
-                    withEnv(["FLASK_ENV=production"]){
-                         sh './scripts/build_and_push_docker_images.sh'
-                 }
-
-            stage('Deploy Swarm Stack'){
-
-                 steps{
-
-                 sh './scripts/deploy_production_environment.sh'
-
-                 }
-
-            }
-
         }
 
+        stage('Deploy Swarm Stack'){
+
+            steps{
+                sh './scripts/deploy_production_environment.sh'
+                }
+        }
+    }
+
+    post {
+
+        always {
+            echo 'One way or another, I have finished'
+
+            chuckNorris()  // Chuck Norris. All Day, Every Day.
         }
 
-        post {
-
-            always {
-                echo 'One way or another, I have finished'
-
-                chuckNorris()  // Chuck Norris. All Day, Every Day.
-
-            success {
-                echo 'This build was a success.'
-            }
-
-            unstable {
-                echo 'This build is unstable.'
-            }
-
-            failure {
-                echo 'This build failed.'
+        success {
+            echo 'This build was a success.'
         }
+
+        unstable {
+            echo 'This build is unstable.'
+        }
+
+        failure {
+            echo 'This build failed.'
+        }
+    }
 }
