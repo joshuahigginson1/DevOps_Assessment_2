@@ -3,6 +3,17 @@
   apt_repository:
     repo: ppa:gluster/glusterfs-7
 
+- name: "Remove any older, conflicting Gluster packages."
+  apt:
+    name: "{{ item }}"
+    state: absent
+
+  with_items:
+    - glusterfs-server
+    - glusterfs-client
+    - glusterfs-common
+    - nfs-kernel-server
+
 - name: Install common Git and GlusterFS dependencies.
   apt:
     name: "{{ item }}"
@@ -12,23 +23,24 @@
   with_items:
     - git
     - software-properties-common
+    - glusterfs-server
 
 - name: Enable GlusterFS on Boot.
   service:
     name: glusterd
-    state: started
+    state: restarted
     enabled: yes
 
 - name: Add peers to our GlusterFS pool.
   gluster_peer:
     state: present
     nodes: "{{ groups['glusterfs'] }}"
-  delegate_to: "{{ groups['jenkins-ansible-driver'][0] }}"
+  delegate_to: "{{ groups['jenkins_ansible_driver'][0] }}"
 
 - name: Probe our delegate with each other glusterFS node.
   gluster_peer:
     state: present
-    nodes: "{{ groups['jenkins-ansible-driver'][0] }}"
+    nodes: "{{ groups['jenkins_ansible_driver'][0] }}"
   delegate_to: "{{ groups['glusterfs'] }}"
 
 - name: Ensure that our Gluster brick and mount directories exist.
