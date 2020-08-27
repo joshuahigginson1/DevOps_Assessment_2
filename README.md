@@ -201,7 +201,8 @@ The only things we I haven’t currently automated is the ‘in progress and don
 - Warnings Next Generation (For Pylint Test Reporting)
 - Performance (For Junit Test Reporting)
 
-2b. Add Jenkins user to sudoers.
+2b. Add Jenkins user to sudoers. Changed permissions of script created on my
+ local computer.
 
 3. We add our IP aliases to the Jenkins-Ansible-Driver /etc/hosts file.
  
