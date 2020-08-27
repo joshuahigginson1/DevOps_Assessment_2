@@ -1,6 +1,7 @@
 #!/bin/sh
 
 pwd
+ls
 
 cd src/tests
 
