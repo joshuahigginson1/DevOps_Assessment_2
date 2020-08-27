@@ -101,52 +101,6 @@ pipeline{
 
                 chuckNorris()  // Chuck Norris. All Day, Every Day.
 
-                // Service 1 Tests
-
-                junit(testResults: '/test_service_1.xml')
-
-                recordIssues(
-                healthy: 20,
-                unhealthy: 50
-                tools: [pep8(pattern: '/tests/test_results/pep8.log'),
-                        pyLint(pattern: '/tests/test_results/pylint.log')]
-                )
-
-                // Service 2 Tests
-
-                junit(testResults: '/test_service_2.xml')
-
-                recordIssues(
-                healthy: 20,
-                unhealthy: 50
-                tools: [pep8(pattern: '/tests/test_results/pep8.log'),
-                        pyLint(pattern: '/tests/test_results/pylint.log')]
-                )
-
-                // Service 3 Tests
-
-                junit(testResults: '/test_service_3.xml')
-
-                recordIssues(
-                healthy: 20,
-                unhealthy: 50
-                tools: [pep8(pattern: '/tests/test_results/pep8.log'),
-                        pyLint(pattern: '/tests/test_results/pylint.log')]
-                )
-
-                // Service 4 Tests
-
-                junit(testResults: '/test_service_4.xml')
-
-                recordIssues(
-                healthy: 20,
-                unhealthy: 50
-                tools: [pep8(pattern: '/tests/test_results/pep8.log'),
-                        pyLint(pattern: '/tests/test_results/pylint.log')]
-                )
-
-            }
-
             success {
                 echo 'This build was a success.'
             }
