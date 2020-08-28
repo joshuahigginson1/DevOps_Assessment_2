@@ -23,7 +23,4 @@ docker push joshuahigginson1/melodie_service4:latest
 
 # Clean up images on Jenkins machine.
 
-docker rmi melodie_service1:latest
-docker rmi melodie_service2:latest
-docker rmi melodie_service3:latest
-docker rmi melodie_service4:latest
+docker image prune -a -y
