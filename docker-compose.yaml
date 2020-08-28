@@ -5,10 +5,10 @@ services:
   nginx:
     image: nginx:latest
 
-  ports:
-    - target: 5001
-      published: 5001
-      protocol: tcp
+    ports:
+      - target: 5001
+        published: 5001
+        protocol: tcp
 
   service1:
 
