@@ -83,7 +83,7 @@ pipeline{
 
             steps{
                 withEnv(["FLASK_ENV=production"]) {
-                    sh 'jenkins/scripts/deploy_production_environment.sh'
+                    sh 'jenkins/scripts/deploy_docker_swarm_stack.sh'
                 }
             }
         }
@@ -99,7 +99,7 @@ pipeline{
 
             // Service 1 Tests
 
-            pwd()
+            echo(pwd())
 
             junit(testResults: '/var/lib/jenkins/workspace/melodie-pipeline/service1/tests/test_results/test_results_service1.xml')
 
