@@ -8,7 +8,7 @@ scp docker-compose.yaml jenkins@melodie-manager-1:/
 
 ssh jenkins@melodie-manager-1 << EOF
 echo "This machine is currently being controlled by Jenkins-Ansible-Driver."
-cd /
+pwd
 docker stack deploy --compose-file docker-compose.yaml melodie-stack
 EOF
 
