@@ -25,6 +25,8 @@ else:
 
 # Import Routes --------------------------------------------------------
 
+print(f"The SQLALCHEMY DATABASE URI IS: {service1.config['SQLALCHEMY_DATABASE_URI']}")
+
 bootstrap = Bootstrap(service1)
 db = SQLAlchemy(service1)
 
