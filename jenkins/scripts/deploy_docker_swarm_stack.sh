@@ -11,7 +11,7 @@ echo "This machine is currently being controlled by Jenkins-Ansible-Driver."
 
 docker login -u"$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
-docker stack deploy --compose-file docker-compose.yaml melodie-stack top
+docker stack deploy --with-registry-auth -c docker-compose.yaml melodie-stack
 
 sleep 10
 docker service ls
