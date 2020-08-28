@@ -23,4 +23,4 @@ docker push joshuahigginson1/melodie_service4:latest
 
 # Clean up images on Jenkins machine.
 
-docker image prune -a -y
+docker image prune -a -f
