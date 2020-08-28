@@ -6,12 +6,14 @@
 
 scp docker-compose.yaml jenkins@melodie-manager-1:/home/jenkins
 
-ssh jenkins@melodie-manager-1 << EOF
+ssh -t jenkins@melodie-manager-1 'export FLASK_ENV=$FLASK_ENV; bash'<< EOF
+
 echo "This machine is currently being controlled by Jenkins-Ansible-Driver."
 
 docker login -u"$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
+echo $DOCKER_USERNAME
+
 docker stack deploy --with-registry-auth -c docker-compose.yaml melodie-stack
 
-docker service ls
 EOF
