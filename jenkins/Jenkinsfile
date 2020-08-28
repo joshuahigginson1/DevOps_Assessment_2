@@ -99,8 +99,9 @@ pipeline{
 
             // Service 1 Tests
 
-            junit(testResults:
-            'service1/tests/test_results/test_results_service1.xml')
+            pwd
+
+            junit(testResults:'service1/tests/test_results/test_results_service1.xml')
 
             recordIssues(
             healthy: 20,
