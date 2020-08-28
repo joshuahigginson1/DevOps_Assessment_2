@@ -12,7 +12,7 @@ echo "This machine is currently being controlled by Jenkins-Ansible-Driver."
 
 docker login -u"$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
-export FLASK_ENV="$FLASK_ENV"
+export FLASK_ENV=$FLASK_ENV
 
 export TESTING_SECRET_KEY="$TESTING_SECRET_KEY"
 export DEV_SECRET_KEY="$DEV_SECRET_KEY"

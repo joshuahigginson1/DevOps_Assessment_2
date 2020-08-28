@@ -54,7 +54,7 @@ services:
     image: docker.io/joshuahigginson1/melodie_service2:latest
 
     environment:
-      - FLASK_ENV='nigelfaragesucks'
+      - FLASK_ENV
 
     build:
       context: ./service2
