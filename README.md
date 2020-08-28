@@ -199,7 +199,7 @@ The only things we I haven’t currently automated is the ‘in progress and don
 2a. Install required Jenkins plugins for this project:
 - ChuckNorris
 - Warnings Next Generation (For Pylint Test Reporting)
-- Performance (For Junit Test Reporting)
+- JUnit (For Junit Test Reporting)
 
 2b. Add Jenkins user to sudoers. Changed permissions of script created on my
  local computer.

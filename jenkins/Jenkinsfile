@@ -6,7 +6,7 @@ pipeline{
 
     environment {
 
-        FLASK_ENV = "testing"
+        FLASK_ENV = "development"
 
         TESTING_SECRET_KEY = credentials('TESTING_SECRET_KEY')
         DEV_SECRET_KEY = credentials('DEV_SECRET_KEY')
@@ -82,8 +82,10 @@ pipeline{
         stage('Deploy Swarm Stack'){
 
             steps{
-                sh 'jenkins/scripts/deploy_production_environment.sh'
+                withEnv["FLASK_ENV=production"] {
+                    sh 'jenkins/scripts/deploy_production_environment.sh'
                 }
+            }
         }
     }
 
@@ -93,7 +95,55 @@ pipeline{
             echo 'One way or another, I have finished'
 
             chuckNorris()  // Chuck Norris. All Day, Every Day.
+
+
+            // Service 1 Tests
+
+            junit(testResults:
+            'service1/tests/test_results/test_results_service1.xml')
+
+            recordIssues(
+            healthy: 20,
+            unhealthy: 50
+            tools: [pep8(pattern: '/tests/test_results/service1_pep8_report.txt'),
+                    pyLint(pattern: '/tests/test_results/service1_pylint_report.log')]
+            )
+
+            // Service 2 Tests
+
+            junit(testResults: '/test_results_service2.xml')
+
+            recordIssues(
+            healthy: 20,
+            unhealthy: 50
+            tools: [pep8(pattern: '/tests/test_results/service2_pep8_report.txt'),
+                    pyLint(pattern: '/tests/test_results/service2_pylint_report.log')]
+            )
+
+            // Service 3 Tests
+
+            junit(testResults: '/test_results_service3.xml')
+
+            recordIssues(
+            healthy: 20,
+            unhealthy: 50
+            tools: [pep8(pattern: '/tests/test_results/service3_pep8_report.txt'),
+                    pyLint(pattern: '/tests/test_results/service3_pylint_report.log')]
+            )
+
+            // Service 4 Tests
+
+            junit(testResults: '/test_results_service4.xml')
+
+            recordIssues(
+            healthy: 20,
+            unhealthy: 50
+            tools: [pep8(pattern: '/tests/test_results/service4_pep8_report.txt'),
+                    pyLint(pattern: '/tests/test_results/service4_pylint_report.log')]
+            )
+
         }
+
 
         success {
             echo 'This build was a success.'
