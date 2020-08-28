@@ -2,6 +2,14 @@
 version: "3.8"
 services:
 
+  nginx:
+    image: nginx:latest
+
+  ports:
+    - target: 5001
+      published: 5001
+      protocol: tcp
+
   service1:
 
     image: docker.io/joshuahigginson1/melodie_service1:latest
@@ -37,6 +45,9 @@ services:
         published: 5001
         protocol: tcp
 
+    deploy:
+      replicas: 2
+
     depends_on:
       - service2
       - service3
@@ -57,6 +68,9 @@ services:
         published: 5002
         protocol: tcp
 
+    deploy:
+      replicas: 3
+
   service3:
 
     image: docker.io/joshuahigginson1/melodie_service3:latest
@@ -71,6 +85,9 @@ services:
       - target: 5003
         published: 5003
         protocol: tcp
+
+    deploy:
+      replicas: 3
 
   service4:
 
@@ -90,4 +107,7 @@ services:
       - target: 5004
         published: 5004
         protocol: tcp
+
+    deploy:
+      replicas: 3
 ...
