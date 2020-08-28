@@ -99,9 +99,7 @@ pipeline{
 
             // Service 1 Tests
 
-            pwd
-
-            junit(testResults:'service1/tests/test_results/test_results_service1.xml')
+            junit(testResults: '/var/lib/jenkins/workspace/melodie-pipeline/service1/tests/test_results/test_results_service1.xml')
 
             recordIssues(
             healthy: 20,
@@ -112,7 +110,7 @@ pipeline{
 
             // Service 2 Tests
 
-            junit(testResults: '/test_results_service2.xml')
+            junit(testResults: '/var/lib/jenkins/workspace/melodie-pipeline/service1/tests/test_results/test_results_service2.xml')
 
             recordIssues(
             healthy: 20,
@@ -123,7 +121,7 @@ pipeline{
 
             // Service 3 Tests
 
-            junit(testResults: '/test_results_service3.xml')
+            junit(testResults:'/var/lib/jenkins/workspace/melodie-pipeline/service1/tests/test_results/test_results_service3.xml')
 
             recordIssues(
             healthy: 20,
@@ -134,7 +132,7 @@ pipeline{
 
             // Service 4 Tests
 
-            junit(testResults: '/test_results_service4.xml')
+            junit(testResults:'/var/lib/jenkins/workspace/melodie-pipeline/service1/tests/test_results/test_results_service4.xml')
 
             recordIssues(
             healthy: 20,
