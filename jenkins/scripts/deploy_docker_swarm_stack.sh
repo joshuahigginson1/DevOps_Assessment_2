@@ -13,6 +13,5 @@ docker login -u"$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
 docker stack deploy --with-registry-auth -c docker-compose.yaml melodie-stack
 
-sleep 10
 docker service ls
 EOF
