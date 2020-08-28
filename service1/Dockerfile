@@ -9,7 +9,7 @@ WORKDIR /
 
 COPY . .
 
-RUN apt-get update && apt-get -y upgrade
+RUN apt update && apt upgrade -y
 RUN apt install gunicorn -y
 RUN pip3 install -r s1_requirements.txt
 
