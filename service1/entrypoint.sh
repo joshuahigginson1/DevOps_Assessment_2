@@ -1,4 +1,3 @@
-printenv
 echo "Creating Database... \n \n"
 exec python3 create.py
 echo "Created Database?? \n \n "
