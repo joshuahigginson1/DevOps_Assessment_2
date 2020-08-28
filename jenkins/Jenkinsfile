@@ -104,7 +104,7 @@ pipeline{
 
             recordIssues(
             healthy: 20,
-            unhealthy: 50
+            unhealthy: 50,
             tools: [pep8(pattern: '/tests/test_results/service1_pep8_report.txt'),
                     pyLint(pattern: '/tests/test_results/service1_pylint_report.log')]
             )
@@ -115,7 +115,7 @@ pipeline{
 
             recordIssues(
             healthy: 20,
-            unhealthy: 50
+            unhealthy: 50,
             tools: [pep8(pattern: '/tests/test_results/service2_pep8_report.txt'),
                     pyLint(pattern: '/tests/test_results/service2_pylint_report.log')]
             )
@@ -126,7 +126,7 @@ pipeline{
 
             recordIssues(
             healthy: 20,
-            unhealthy: 50
+            unhealthy: 50,
             tools: [pep8(pattern: '/tests/test_results/service3_pep8_report.txt'),
                     pyLint(pattern: '/tests/test_results/service3_pylint_report.log')]
             )
@@ -137,7 +137,7 @@ pipeline{
 
             recordIssues(
             healthy: 20,
-            unhealthy: 50
+            unhealthy: 50,
             tools: [pep8(pattern: '/tests/test_results/service4_pep8_report.txt'),
                     pyLint(pattern: '/tests/test_results/service4_pylint_report.log')]
             )
