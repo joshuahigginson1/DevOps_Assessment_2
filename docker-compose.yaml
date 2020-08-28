@@ -6,6 +6,36 @@ services:
 
     image: docker.io/joshuahigginson1/melodie_service1:latest
 
+    environment:
+      - FLASK_ENV
+
+      - SERVICE_2_URL
+      - SERVICE_3_URL
+      - SERVICE_4_URL
+
+      - FILES_DIRECTORY
+
+      - PRODUCTION_DB_USERNAME
+      - PRODUCTION_DB_USERPASS
+      - PRODUCTION_DB
+      - PRODUCTION_DATABASE_ADDRESS
+
+      - PRODUCTION_SECRET_KEY
+
+      - DEVELOPMENT_DB_USERNAME
+      - DEVELOPMENT_DB_USERPASS
+      - DEVELOPMENT_DB
+      - DEVELOPMENT_DATABASE_ADDRESS
+
+      - DEV_SECRET_KEY
+
+      - TESTING_DB_USERNAME
+      - TESTING_DB_USERPASS
+      - TESTING_DB
+      - TESTING_DATABASE_ADDRESS
+
+      - TESTING_SECRET_KEY
+
     build:
       context: ./service1
 
@@ -23,6 +53,9 @@ services:
 
     image: docker.io/joshuahigginson1/melodie_service2:latest
 
+    environment:
+      - FLASK_ENV
+
     build:
       context: ./service2
 
@@ -35,6 +68,9 @@ services:
 
     image: docker.io/joshuahigginson1/melodie_service3:latest
 
+    environment:
+      - FLASK_ENV
+
     build:
       context: ./service3
 
@@ -46,6 +82,15 @@ services:
   service4:
 
     image: docker.io/joshuahigginson1/melodie_service4:latest
+
+    environment:
+      - FLASK_ENV
+
+      - PNG_DIRECTORY
+      - MIDI_DIRECTORY
+
+      - SERVICE_2_URL
+      - SERVICE_3_URL
 
     build:
       context: ./service4
