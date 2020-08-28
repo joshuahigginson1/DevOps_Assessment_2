@@ -37,7 +37,7 @@ class ProductionConfig(Config):
     DB_ADD = environ.get('PRODUCTION_DATABASE_ADDRESS')
     DB_NAME = environ.get('PRODUCTION_DB')
 
-    DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
     SERVICE_2_URL = environ.get('SERVICE_2_URL')
     SERVICE_3_URL = environ.get('SERVICE_3_URL')
