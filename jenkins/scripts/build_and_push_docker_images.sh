@@ -4,9 +4,6 @@
 
 docker login -u"$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 
-pwd
-ls
-
 cd service1
 docker build -t joshuahigginson1/melodie_service1:latest .
 docker push joshuahigginson1/melodie_service1:latest
@@ -22,3 +19,11 @@ docker push joshuahigginson1/melodie_service3:latest
 cd service4
 docker build -t joshuahigginson1/melodie_service4:latest .
 docker push joshuahigginson1/melodie_service4:latest
+
+
+# Clean up images on Jenkins machine.
+
+docker rmi melodie_service1:latest
+docker rmi melodie_service2:latest
+docker rmi melodie_service3:latest
+docker rmi melodie_service4:latest
