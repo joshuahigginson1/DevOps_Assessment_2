@@ -111,7 +111,9 @@ pipeline{
             unhealthy: 50,
             tools: [pep8(pattern: 'service1/src/tests/test_results/service1_pep8_report.txt, service2/src/tests/test_results/service2_pep8_report.txt, service3/src/tests/test_results/service3_pep8_report.txt, service4/src/tests/test_results/service4_pep8_report.txt'),
                     pyLint(pattern: 'service1/src/tests/test_results/service1_pylint_report.log, service2/src/tests/test_results/service2_pylint_report.log, service3/src/tests/test_results/service3_pylint_report.log, service4/src/tests/test_results/service4_pylint_report.log')]
-        )
+            )
+        }
+
 
         success {
             echo 'This build was a success.'
