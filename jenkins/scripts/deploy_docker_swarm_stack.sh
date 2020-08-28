@@ -42,8 +42,6 @@ export SERVICE_2_URL="$SERVICE_2_URL"
 export SERVICE_3_URL="$SERVICE_3_URL"
 export SERVICE_4_URL="$SERVICE_4_URL"
 
-printenv
-
 docker stack deploy --with-registry-auth -c docker-compose.yaml melodie-stack
 
 EOF

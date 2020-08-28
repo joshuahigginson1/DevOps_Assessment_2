@@ -186,12 +186,14 @@ The only things we I haven’t currently automated is the ‘in progress and don
 
 ## Project Setup
 
-1. Create 4 new VM instances, and 1 Database instance in GCP:
+1. Create 4 new VM instances in GCP:
 
 - Jenkins-Ansible-Driver
 - Melodie-Manager-1
 - Melodie-Worker-1
 - Melodie-Worker-2
+
+1a. Create an SQL database instance in GCP:
 - Melodie-MySQL-Database
 
 2. Run our Jenkins install script on Jenkins-Ansible-Driver.
