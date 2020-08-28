@@ -225,7 +225,7 @@ def test_return_form(common_rhythms, common_scales):
 
     # We should always be able to reach the homepage, so a get request
     # should return 200.
-
+    pass
 
 def test_download_file():
     """This function tests the ability for our service to download a file."""
