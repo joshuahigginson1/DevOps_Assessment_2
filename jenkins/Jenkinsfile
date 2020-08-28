@@ -99,6 +99,8 @@ pipeline{
 
             // Service 1 Tests
 
+            pwd()
+
             junit(testResults: '/var/lib/jenkins/workspace/melodie-pipeline/service1/tests/test_results/test_results_service1.xml')
 
             recordIssues(
