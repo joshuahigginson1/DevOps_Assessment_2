@@ -26,8 +26,8 @@ else:
 # Import Routes --------------------------------------------------------
 
 print(f"The DATABASE URI IS: {service1.config['SQLALCHEMY_DATABASE_URI']}")
-print(f"The FILES DIR ENV IS: {environ.get('FILES_DIRECTORY')}")
-print(f"The FILES DIR IS: {service1.config['FILES_DIRECTORY']}")
+print(f"The flask env IS: {environ.get('FLASK_ENV')}")
+print(f"The apps env IS: {service1.config['ENV']}")
 
 bootstrap = Bootstrap(service1)
 db = SQLAlchemy(service1)
