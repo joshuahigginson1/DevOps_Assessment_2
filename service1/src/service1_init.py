@@ -2,7 +2,7 @@
 
 # Import Flask ---------------------------------------------------------
 
-from os import environ
+from os import environ, system
 
 from flask import Flask
 
@@ -25,7 +25,16 @@ else:
 
 # Import Routes --------------------------------------------------------
 
-print(f"The SQLALCHEMY DATABASE URI IS: {service1.config['SQLALCHEMY_DATABASE_URI']}")
+print(
+    f"The SQLALCHEMY DATABASE URI IS: {service1.config['SQLALCHEMY_DATABASE_URI']}")
+
+hostname = environ.get('DB_ADD')
+response = system("ping -c 1 " + hostname)
+
+if response == 0:
+    print(f'{hostname}is up!')
+else:
+    print(f'{hostname} is down!')
 
 bootstrap = Bootstrap(service1)
 db = SQLAlchemy(service1)
