@@ -10,7 +10,7 @@ from flask_bootstrap import Bootstrap
 
 from flask_sqlalchemy import SQLAlchemy
 
-import pyping
+import ping3
 
 # Create Flask App -----------------------------------------------------
 
@@ -32,7 +32,7 @@ print(
 
 hostname = environ.get('DB_ADD')
 
-r = pyping.ping(hostname)
+r = ping3.ping(hostname)
 
 if r.ret_code == 0:
     print(f'{hostname} is up!')
