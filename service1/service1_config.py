@@ -2,7 +2,7 @@
 
 # imports ------------------------------
 
-from os import environ, path
+from os import environ, path, getenv
 
 # .env location ------------------------
 
@@ -55,7 +55,7 @@ class ProductionConfig(Config):
 
     database_step_1 = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
-    SQLALCHEMY_DATABASE_URI = remove_quotes(database_step_1)
+    SQLALCHEMY_DATABASE_URI = str(remove_quotes(database_step_1))
 
     SERVICE_2_URL = remove_quotes(environ.get('SERVICE_2_URL'))
     SERVICE_3_URL = remove_quotes(environ.get('SERVICE_3_URL'))
@@ -74,7 +74,7 @@ class DevelopmentConfig(Config):
 
     database_step_1 = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
-    SQLALCHEMY_DATABASE_URI = remove_quotes(database_step_1)
+    SQLALCHEMY_DATABASE_URI = str(remove_quotes(database_step_1))
 
     SECRET_KEY = remove_quotes(environ.get("DEV_SECRET_KEY"))
 
@@ -91,6 +91,6 @@ class TestingConfig(Config):
 
     database_step_1 = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
-    SQLALCHEMY_DATABASE_URI = remove_quotes(database_step_1)
+    SQLALCHEMY_DATABASE_URI = str(remove_quotes(database_step_1))
 
     SECRET_KEY = remove_quotes(environ.get("TESTING_SECRET_KEY"))

@@ -30,4 +30,10 @@ print(f"The SQLALCHEMY DATABASE URI IS: {service1.config['SQLALCHEMY_DATABASE_UR
 bootstrap = Bootstrap(service1)
 db = SQLAlchemy(service1)
 
+# Build Database Schema ------------------------------------------------
+
+from src.service1_schema import Downloads
+
+db.create_all()
+
 import src.service1_routes
