@@ -20,20 +20,20 @@ from src.service1_schema import Downloads
 
 
 @service1.after_request
-def add_header(r):
+def add_header(sendfiles_request):
     """ The add_header wrapper 'hijacks' our send_files request,
     and deliberately adds a number of headers to prevent our browser from
     caching our file output.
 
     Keyword Arguments:
-        r: a request response.
+        sendfiles_request: a request response.
     """
 
-    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    r.headers["Pragma"] = "no-cache"
-    r.headers["Expires"] = "0"
-    r.headers['Cache-Control'] = 'public, max-age=0'
-    return r
+    sendfiles_request.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    sendfiles_request.headers["Pragma"] = "no-cache"
+    sendfiles_request.headers["Expires"] = "0"
+    sendfiles_request.headers['Cache-Control'] = 'public, max-age=0'
+    return sendfiles_request
 
 
 # Routes ---------------------------------------------------------------
