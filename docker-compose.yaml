@@ -10,10 +10,6 @@ services:
         published: 80
         protocol: tcp
 
-      - target: 3306
-        published: 3306
-        protocol: tcp
-
   service1:
 
     image: docker.io/joshuahigginson1/melodie_service1:latest
@@ -47,6 +43,10 @@ services:
     ports:
       - target: 5001
         published: 5001
+        protocol: tcp
+
+      - target: 3306
+        published: 3306
         protocol: tcp
 
     deploy:
