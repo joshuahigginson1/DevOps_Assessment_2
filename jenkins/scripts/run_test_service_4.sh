@@ -2,6 +2,11 @@
 
 cd service4/src/tests
 
+export FLASK_ENV="$FLASK_ENV"
+
+export PNG_DIRECTORY="$PNG_DIRECTORY"
+export MIDI_DIRECTORY="$MIDI_DIRECTORY"
+
 sudo pytest --junit-xml=test_results/test_results_service4.xml
 
 printf "\n"
