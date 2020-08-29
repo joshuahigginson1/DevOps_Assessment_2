@@ -9,4 +9,4 @@ WORKDIR /
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-RUN nginx -s reload
+CMD ["nginx", "-g", "daemon off;"]
