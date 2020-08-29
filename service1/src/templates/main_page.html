@@ -35,6 +35,36 @@
 
                     <div class="col-md-12">
 
+                        <div class ='container'>
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %
+                                    {% for category, message in messages %}
+                                        {% if category == 'danger' %}
+                                            <div class="alert alert-{{category}}" role="alert">  ert. -->
+                                                {{ message }}
+                                            </div>
+                                        {% endif %}
+                                        {% if category == 'warning' %}
+                                            <div class="alert alert-{{category}}" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endif %}
+                                        {% if category == 'success' %}
+                                            <div class="alert alert-{{category}}" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endif %}
+                                        {% if category == 'primary' %}
+                                            <div class="alert alert-{{category}}" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+
+                        </div>
+
                         <h1>Welcome to Mélodie</h1>
 
                         <h3>🎼 🎹 🎵 🎶 📻 🎤 🎺  🎧 🎻 🎙️ 👨‍🎤 👩‍🎤 🎷 🎸</h3>
@@ -50,11 +80,8 @@
                 <div class="row">
 
                     <div class = "col-md-12">
-
                         {% include "form.html" %}
-
                         {% block download %} {% endblock %}
-
                     </div>
 
                 </div>

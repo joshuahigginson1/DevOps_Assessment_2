@@ -2,9 +2,10 @@
 
 # Imports --------------------------------------------------------------
 from datetime import date
+from time import sleep
 
 import requests
-from flask import render_template, send_from_directory, abort
+from flask import render_template, send_from_directory, abort, flash
 
 from src.service1_init import service1, db
 
@@ -108,15 +109,20 @@ def return_form():
             db.session.add(add_to_db)
             db.session.commit()
 
+            sleep(2)
+
+            num_downloads = str(db.session.query(Downloads.id).count())
+
             return render_template('main_page_download.html',
                                    title=' ~ Download Ready! 🎶',
                                    form=homepage_form,
                                    download=download_name,
-                                   dl_text=dl_text)
+                                   dl_text=dl_text,
+                                   num_downloads=num_downloads)
 
         else:
 
-            # TODO: Add a flash message to user.
+            flash('There has been an error. File not saved.', 'error')
             print("There has been an error. File not saved.")
 
     # Get the number of file downloads from our database.
@@ -144,4 +150,8 @@ def download_file(download_name):
                                    as_attachment=True)
 
     except FileNotFoundError:
+
+        print("There has been an error. File not saved.")
+        flash('There has been an error. File not saved.', 'error')
+        # redirect back to homepage.
         abort(404)

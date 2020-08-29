@@ -17,6 +17,14 @@
                                        class_="form-control text-center")
                         }}
 
+                         {% if form.file_name.errors %}
+                            <ul class=errors>
+                            {% for error in form.file_name.errors %}
+                              <li>{{ error }}</li>
+                            {% endfor %}
+                            </ul>
+                          {% endif %}
+
                     </div>
 
                 </div>
