@@ -2,13 +2,13 @@
 version: "3.8"
 services:
 
-  nginx:
-    image: docker.io/joshuahigginson1/melodie_nginx:latest
+#  nginx:
+#    image: docker.io/joshuahigginson1/melodie_nginx:latest
 
-    ports:
-      - target: 80
-        published: 80
-        protocol: tcp
+#    ports:
+#      - target: 80
+#        published: 80
+#        protocol: tcp
 
   service1:
 
