@@ -10,8 +10,6 @@ from flask_bootstrap import Bootstrap
 
 from flask_sqlalchemy import SQLAlchemy
 
-import ping3
-
 # Create Flask App -----------------------------------------------------
 
 service1 = Flask(__name__)
@@ -29,15 +27,6 @@ else:
 
 print(
     f"The SQLALCHEMY DATABASE URI IS: {service1.config['SQLALCHEMY_DATABASE_URI']}")
-
-hostname = environ.get('DB_ADD')
-
-r = ping3.ping(hostname)
-
-if r.ret_code == 0:
-    print(f'{hostname} is up!')
-else:
-    print(f'{hostname} is down!')
 
 bootstrap = Bootstrap(service1)
 db = SQLAlchemy(service1)
