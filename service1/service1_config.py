@@ -37,9 +37,9 @@ class Config(object):  # General Config
 
     SECRET_KEY = remove_quotes(environ.get("PRODUCTION_SECRET_KEY"))
 
-    SERVICE_2_URL = "0.0.0.0:5002"
-    SERVICE_3_URL = "0.0.0.0:5003"
-    SERVICE_4_URL = "0.0.0.0:5004"
+    SERVICE_2_URL = "http://0.0.0.0:5002"
+    SERVICE_3_URL = "http://0.0.0.0:5003"
+    SERVICE_4_URL = "http://0.0.0.0:5004"
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 

@@ -37,8 +37,8 @@ class Config(object):  # General Config
     print(f"The PNG_DIR is: {PNG_DIRECTORY}")
     print(f"The MIDI_DIR is: {PNG_DIRECTORY}")
 
-    SERVICE_2_URL = "0.0.0.0:5002"
-    SERVICE_3_URL = "0.0.0.0:5003"
+    SERVICE_2_URL = "http://0.0.0.0:5002"
+    SERVICE_3_URL = "http://0.0.0.0:5003"
 
 
 class ProductionConfig(Config):
