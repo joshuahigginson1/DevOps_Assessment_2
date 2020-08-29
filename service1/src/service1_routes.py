@@ -109,8 +109,6 @@ def return_form():
             db.session.add(add_to_db)
             db.session.commit()
 
-            sleep(2)
-
             num_downloads = str(db.session.query(Downloads.id).count())
 
             return render_template('main_page_download.html',
@@ -143,6 +141,8 @@ def download_file(download_name):
 
     print(f" The file directory is: {files_directory}")
     print(f" The filename is: {download_name}")
+
+    sleep(2)
 
     try:
         return send_from_directory(files_directory,
