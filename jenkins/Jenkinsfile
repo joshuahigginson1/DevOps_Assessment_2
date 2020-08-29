@@ -6,7 +6,7 @@ pipeline{
 
     environment {
 
-        FLASK_ENV = "development"
+        FLASK_ENV = "production"
 
         TESTING_SECRET_KEY = credentials('TESTING_SECRET_KEY')
         DEV_SECRET_KEY = credentials('DEV_SECRET_KEY')
