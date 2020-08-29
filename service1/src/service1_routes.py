@@ -97,8 +97,8 @@ def return_form():
 
             add_to_db = Downloads(
                 date=date.today(),
-                file_name=homepage_form.musical_scale.data,
-                musical_key=homepage_form.musical_scale.data,
+                file_name=homepage_form.file_name.data,
+                musical_key=homepage_form.musical_key.data,
                 musical_scale=homepage_form.musical_scale.data,
                 rhythm_length=homepage_form.rhythm_length.data,
                 tempo=homepage_form.tempo.data,
