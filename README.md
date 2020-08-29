@@ -171,6 +171,7 @@ When we hit ‘commit’, PyCharm will automatically create a commit message bas
 
 The only things we I haven’t currently automated is the ‘in progress and done’ states for each task. 
 
+jhgjhgj
 
 ## Project Brief
 
