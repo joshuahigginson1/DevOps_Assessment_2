@@ -29,7 +29,7 @@ print(
     f"The SQLALCHEMY DATABASE URI IS: {service1.config['SQLALCHEMY_DATABASE_URI']}")
 
 hostname = environ.get('DB_ADD')
-response = system("ping -c 1 " + hostname)
+response = system(f"ping -c 1 {hostname}")
 
 if response == 0:
     print(f'{hostname}is up!')
