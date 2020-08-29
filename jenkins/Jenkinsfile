@@ -34,10 +34,10 @@ pipeline{
         DOCKER_USERNAME = credentials('DOCKER_USERNAME')
         DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
 
-        SERVICE_1_URL = "service1:5001"
-        SERVICE_2_URL = "service2:5002"
-        SERVICE_3_URL = "service3:5003"
-        SERVICE_4_URL = "service4:5004"
+        SERVICE_1_URL = "melodie-stack_service1:5001"
+        SERVICE_2_URL = "melodie-stack_service2:5002"
+        SERVICE_3_URL = "melodie-stack_service3:5003"
+        SERVICE_4_URL = "melodie-stack_service4:5004"
 
     }
 
