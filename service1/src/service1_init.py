@@ -10,6 +10,8 @@ from flask_bootstrap import Bootstrap
 
 from flask_sqlalchemy import SQLAlchemy
 
+import pyping
+
 # Create Flask App -----------------------------------------------------
 
 service1 = Flask(__name__)
@@ -29,10 +31,11 @@ print(
     f"The SQLALCHEMY DATABASE URI IS: {service1.config['SQLALCHEMY_DATABASE_URI']}")
 
 hostname = environ.get('DB_ADD')
-response = system(f"ping -c 1 {hostname}")
 
-if response == 0:
-    print(f'{hostname}is up!')
+r = pyping.ping(hostname)
+
+if r.ret_code == 0:
+    print(f'{hostname} is up!')
 else:
     print(f'{hostname} is down!')
 
