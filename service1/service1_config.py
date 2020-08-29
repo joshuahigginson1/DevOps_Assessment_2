@@ -27,6 +27,8 @@ class Config(object):  # General Config
     SERVICE_3_URL = "0.0.0.0:5003"
     SERVICE_4_URL = "0.0.0.0:5004"
 
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 
 class ProductionConfig(Config):
 
@@ -43,6 +45,7 @@ class ProductionConfig(Config):
     SERVICE_3_URL = environ.get('SERVICE_3_URL')
     SERVICE_4_URL = environ.get('SERVICE_4_URL')
 
+
 class DevelopmentConfig(Config):
     DEBUG = True
 
@@ -53,7 +56,7 @@ class DevelopmentConfig(Config):
     DB_ADD = environ.get('DEVELOPMENT_DATABASE_ADDRESS')
     DB_NAME = environ.get('DEVELOPMENT_DB')
 
-    DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
     SECRET_KEY = environ.get("DEV_SECRET_KEY")
 
@@ -68,6 +71,6 @@ class TestingConfig(Config):
     DB_ADD = environ.get('TESTING_DATABASE_ADDRESS')
     DB_NAME = environ.get('TESTING_DB')
 
-    DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
     SECRET_KEY = environ.get("TESTING_SECRET_KEY")

@@ -9,4 +9,4 @@ WORKDIR /
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-ENTRYPOINT ['nginx', '-s reload']
+RUN nginx -s reload
