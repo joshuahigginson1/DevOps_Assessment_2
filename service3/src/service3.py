@@ -20,10 +20,10 @@ from flask import Flask, request, jsonify
 
 service3 = Flask(__name__)
 
-if environ.get("FLASK_ENV") == 'production':
+if environ.get("FLASK_ENV").replace('"', '') == 'production':
     service3.config.from_object('service3_config.ProductionConfig')
 
-elif environ.get("FLASK_ENV") == 'testing':
+elif environ.get("FLASK_ENV").replace('"', '') == 'testing':
     service3.config.from_object('service3_config.TestingConfig')
 
 else:

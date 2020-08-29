@@ -10,10 +10,10 @@ from flask import Flask
 
 service4 = Flask(__name__)
 
-if environ.get("FLASK_ENV") == 'production':
+if environ.get("FLASK_ENV").replace('"', '') == 'production':
     service4.config.from_object('service4_config.ProductionConfig')
 
-elif environ.get("FLASK_ENV") == 'testing':
+elif environ.get("FLASK_ENV").replace('"', '') == 'testing':
     service4.config.from_object('service4_config.TestingConfig')
 
 else:
