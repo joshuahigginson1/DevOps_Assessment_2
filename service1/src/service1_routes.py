@@ -120,7 +120,7 @@ def return_form():
 
         else:
 
-            flash('There has been an error. File not saved.', 'error')
+            flash('There has been an error. File not saved.', 'danger')
             print("There has been an error. File not saved.")
 
     # Get the number of file downloads from our database.
@@ -152,6 +152,6 @@ def download_file(download_name):
     except FileNotFoundError:
 
         print("There has been an error. File not saved.")
-        flash('There has been an error. File not saved.', 'error')
+        flash('There has been an error. File not saved.', 'danger')
         # redirect back to homepage.
         abort(404)

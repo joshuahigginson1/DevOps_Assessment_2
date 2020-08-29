@@ -20,7 +20,7 @@
                          {% if form.file_name.errors %}
                             <ul class=errors>
                             {% for error in form.file_name.errors %}
-                              <li>{{ error }}</li>
+                              <p>{{ error }}</p>
                             {% endfor %}
                             </ul>
                           {% endif %}
