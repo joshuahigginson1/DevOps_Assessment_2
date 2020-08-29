@@ -10,6 +10,18 @@ from os import environ, path
 basedir = path.abspath(path.dirname(__file__))
 
 
+# Functions ------------------------------------------------------------
+
+def remove_quotes(string):
+    """ This function removes any speech mark quotes from a string input.
+
+        Keyword Arguments;
+            string: A string with speech marks.
+    """
+
+    return string.replace('"', '')
+
+
 # Declare Classes ------------------------------------------------------
 
 class Config(object):  # General Config
@@ -19,11 +31,11 @@ class Config(object):  # General Config
     DEBUG = False
     TESTING = False
 
-    print(environ.get("FILES_DIRECTORY"))
+    files_dir_env = remove_quotes(environ.get("FILES_DIRECTORY"))
 
-    FILES_DIRECTORY = path.join(basedir, environ.get('FILES_DIRECTORY'))
+    FILES_DIRECTORY = path.join(basedir, files_dir_env)
 
-    SECRET_KEY = environ.get("PRODUCTION_SECRET_KEY")
+    SECRET_KEY = remove_quotes(environ.get("PRODUCTION_SECRET_KEY"))
 
     SERVICE_2_URL = "0.0.0.0:5002"
     SERVICE_3_URL = "0.0.0.0:5003"
@@ -43,11 +55,11 @@ class ProductionConfig(Config):
 
     database_step_1 = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
-    SQLALCHEMY_DATABASE_URI = database_step_1.replace('"', '')
+    SQLALCHEMY_DATABASE_URI = remove_quotes(database_step_1)
 
-    SERVICE_2_URL = environ.get('SERVICE_2_URL')
-    SERVICE_3_URL = environ.get('SERVICE_3_URL')
-    SERVICE_4_URL = environ.get('SERVICE_4_URL')
+    SERVICE_2_URL = remove_quotes(environ.get('SERVICE_2_URL'))
+    SERVICE_3_URL = remove_quotes(environ.get('SERVICE_3_URL'))
+    SERVICE_4_URL = remove_quotes(environ.get('SERVICE_4_URL'))
 
 
 class DevelopmentConfig(Config):
@@ -62,9 +74,9 @@ class DevelopmentConfig(Config):
 
     database_step_1 = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
-    SQLALCHEMY_DATABASE_URI = database_step_1.replace('"', '')
+    SQLALCHEMY_DATABASE_URI = remove_quotes(database_step_1)
 
-    SECRET_KEY = environ.get("DEV_SECRET_KEY")
+    SECRET_KEY = remove_quotes(environ.get("DEV_SECRET_KEY"))
 
 
 class TestingConfig(Config):
@@ -79,6 +91,6 @@ class TestingConfig(Config):
 
     database_step_1 = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
 
-    SQLALCHEMY_DATABASE_URI = database_step_1.replace('"', '')
+    SQLALCHEMY_DATABASE_URI = remove_quotes(database_step_1)
 
-    SECRET_KEY = environ.get("TESTING_SECRET_KEY")
+    SECRET_KEY = remove_quotes(environ.get("TESTING_SECRET_KEY"))
