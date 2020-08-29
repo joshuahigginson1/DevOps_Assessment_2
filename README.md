@@ -196,6 +196,9 @@ The only things we I haven’t currently automated is the ‘in progress and don
 1a. Create an SQL database instance in GCP:
 - Melodie-MySQL-Database
 
+Make sure that the Public IP of our Jenkins driver and Melodie-Manager-1 is
+ authorised.
+
 2. Run our Jenkins install script on Jenkins-Ansible-Driver.
 
 2a. Install required Jenkins plugins for this project:
