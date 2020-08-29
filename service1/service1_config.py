@@ -60,7 +60,9 @@ class DevelopmentConfig(Config):
     DB_ADD = environ.get('DEVELOPMENT_DATABASE_ADDRESS')
     DB_NAME = environ.get('DEVELOPMENT_DB')
 
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
+    database_step_1 = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
+
+    SQLALCHEMY_DATABASE_URI = database_step_1.replace('"', '')
 
     SECRET_KEY = environ.get("DEV_SECRET_KEY")
 
@@ -75,6 +77,8 @@ class TestingConfig(Config):
     DB_ADD = environ.get('TESTING_DATABASE_ADDRESS')
     DB_NAME = environ.get('TESTING_DB')
 
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
+    database_step_1 = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
+
+    SQLALCHEMY_DATABASE_URI = database_step_1.replace('"', '')
 
     SECRET_KEY = environ.get("TESTING_SECRET_KEY")
