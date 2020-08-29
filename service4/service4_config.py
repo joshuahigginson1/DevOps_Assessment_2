@@ -18,7 +18,8 @@ def remove_quotes(string):
 
     return string.replace('"', '')
 
-# Declare Classes ------------------------------------------------------
+# Declare Classes ---
+# ---------------------------------------------------
 
 class Config(object):  # General Config
 
@@ -27,11 +28,11 @@ class Config(object):  # General Config
     DEBUG = False
     TESTING = False
 
-    PNG_DIRECTORY = path.join(basedir,
-                              remove_quotes(environ.get('PNG_DIRECTORY')))
+    PNG_DIRECTORY = path.join(basedir, remove_quotes(environ.get(
+        'PNG_DIRECTORY')))
 
-    MIDI_DIRECTORY = path.join(basedir,
-                               remove_quotes(environ.get('MIDI_DIRECTORY')))
+    MIDI_DIRECTORY = path.join(basedir, remove_quotes(environ.get(
+        'MIDI_DIRECTORY')))
 
     print(f"The PNG_DIR is: {PNG_DIRECTORY}")
     print(f"The MIDI_DIR is: {PNG_DIRECTORY}")
