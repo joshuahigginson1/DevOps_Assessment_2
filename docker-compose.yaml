@@ -3,11 +3,11 @@ version: "3.8"
 services:
 
   nginx:
-    image: nginx:latest
+    image: docker.io/joshuahigginson1/melodie_nginx:latest
 
     ports:
-      - target: 5001
-        published: 5001
+      - target: 80
+        published: 80
         protocol: tcp
 
   service1:

@@ -24,6 +24,11 @@ pwd
 docker build -t joshuahigginson1/melodie_service4:latest .
 docker push joshuahigginson1/melodie_service4:latest
 
+cd ../nginx
+pwd
+docker build -t joshuahigginson1/melodie_nginx:latest .
+docker push joshuahigginson1/melodie_nginx:latest
+
 
 # Clean up images on Jenkins machine.
 
