@@ -19,6 +19,8 @@ class Config(object):  # General Config
     DEBUG = False
     TESTING = False
 
+    print(environ.get("FILES_DIRECTORY"))
+
     FILES_DIRECTORY = path.join(basedir, environ.get('FILES_DIRECTORY'))
 
     SECRET_KEY = environ.get("PRODUCTION_SECRET_KEY")
@@ -39,7 +41,9 @@ class ProductionConfig(Config):
     DB_ADD = environ.get('PRODUCTION_DATABASE_ADDRESS')
     DB_NAME = environ.get('PRODUCTION_DB')
 
-    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
+    database_step_1 = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_ADD}/{DB_NAME}"
+
+    SQLALCHEMY_DATABASE_URI = database_step_1.replace('"', '')
 
     SERVICE_2_URL = environ.get('SERVICE_2_URL')
     SERVICE_3_URL = environ.get('SERVICE_3_URL')
