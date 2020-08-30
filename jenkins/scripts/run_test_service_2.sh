@@ -1,6 +1,10 @@
 #!/bin/sh
 
-cd service2/src/tests
+cd service2/src
+
+sudo chmod 777 tests
+
+cd service2
 
 export FLASK_ENV="$FLASK_ENV"
 
