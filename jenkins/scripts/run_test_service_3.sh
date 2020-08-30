@@ -10,7 +10,7 @@ export FLASK_ENV="$FLASK_ENV"
 
 sudo rm test_results/*
 
-python3 -m pytest --cov=src --cov-report term-missing xml:test_cov_service1.xml --junit-xml=test_results/test_results_service3.xml
+python3 -m pytest --cov=src --cov-report term-missing xml --junit-xml=test_results/test_results_service3.xml
 
 printf "\n"
 printf "\n"
