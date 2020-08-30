@@ -5,7 +5,8 @@ from datetime import date
 from time import sleep
 
 import requests
-from flask import render_template, send_from_directory, abort, flash
+from flask import render_template, send_from_directory, abort, flash, redirect, \
+    request
 
 from src.service1_init import service1, db
 
@@ -154,4 +155,4 @@ def download_file(download_name):
         print("There has been an error. File not saved.")
         flash('There has been an error. File not saved.', 'danger')
         # redirect back to homepage.
-        abort(404)
+        redirect(request.referrer)
