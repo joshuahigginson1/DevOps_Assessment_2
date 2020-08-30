@@ -2,7 +2,7 @@
 
 cd service2/src
 
-sudo chmod 777 tests
+sudo chmod -R 777 tests
 
 cd tests
 
