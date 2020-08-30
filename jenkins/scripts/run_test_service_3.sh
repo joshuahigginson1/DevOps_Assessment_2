@@ -4,7 +4,7 @@ cd service3/src/tests
 
 export FLASK_ENV="$FLASK_ENV"
 
-sudo pytest --junit-xml=test_results/test_results_service3.xml
+sudo pytest --continue-on-collection-errors -v --junit-xml=test_results/test_results_service3.xml
 
 printf "\n"
 printf "\n"

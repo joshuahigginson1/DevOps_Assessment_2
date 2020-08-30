@@ -13,7 +13,7 @@ export TESTING_DB_USERNAME="$TESTING_DB_USERNAME"
 export TESTING_DB_USERPASS="$TESTING_DB_USERPASS"
 export TESTING_DATABASE_ADDRESS="$TESTING_DATABASE_ADDRESS"
 
-sudo pytest --junit-xml=test_results/test_results_service1.xml
+sudo pytest --continue-on-collection-errors -v --junit-xml=test_results/test_results_service1.xml
 
 printf "\n"
 printf "\n"
