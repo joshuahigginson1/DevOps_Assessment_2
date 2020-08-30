@@ -92,7 +92,6 @@ def initialise_bar(bar_object, note_length, note_pitch):
         note_length: A given note length in mingus syntax.
         note_pitch: A given note pitch in mingus syntax.
         """
-    # TODO: Test add_note_to_bar function
 
     if note_pitch == "r":
         return bar_object.place_rest(note_length)
@@ -107,8 +106,9 @@ def add_notes_to_bar(initialised_bar,
                      s3_url,
                      scale_key_pair,
                      rhythm_key_pair):
-    """This function fills an existing bar object with new notes, polled
-    from service 2 and service 3. TODO: Test fill_bar_with_notes function
+    """
+    This function fills an existing bar object with new notes, polled
+    from service 2 and service 3.
     """
 
     while not initialised_bar.is_full():

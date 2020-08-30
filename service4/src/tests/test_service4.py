@@ -2,7 +2,9 @@
 
 # Imports --------------------------------------------------------------
 
-from src.service4 import generate_key_offset
+from src.service4_routes import create_bar
+from mingus.containers import Bar
+
 
 # Tests ----------------------------------------------------------------
 
@@ -22,8 +24,28 @@ def test_generate_key_offset(all_keys, key_offset_dict):
         key_offset_dict = A pytest fixture returning our key offset.
     """
 
-    for key in all_keys:
-        # assert generate_key_offset(key, key_offset_dict) == \
-        #       key_offset_dict.get(key)  # Is this test needed?
 
-        assert 0 <= generate_key_offset(key, key_offset_dict) <= 11
+def test_create_bar():
+    """This tests the creation of a new bar."""
+
+    new_bar = create_bar()
+
+    assert True == True
+
+
+def test_initialise_bar():
+    """This tests the..."""
+
+    assert True == True
+
+
+def test_add_notes_to_bar():
+    """This tests the..."""
+
+    assert True == True
+
+
+def test_overwrite_transpose_bar():
+    """This tests the..."""
+
+    assert True == True

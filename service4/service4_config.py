@@ -3,7 +3,8 @@
 from os import environ, path
 
 # Find the absolute path of the root directory of our current file. ----
-basedir = path.abspath(path.dirname(__file__))
+
+from dotenv import load_dotenv
 
 print(f"The basedir is: {basedir} \n")
 
