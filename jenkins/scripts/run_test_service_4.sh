@@ -7,6 +7,8 @@ export FLASK_ENV="$FLASK_ENV"
 export PNG_DIRECTORY="$PNG_DIRECTORY"
 export MIDI_DIRECTORY="$MIDI_DIRECTORY"
 
+source /var/lib/jenkins/workspace/melodie-pipeline/venv/bin/activate
+
 sudo pytest --continue-on-collection-errors -v --junit-xml=test_results/test_results_service4.xml
 
 printf "\n"
@@ -25,3 +27,5 @@ sudo sh -c "pylint-fail-under --fail_under 1 -f parseable src > test_results/ser
 # We just want the style report, not for the program to fail our build.
 
 sudo sh -c "pycodestyle src > test_results/service4_pep8_report.txt || exit 0"
+
+deactivate
