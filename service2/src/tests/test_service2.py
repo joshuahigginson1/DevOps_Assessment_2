@@ -5,7 +5,7 @@
 import json
 from os import environ
 
-from service2.src.service2 import return_scale_dictionary, \
+from service2 import return_scale_dictionary, \
     return_random_pitch, generate_random_note_pitch, get_note_name, \
     on_get_request, on_post_request, service2
 
