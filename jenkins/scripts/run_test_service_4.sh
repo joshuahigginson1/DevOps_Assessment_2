@@ -13,7 +13,7 @@ export MIDI_DIRECTORY="$MIDI_DIRECTORY"
 
 sudo rm test_results/*
 
-python3 -m pytest -v --cov=src --cov-report term-missing --junit-xml=test_results/test_results_service4.xml
+python3 -m pytest -v --cov=src --cov-report term-missing xml:test_cov_service1.xml --junit-xml=test_results/test_results_service4.xml
 
 printf "\n"
 printf "\n"
