@@ -1,12 +1,14 @@
 #!/bin/sh
 
-cd service3/src/tests
+cd service3/src
+
+sudo chmod 777 tests
+
+cd tests
 
 export FLASK_ENV="$FLASK_ENV"
 
-# source /var/lib/jenkins/workspace/melodie-pipeline/venv/bin/activate
-
-sudo pytest --continue-on-collection-errors -v --junit-xml=test_results/test_results_service3.xml
+python3 -m pytest -v --junit-xml=test_results/test_results_service3.xml
 
 printf "\n"
 printf "\n"

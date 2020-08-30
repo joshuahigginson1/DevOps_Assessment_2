@@ -1,22 +1,23 @@
 #!/bin/sh
 
-cd service1/src/tests
+cd service1/src
 
-export FLASK_ENV=$FLASK_ENV
+sudo chmod 777 tests
 
-export TESTING_SECRET_KEY=$TESTING_SECRET_KEY
+cd tests
 
-export FILES_DIRECTORY=$FILES_DIRECTORY
+export FLASK_ENV="$FLASK_ENV"
 
-export TESTING_DB=$TESTING_DB
-export TESTING_DB_USERNAME=$TESTING_DB_USERNAME
-export TESTING_DB_USERPASS=$TESTING_DB_USERPASS
-export TESTING_DATABASE_ADDRESS=$TESTING_DATABASE_ADDRESS
+export TESTING_SECRET_KEY="$TESTING_SECRET_KEY"
 
-# source /var/lib/jenkins/workspace/melodie-pipeline/venv/bin/activate
+export FILES_DIRECTORY="$FILES_DIRECTORY"
 
+export TESTING_DB="$TESTING_DB"
+export TESTING_DB_USERNAME="$TESTING_DB_USERNAME"
+export TESTING_DB_USERPASS="$TESTING_DB_USERPASS"
+export TESTING_DATABASE_ADDRESS="$TESTING_DATABASE_ADDRESS"
 
-sudo pytest --continue-on-collection-errors -v --junit-xml=test_results/test_results_service1.xml
+python3 -m pytest -v --junit-xml=test_results/test_results_service1.xml
 
 printf "\n"
 printf "\n"

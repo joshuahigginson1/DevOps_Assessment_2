@@ -1,15 +1,17 @@
 #!/bin/sh
 
-cd service4/src/tests
+cd service4/src
+
+sudo chmod 777 tests
+
+cd tests
 
 export FLASK_ENV="$FLASK_ENV"
 
 export PNG_DIRECTORY="$PNG_DIRECTORY"
 export MIDI_DIRECTORY="$MIDI_DIRECTORY"
 
-# source /var/lib/jenkins/workspace/melodie-pipeline/venv/bin/activate
-
-sudo pytest --continue-on-collection-errors -v --junit-xml=test_results/test_results_service4.xml
+python3 -m pytest -v --junit-xml=test_results/test_results_service4.xml
 
 printf "\n"
 printf "\n"
