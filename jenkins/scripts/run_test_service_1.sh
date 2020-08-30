@@ -29,13 +29,13 @@ printf "\n"
 
 # So instead, we use the 'pylint-fail-under' plugin.
 
-pylint-fail-under --fail_under 1 -f parseable src > test_results/service1_pylint_report.log
+sudo pylint-fail-under --fail_under 1 -f parseable src > test_results/service1_pylint_report.log
 
 cat test_results/service1_pylint_report.log
 
 # Run our Pep8 function, and saves the output to a new .txt file.
 # We just want the style report, not for the program to fail our build.
 
-pycodestyle src > test_results/service1_pep8_report.txt || exit 0
+sudo pycodestyle src > test_results/service1_pep8_report.txt || exit 0
 
 cat test_results/service1_pep8_report.txt
