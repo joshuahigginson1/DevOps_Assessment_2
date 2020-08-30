@@ -206,6 +206,7 @@ Make sure that the Public IP of our Jenkins driver and Melodie-Manager-1 is
 - ChuckNorris
 - Warnings Next Generation (For Pylint Test Reporting)
 - JUnit (For Junit Test Reporting)
+- coburtura 
 
 2b. Add Jenkins user to sudoers. Changed permissions of script created on my
  local computer.
