@@ -17,7 +17,7 @@ export TESTING_DB_USERNAME="$TESTING_DB_USERNAME"
 export TESTING_DB_USERPASS="$TESTING_DB_USERPASS"
 export TESTING_DATABASE_ADDRESS="$TESTING_DATABASE_ADDRESS"
 
-source /var/lib/jenkins/workspace/melodie-pipeline/venv/bin/activate
+# source /var/lib/jenkins/workspace/melodie-pipeline/venv/bin/activate
 
 sudo pytest --continue-on-collection-errors -v --junit-xml=test_results/test_results_service1.xml
 
@@ -37,5 +37,3 @@ sudo sh -c "pylint-fail-under --fail_under 1 -f parseable src > test_results/ser
 # We just want the style report, not for the program to fail our build.
 
 sudo sh -c "pycodestyle src > test_results/service1_pep8_report.txt || exit 0"
-
-deactivate
