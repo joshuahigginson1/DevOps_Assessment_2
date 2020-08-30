@@ -9,7 +9,7 @@ export FLASK_ENV="$FLASK_ENV"
 # sudo pytest --continue-on-collection-errors -v
 # --junit-xml=test_results/test_results_service2.xml
 
-python3 -m pytest
+python3 -m pytest --junit-xml=test_results/test_results_service2.xml
 
 printf "\n"
 printf "\n"
