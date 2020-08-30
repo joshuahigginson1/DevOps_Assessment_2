@@ -106,7 +106,7 @@ pipeline{
 
             junit(testResults: "service1/src/tests/test_results/test_results_service1.xml, service2/src/tests/test_results/test_results_service2.xml, service3/src/tests/test_results/test_results_service3.xml, service4/src/tests/test_results/test_results_service4.xml")
 
-            cobertura coberturaReportFile: "service1/src/tests/test_results/test_cov_service1.xml, service2/src/tests/test_results/test_cov_service2.xml, service3/src/tests/test_results/test_cov_service3.xml, service4/src/tests/test_results/test_cov_service4.xml"
+            cobertura(coberturaReportFile: "service1/src/tests/test_results/test_cov_service1.xml, service2/src/tests/test_results/test_cov_service2.xml, service3/src/tests/test_results/test_cov_service3.xml, service4/src/tests/test_results/test_cov_service4.xml")
 
             recordIssues(
             healthy: 20,
