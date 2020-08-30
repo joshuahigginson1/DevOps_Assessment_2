@@ -6,7 +6,10 @@ export FLASK_ENV="$FLASK_ENV"
 
 # source /var/lib/jenkins/workspace/melodie-pipeline/venv/bin/activate
 
-sudo pytest --continue-on-collection-errors -v --junit-xml=test_results/test_results_service2.xml
+# sudo pytest --continue-on-collection-errors -v
+# --junit-xml=test_results/test_results_service2.xml
+
+python3 -m pytest
 
 printf "\n"
 printf "\n"
