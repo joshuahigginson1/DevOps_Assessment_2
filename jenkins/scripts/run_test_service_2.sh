@@ -8,6 +8,8 @@ cd tests
 
 export FLASK_ENV="$FLASK_ENV"
 
+sudo rm test_results/*
+
 python3 -m pytest -v --junit-xml=test_results/test_results_service2.xml
 
 printf "\n"

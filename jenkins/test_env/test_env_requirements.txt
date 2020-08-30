@@ -29,4 +29,6 @@ pytest-mock==3.3.0
 # Violation Checking in Jenkins
 pylint==2.6.0
 pylint-fail-under==0.3.0
+pylint-flask-sqlalchemy==0.2.0
+pylint-flask==0.6
 pycodestyle==2.6.0

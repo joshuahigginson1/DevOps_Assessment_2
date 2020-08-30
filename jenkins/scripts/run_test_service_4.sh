@@ -11,6 +11,8 @@ export FLASK_ENV="$FLASK_ENV"
 export PNG_DIRECTORY="$PNG_DIRECTORY"
 export MIDI_DIRECTORY="$MIDI_DIRECTORY"
 
+sudo rm test_results/*
+
 python3 -m pytest -v --junit-xml=test_results/test_results_service4.xml
 
 printf "\n"
