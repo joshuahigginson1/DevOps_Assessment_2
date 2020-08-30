@@ -33,7 +33,7 @@ printf "\n"
 
 echo 'Writing PYLINT Report...'
 
-sudo pylint-fail-under --load-plugins pylint_flask pylint_flask_sqlalchemy --fail_under 1 -f parseable src > test_results/service1_pylint_report.log
+sudo pylint-fail-under --load-plugins='pylint_flask','pylint_flask_sqlalchemy' --fail_under 1 -f parseable src > test_results/service1_pylint_report.log
 
 # Run our Pep8 function, and saves the output to a new .txt file.
 # We just want the style report, not for the program to fail our build.
