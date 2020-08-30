@@ -19,7 +19,7 @@ export TESTING_DATABASE_ADDRESS="$TESTING_DATABASE_ADDRESS"
 
 sudo rm test_results/*
 
-python3 -m pytest --cov -v --junit-xml=test_results/test_results_service1.xml
+python3 -m pytest -v --cov=src --junit-xml=test_results/test_results_service1.xml
 
 printf "\n"
 printf "\n"
