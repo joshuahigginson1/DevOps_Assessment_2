@@ -121,15 +121,13 @@ pipeline{
                 stash name: "s4_cov", includes: "test_cov_service4.xml"
             }
 
-            stage('Publish Code Coverage') {
-                // Publish combined code coverage results
-                unstash 's1_cov';
-                unstash 's2_cov';
-                unstash 's3_cov';
-                unstash 's4_cov';
 
-                cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '*.xml', conditionalCoverageTargets: '70, 0, 0', enableNewApi: true, failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
-            }
+            unstash 's1_cov';
+            unstash 's2_cov';
+            unstash 's3_cov';
+            unstash 's4_cov';
+
+            cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '*.xml', conditionalCoverageTargets: '70, 0, 0', enableNewApi: true, failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
 
             // Old coverage report.
             // publishCoverage adapters: [coberturaAdapter(mergeToOneReport: true, path: 'service1/src/tests/test_results/test_cov_service1.xml, service2/src/tests/test_results/test_cov_service2.xml, service3/src/tests/test_results/test_cov_service3.xml, service4/src/tests/test_results/test_cov_service4.xml')], sourceFileResolver: sourceFiles('NEVER_STORE')
