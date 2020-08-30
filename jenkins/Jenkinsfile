@@ -105,7 +105,11 @@ pipeline{
             // Service 1 Tests
 
             junit(testResults: "service1/src/tests/test_results/test_results_service1.xml, service2/src/tests/test_results/test_results_service2.xml, service3/src/tests/test_results/test_results_service3.xml, service4/src/tests/test_results/test_results_service4.xml")
-            cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'service1/src/tests/test_results/test_cov_service1.xml, service2/src/tests/test_results/test_cov_service2.xml, service3/src/tests/test_results/test_cov_service3.xml, service4/src/tests/test_results/test_cov_service4.xml', enableNewApi: true, failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+
+            cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'service1/src/tests/test_results/test_cov_service1.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+
+            cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'service2/src/tests/test_results/test_cov_service2.xml', conditionalCoverageTargets: '70, 0, 0', enableNewApi: true, failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+
             publishCoverage adapters: [coberturaAdapter(mergeToOneReport: true, path: 'service1/src/tests/test_results/test_cov_service1.xml, service2/src/tests/test_results/test_cov_service2.xml, service3/src/tests/test_results/test_cov_service3.xml, service4/src/tests/test_results/test_cov_service4.xml')], sourceFileResolver: sourceFiles('NEVER_STORE')
 
             recordIssues(
