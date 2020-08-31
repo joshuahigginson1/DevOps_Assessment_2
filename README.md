@@ -326,6 +326,9 @@ We finally run the 'pytest-cov' equivalent command, which outputs a Junit Test, 
 
 
 
+
+
+
 ##### Gluster and Persistent Data Volumes in Docker Swarm
 
 Out of the box, docker only provides support for local volumes.
@@ -337,7 +340,18 @@ This is where running MySQL as a container falls short.
 
 #### Ansible
 
-We use ansible to configure the environment for our project.
+In this project, Ansible manages the docker install and docker swarm deployment process.
+
+We start with running a common role, which ensures that GIT is installed on every machine. I then install docker, and docker's python dependencies to the docker install group.
+
+I am using IP aliases with the /etc/hosts file on my ansible driver, in order
+ to securely host this ansible inventory file on GitHub.
+
+I prune any old docker images using docker_prune, to ensure that my VM’s aren’t always running out of hard drive space. I had this occur multiple times, which ends up bricking the virtual machine.
+
+I then initiate a new swarm on my master node, before creating a new host, and registering the docker_swarm_info as a new host variable. This allows
+ me to automatically add worker nodes to our swarm.
+
 
 ### Front End Development
 
