@@ -74,6 +74,7 @@ pipeline{
                 sh 'jenkins/scripts/run_ansible_playbook.sh'
             }
         }
+    }
 
     post {
 
