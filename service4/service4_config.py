@@ -4,6 +4,7 @@ from os import environ, path
 
 # Find the absolute path of the root directory of our current file. ----
 
+basedir = path.abspath(path.dirname(__file__))
 print(f"The basedir is: {basedir} \n")
 
 # Functions ------------------------------------------------------------
