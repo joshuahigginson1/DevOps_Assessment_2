@@ -2,9 +2,6 @@
 
 # Imports --------------------------------------------------------------
 
-from src.service4_routes import create_bar
-from mingus.containers import Bar
-
 
 # Tests ----------------------------------------------------------------
 
@@ -27,8 +24,6 @@ def test_generate_key_offset(all_keys, key_offset_dict):
 
 def test_create_bar():
     """This tests the creation of a new bar."""
-
-    new_bar = create_bar()
 
     assert True == True
 

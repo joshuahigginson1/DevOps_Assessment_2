@@ -144,4 +144,3 @@ def on_post_request():
     print(f'Converted data: {converted_data[0]}')
     print(f'Note pitch output: {note_pitch_output}')
     return jsonify(note_pitch_output)
-

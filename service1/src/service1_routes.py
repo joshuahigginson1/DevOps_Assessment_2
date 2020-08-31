@@ -5,8 +5,8 @@ from datetime import date
 from time import sleep
 
 import requests
-from flask import render_template, send_from_directory, abort, flash, redirect, \
-    request
+from flask import render_template, send_from_directory, abort, flash,\
+    redirect, request
 
 from src.service1_init import service1, db
 
@@ -31,7 +31,8 @@ def add_header(sendfiles_request):
         sendfiles_request: a request response.
     """
 
-    sendfiles_request.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    sendfiles_request.headers["Cache-Control"] = "no-cache, no-store, " \
+                                                 "must-revalidate "
     sendfiles_request.headers["Pragma"] = "no-cache"
     sendfiles_request.headers["Expires"] = "0"
     sendfiles_request.headers['Cache-Control'] = 'public, max-age=0'

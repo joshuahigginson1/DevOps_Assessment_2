@@ -80,8 +80,8 @@ def convert_form_to_full_json_output(form_get_on_validation, full_dict):
     # Initialise a new_dictionary.
     new_dict = {}
 
-    """ If a value in this dictionary matches the returned value 
-    from our form, then we return a new dictionary object. """
+    # If a value in this dictionary matches the returned value...
+    # ...from our form, then we return a new dictionary object.
 
     for label, value in list_of_dict_items:
         if value == output_form_list:

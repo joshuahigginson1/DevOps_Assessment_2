@@ -23,8 +23,7 @@ class MelodieForm(FlaskForm):
     service_2_url = service1.config["SERVICE_2_URL"]
     service_3_url = service1.config["SERVICE_3_URL"]
 
-    """ Our list gets sent backwards. We need to reverse it to display 
-    correctly in our form. """
+    # Our list gets sent backwards. We need to reverse it.
 
     forward_s2_list = list(get_service_2_response(service_2_url).items())
     bward_s2_list = [(value, key) for (key, value) in forward_s2_list]
