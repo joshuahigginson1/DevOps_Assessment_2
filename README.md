@@ -323,19 +323,27 @@ We finally run the 'pytest-cov' equivalent command, which outputs a Junit Test, 
 #### Docker
 
 
+#### Database Technologies
 
+For this project, I wanted to ensure that the data within my database was
+ stored in a robust and redundant manner.
+ 
+When I first approached databases in this SFIA2 project, I had originally
+ planned to run an instance of MySQL within a container, running on my docker
+  swarm stack. 
+  
+However, I realised that if my database VM were to crash, or the database container just so happened to move nodes, then data would be lost.
 
+I spent a lot of time researching different persistent volumes on a swarm network. Unlike Kubernetes or Mesos, Docker Swarm does not natively support shared persistent volumes. And the majority of these plugins, bar REX RAY, are classed as legacy.
 
+I tried running a GlusterFS server across VM’s, however this added too much complexity for me to handle over a week’s time scale. I tried using Gcloud’s persistent disk feature, however it only offers read only functionality.
 
+So I took it back to basics. Running a dedicated Google SQL instance of MySQL 5.7, which automatically manages data backup, security, and redundancy. 
 
-
-##### Gluster and Persistent Data Volumes in Docker Swarm
 
 Out of the box, docker only provides support for local volumes.
 
 This is where running MySQL as a container falls short.
-
-
 
 
 #### Ansible
