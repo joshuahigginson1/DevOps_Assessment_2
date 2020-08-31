@@ -129,3 +129,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+!/service1/service1.env
+!/service2/service2.env
+!/service3/service3.env
+!/service4/service4.env
