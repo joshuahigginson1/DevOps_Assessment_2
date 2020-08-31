@@ -75,25 +75,6 @@ pipeline{
             }
         }
 
-        stage('Build Docker Images'){
-
-            steps{
-                withEnv(["FLASK_ENV=production"]){
-                    sh 'jenkins/scripts/build_and_push_docker_images.sh'
-                }
-            }
-        }
-
-        stage('Deploy Swarm Stack'){
-
-            steps{
-                withEnv(["FLASK_ENV=production"]) {
-                    sh 'jenkins/scripts/deploy_docker_swarm_stack.sh'
-                }
-            }
-        }
-    }
-
     post {
 
         always {
@@ -143,7 +124,18 @@ pipeline{
 
         success {
             echo 'This build was a success.'
+
+            // stage('Build Docker Images'){
+
+            withEnv(["FLASK_ENV=production"]){
+                    sh 'jenkins/scripts/build_and_push_docker_images.sh'
+
+            // stage('Deploy Swarm Stack')
+
+                    sh 'jenkins/scripts/deploy_docker_swarm_stack.sh'
+            }
         }
+
 
         unstable {
             echo 'This build is unstable.'

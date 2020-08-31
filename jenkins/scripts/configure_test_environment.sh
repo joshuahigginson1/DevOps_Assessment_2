@@ -5,7 +5,7 @@
 # Update dependencies.
 sudo apt update
 sudo apt upgrade -y
-# sudo apt install -y python3 python3-pip python3-venv lilypond gunicorn
+sudo apt install -y python3 python3-pip python3-venv lilypond gunicorn
 
 # Create our virtual environment.
 # sudo python3 -m venv venv
