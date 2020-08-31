@@ -2,7 +2,7 @@
 
 # imports ------------------------------
 
-from os import environ, path, getenv
+from os import environ, path
 
 # .env location ------------------------
 
