@@ -31,7 +31,8 @@ def common_rhythms():
         "short": [4, 8, 16, 32],
         "long": [1, 2, 4],
         "standard": [2, 4, 8, 16],
-        "extremes": [1, 32, 64, 128]
+        "extremes": [1, 32, 64, 128],
+        "png implementation": [4, 8, 16, 32]
     }
 
     return common_rhythms_dictionary
