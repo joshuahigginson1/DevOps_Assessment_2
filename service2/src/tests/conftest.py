@@ -41,7 +41,7 @@ def common_scales():
         "harmonic minor": [1, 3, 4, 6, 8, 9, 12, "r"],
         "minor pentatonic": [1, 4, 6, 8, 11, "r"],
         "minor blues": [1, 4, 6, 7, 8, 11, "r"],
-        "png implementation": [1, 4, 6, 7, 8, 11, "r"]
+        "midi implementation": [1, 4, 6, 7, 8, 11, "r"]
     }
     return common_scales
 
