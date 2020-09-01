@@ -15,7 +15,7 @@ _Created for QA Consulting by Joshua Higginson_
 
 
 ![GitHub](https://img.shields.io/github/license/joshuahigginson1/DevOps_Assessment_2?style=flat-square)
-![Coffee](https://img.shields.io/badge/Coffee%20Consumed-%E2%98%95%20%2011%20Cups%20%20%E2%98%95-yellow?style=flat-square)
+![Coffee](https://img.shields.io/badge/Coffee%20Consumed-%E2%98%95%20%2013%20Cups%20%20%E2%98%95-yellow?style=flat-square)
 
 ## Contents
 - [Pre-Project Reflection](#pre-project-reflection)
@@ -29,7 +29,6 @@ _Created for QA Consulting by Joshua Higginson_
   - [Front End Development](#front-end-development)
 - [Testing](#testing)
  - [Unit Testing](#unit-testing)
- - [Functional Testing](#functional-testing)
 - [Project Management](#project-management)
 - [Project Review](#project-review)
   - [Known Issues and Future Optimisation](#known-issues-and-future-optimisations)
@@ -128,8 +127,7 @@ The best way for me to correctly implement JIRA integration with my source code 
 - One task or subtask within JIRA requires creating a new feature branch.
 - When that task has reached its definition of ‘done’, then we close the branch, merge with master, and then close that branch.
 
-
-### 👋 What’s up, EPIC slappers. 👋
+### Epics
 
 I’ll be simplifying the use of epics in this project:
 I’ll be having an epic for ‘Documentation and Presentation’, one for ‘Software Development’, and one for ‘DevOps technologies’. 
@@ -171,11 +169,14 @@ When we hit ‘commit’, PyCharm will automatically create a commit message bas
 
 The only things we I haven’t currently automated is the ‘in progress and done’ states for each task. 
 
-jhgjhgj
-
 ## Project Brief
 
+The project brief was to design and implement a service-oriented application, comprised of four different at least four different applications which
+ communicate with one another.
+ 
+As part of my project submission, I have to provide a JIRA board, with full expansion on tasks needed to complete this project.
 
+This application must be fully integrated, using a feature branch model, which will subsequently built with the use of a configured CI server, containerised, and deployed to GCP.
 
 ### Resources
 
@@ -185,56 +186,64 @@ jhgjhgj
 
 ### Requirements
 
+Software is **fully functional** and has been tested in ~~all~~ relevant areas. Best practices were **consistently adhered to** throughout the project.
+
+Software produced is **in line with the documentation** with changes made where needed, with references to refactoring apparent within JIRA and this readme.
+
+**VCS implemented**, and code was stored in a **structured manner** with branches, git ignore file and scripted hooks.
+ 
+Build server installed and successfully built software after a push, with artefact produced for successful builds.
+
+Although I personally struggled with writing relevant tests for services 1 and 4, I have 90% and 93% test coverages on services 2 and 3 respectively. Basic tests written for back-end.
+  
+Test results are tabulated and logged, in Jenkins.
+   
+A full Risk analysis has been performed.
+
+Simple designs provided meeting the agreed standards and patterns.
+
+System can be robustly deployed with no further configuration required, with the use of some more advanced deployment techniques, and with great consideration to the security and reliability of the system.
+
+Deployment activities logged and discussed in a report. Tools and techniques used have been explained with the use of docstrings and a readme,
+
 ## Project Setup
 
-1. Create 4 new VM instances in GCP:
+The following section explains the manual configuration steps required to run our project.
+
+1 - Create 4 new VM instances in GCP:
 
 - Jenkins-Ansible-Driver
 - Melodie-Manager-1
 - Melodie-Worker-1
 - Melodie-Worker-2
 
-1a. Create an SQL database instance in GCP:
-- Melodie-MySQL-Database
+2 - Create an SQL database instance in GCP:
+- Melodie-MySQL-Database (Make sure that the Public IP of our Jenkins driver
+ and Melodie-Manager-1 are authorised.)
 
-Make sure that the Public IP of our Jenkins driver and Melodie-Manager-1 is
- authorised.
+3 - Run our Jenkins install script on Jenkins-Ansible-Driver.
 
-2. Run our Jenkins install script on Jenkins-Ansible-Driver.
-
-2a. Install required Jenkins plugins for this project:
+4 - Install required Jenkins plugins for this project:
 - ChuckNorris
 - Warnings Next Generation (For Pylint Test Reporting)
 - JUnit (For Junit Test Reporting)
-- coburtura 
+- Coburtura 
 
-2b. Add Jenkins user to sudoers. Changed permissions of script created on my
+5 - Add Jenkins user to sudoers. Changed permissions of script created on my
  local computer.
  
-2c. Add Jenkins user to the docker group and restart systemctl jenkins.
+6 - Add Jenkins user to the docker group and restart systemctl jenkins.
 
-3. We add our IP aliases to the Jenkins-Ansible-Driver /etc/hosts file.
+7 - We add our IP aliases to the Jenkins-Ansible-Driver /etc/hosts file.
  
-4. Add the SSH public key of Jenkins-Ansible-Driver to each other VM node.
+8 - Add the SSH public key of Jenkins-Ansible-Driver to each other VM node.
  
-5. Add our environment variables to Jenkins.
+9 - Add our private credentials to to Jenkins.
  
-6. We configure a new pipeline project, pulling down our git repo, and
+10 - Configure a new pipeline project, pulling down our git repo, and
  targeting the Jenkinsfile.
 
-7. Configure a new git SCM webhook.
-
-
-
-
-#### Ansible
-
-Install ansible on ansible driver
-
-Add ssh public key to all nodes.
-Map all IP addresses to /etc/hosts/
-
-
+11 - Configure a new git SCM webhook within GitHub.
 
 ## Project Approach
 
@@ -257,9 +266,15 @@ Transposing note containers. Built in transpose function broke if you
 
 
 
+
+
+
 ### Database Structure
 
-I first approached my database wanting to run it as a container from within
+For this project, I wanted to ensure that the data within my database was
+ stored in a robust and redundant manner.
+ 
+I first approached MySQL, wanting to run it as a container from within
  our swarm. The Dockerfile for running a mySQL container is as follows:
   
 
@@ -287,22 +302,25 @@ I first approached my database wanting to run it as a container from within
 I soon found out that this was a rather unreliable way of hosting a database,
 due to a lack of a distributed volume option within docker swarm.
 
+I tried using Google Cloud’s persistent disk feature, however it only offered
+ read only functionality.
+
 In order to get around this issue, I tried to run a GlusterFS distributed
 file server over my nodes, however, I could not get this system functioning
-with Ansible. 
-  
-I did not want to waste any further time or energy on this configuration!
-As far as I am aware, the next most secure way of running a database server
-is on it's own dedicated hardware machine, with backups cared for by a cloud
- provider. 
-    
-
-
+with Ansible. It added far too much complexity in the limited week I had
+ left.
+ 
+So, I took it back to basics. Running a dedicated Google SQL instance of
+ MySQL 5.7, which automatically manages data backup, security, and
+  redundancy... And I had no more issues!
 
 ### CI Pipeline
 
+My full CI pipeline is as follows:
 
-#### My Jenkins Workflow
+![](.README_images/fe3f6f5f.png)
+
+#### Jenkins Workflow
 
 For my CI server in this project, I chose to use Jenkins, over other popular services such as Travis, CircleCI and TeamCity.
 
@@ -312,39 +330,23 @@ I implore Jenkins for it's third party support with Junit XML testing, with the 
 I could have deployed Jenkins as it's own containerised service using Docker Swarm. 
 For this project however, I chose running an instance of Jenkins on it's own independent VM within GCP. This was for a number of reasons:
 
-- **Simplicity:** With the application that I am running currently being so small in scope, I won't ever require the need to scale up or scale out Jenkins in a containerised fashion. It would be an overkill waste of time, money, and resources.
+- **Simplicity:** With the application that I am running currently being so
+ small in scope, I won't ever require the need to scale up or scale out
+ Jenkins in a containerised fashion. It would be an overkill waste of time, money, and resources. And it also meant that I could share some
+ computing power, by running it on the same machine as our ansible driver.
+
 - **Familiarity:** Within the time scale of this project, I do not have hours in the day required for me to learn the ins and outs of deploying Jenkins as a containerised service using Docker Swarm. 
 - **Industry Standards:** After additional research, I discovered that a more widely supported and preferred approach to running Jenkins as a microservice is to run it using Kubernetes over Docker Swarm, with proprietary support from both Google and AWS.
 
-Chose to write my jenkins shell scripts in sh, then executing them within the Jenkins command shell.
+We get Jenkins to pull our project repo from git, using a git webhook after every push. We then run Pytest, which outputs a Junit Test file with coverage. If our tests pass, Jenkins will subsequently build our docker images, automatically pushing them to docker.io.
 
-We finally run the 'pytest-cov' equivalent command, which outputs a Junit Test, for reading with Jenkins.
+I chose to write my jenkins shell scripts in sh, after executing them within the Jenkins command shell.
 
 #### Docker
 
+In order to ensure that lilypond would always be installed in the correct place, I chose to take a 'snapshot' of it as a docker image. Therefore, I configured 2 unique Dockerfiles, which would handle the installation of ubuntu, python3, and lilypond.
 
-#### Database Technologies
-
-For this project, I wanted to ensure that the data within my database was
- stored in a robust and redundant manner.
- 
-When I first approached databases in this SFIA2 project, I had originally
- planned to run an instance of MySQL within a container, running on my docker
-  swarm stack. 
-  
-However, I realised that if my database VM were to crash, or the database container just so happened to move nodes, then data would be lost.
-
-I spent a lot of time researching different persistent volumes on a swarm network. Unlike Kubernetes or Mesos, Docker Swarm does not natively support shared persistent volumes. And the majority of these plugins, bar REX RAY, are classed as legacy.
-
-I tried running a GlusterFS server across VM’s, however this added too much complexity for me to handle over a week’s time scale. I tried using Gcloud’s persistent disk feature, however it only offers read only functionality.
-
-So I took it back to basics. Running a dedicated Google SQL instance of MySQL 5.7, which automatically manages data backup, security, and redundancy. 
-
-
-Out of the box, docker only provides support for local volumes.
-
-This is where running MySQL as a container falls short.
-
+This project is doing very little in terms of complexity in regards to docker containers. So I would be surprised if there was something in my Dockerfile or docker-compose.yaml that you couldn't understand quite simply at this point!
 
 #### Ansible
 
@@ -360,10 +362,11 @@ I prune any old docker images using docker_prune, to ensure that my VM’s aren�
 I then initiate a new swarm on my master node, before creating a new host, and registering the docker_swarm_info as a new host variable. This allows
  me to automatically add worker nodes to our swarm.
 
-
 ### Front End Development
 
+Front end development was relatively painless. I knew that I wanted a 'one page' application, consisting of a simple form. After experimenting with some HTML layout, I threw on a bootstrap CSS stylesheet and called it a day!
 
+The logic behind the actual service 1 took me quite a while to perfect. In particular, how I would translate our user's intentions, to a tangible end product.
 
 ## Testing
 
@@ -384,11 +387,9 @@ For this project, I did some detailed research on tools for unit testing. For th
 Unit testing of our services took longer to write than the actual MVP code...
 ...But that's okay, I was reading information, and this challenged me to think about TDD with a professional understanding.
 
-I chose to write the justification for each unit test using docstings
-, abiding by professional practice and to pep8 standards. 
+I chose to write the justification for each unit test using docstings, abiding by professional practice and to pep8 standards. 
 
-Below is a brief summary.
-
+Below is a brief summary of the tests within this appication.
 
 #### Unit Testing Service #1
 
@@ -412,16 +413,22 @@ Lilypond has a set of distinct markers which indicate note length. I created a P
 
 #### Unit Testing Service #4
 
-### Functional Testing
-
-
-
+No unit tests were done on service 4, due to the ever increasing logic within the application, utilising Mingus and Lilypond objects. I still have no idea where to start!
 
 ## Project Review
 
+What went well:
+
+Even better if:
 
 
 ### Known Issues and Future Optimisations
+
+For the most part, I have been optimising this app in a continuous fashion, in response to the visual feedback from jenkins.
+ 
+I have encountered an issue where gunicorn workers in service 4 will undergo critical failure. I wouldn't know where to start with this error.
+ 
+If you are unlucky enough to try and download a file the moment after a container is getting cycled, then the random bar will 'go missing' and the user will encounter a 404 error. 
 
 ## Contributors & Authors
 
