@@ -405,6 +405,23 @@ I have encountered an issue where gunicorn workers in service 4 will undergo cri
  
 If you are unlucky enough to try and download a file the moment after a container is getting cycled, then the random bar will 'go missing' and the user will encounter a 404 error. 
 
+What went well:
+
+Feel like I’m starting to have a solid understanding of of the topics we have been studying at QA.
+
+- I have a fully working application, with only a few minimal bugs, beyond my comprehension on how to fix them.
+
+- I have a great grasp of JIRA, and project management, especially JIRA integration with PyCharm tasks.
+
+- I’ve managed to explain complex processes to other members of the cohort.
+
+Even better if:
+
+- Although my time management workflow is solid, I do still think that I was spending TOO much time trying to fix bugs in my Jenkins pipeline, particularly in relation to coding environment discrepancies from my development machine to the production environment.
+
+- My testing abilities are improving, but really not perfect.
+
+
 ## Contributors & Authors
 
 **Josh Higginson** - AUTHOR - _Junior DevOps Consultant for QA Consulting._
