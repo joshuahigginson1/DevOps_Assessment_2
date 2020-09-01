@@ -88,22 +88,22 @@ def service4_post_request():
 
     # === IF MIDI! ===
 
-    # save_as_midi(s1_data.get('file_name'), new_bar, s1_data.get("tempo"))
+    save_as_midi(s1_data.get('file_name'), new_bar, s1_data.get("tempo"))
 
-    # print('\n ---------- THE FILE HAS BEEN SAVED AS MIDI ---------- \n')
+    print('\n ---------- THE FILE HAS BEEN SAVED AS MIDI ---------- \n')
 
     # Send midi file name to user.
 
-    # midi_file_name = f"{s1_data.get('file_name')}-melodie.mid"
+    midi_file_name = f"{s1_data.get('file_name')}-melodie.mid"
 
-    # return send_midi_to_user(midi_file_name)
+    return send_midi_to_user(midi_file_name)
 
     # === IF PNG! ===
 
-    png_file_name = f"{s1_data.get('file_name')}-melodie.png"
+    # png_file_name = f"{s1_data.get('file_name')}-melodie.png"
 
-    save_as_png(s1_data.get("file_name"), new_bar)
+    # save_as_png(s1_data.get("file_name"), new_bar)
 
-    print('\n ---------- THE FILE HAS BEEN SAVED AS PNG ---------- \n')
+    # print('\n ---------- THE FILE HAS BEEN SAVED AS PNG ---------- \n')
 
-    return send_png_to_user(png_file_name)
+    # return send_png_to_user(png_file_name)
