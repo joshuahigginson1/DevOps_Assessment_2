@@ -253,21 +253,7 @@ The following section explains the manual configuration steps required to run ou
 
 ## Project Architecture
 
-sting and int return as normal. Others, we have to do literal evaluation
- using the ast. 
-
-Transposing note containers. Built in transpose function broke if you
- attempted to transpose a bar with rests on. What a ballache, had to go
-  override the method - for every note in the bar, if there are are any
-   rests with None type, continue, if there are any notes with int type, add
-    the key offset.'
-  each
-  file.
-
-
-
-
-
+I tried to keep my project architecture as 'divisive' as possible, separating each individual service, or piece of app functionality within it's own unique directory.
 
 ### Database Structure
 
@@ -392,6 +378,12 @@ I chose to write the justification for each unit test using docstings, abiding b
 Below is a brief summary of the tests within this appication.
 
 #### Unit Testing Service #1
+
+The test-file-melodie files within the file_output section of service 1 are vital for ensuring that our routes work!
+
+The unit tests in service 1 are designed to test our common logic functionality, such as our listify, getting download names, and testing the ability to download a file from the correct url.
+
+I particularly struggled with writing mock tests for service 1.
 
 #### Unit Testing Service #2
 
