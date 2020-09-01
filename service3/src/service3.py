@@ -51,7 +51,7 @@ def return_rhythms_dictionary():
         "long": [1, 2, 4],
         "standard": [2, 4, 8, 16],
         "extremes": [1, 32, 64, 128],
-        "png implementation": [4, 8, 16, 32]
+        "midi implementation": [2, 4, 8, 16]
     }
 
     return rhythms_dictionary
