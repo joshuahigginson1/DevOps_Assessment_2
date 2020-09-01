@@ -22,7 +22,6 @@ _Created for QA Consulting by Joshua Higginson_
 - [Project Brief](#project-brief)
   - [Resources](#resources)
   - [Requirements](#requirements)
-- [Project Approach](#project-approach)
 - [Project Architecture](#project-architecture)
   - [Database Structure](#database-structure)
   - [CI Pipeline](#ci-pipeline)
@@ -245,11 +244,9 @@ The following section explains the manual configuration steps required to run ou
 
 11 - Configure a new git SCM webhook within GitHub.
 
-## Project Approach
-
-
 ## Project Management
 
+I spoke a lot about project management in my pre-project reflection. Suffice to say, I utilised a JIRA board in order to manage my project progress and time tracking. 
 
 ## Project Architecture
 
@@ -257,12 +254,9 @@ I tried to keep my project architecture as 'divisive' as possible, separating ea
 
 ### Database Structure
 
-For this project, I wanted to ensure that the data within my database was
- stored in a robust and redundant manner.
+For this project, I wanted to ensure that the data within my database was stored in a robust and redundant manner.
  
-I first approached MySQL, wanting to run it as a container from within
- our swarm. The Dockerfile for running a mySQL container is as follows:
-  
+I first approached MySQL, wanting to run it as a container from within our swarm. The Dockerfile for running a mySQL container is as follows:
 
 `  service1_db:
   
@@ -285,20 +279,16 @@ I first approached MySQL, wanting to run it as a container from within
         protocol: tcp`
   
   
-I soon found out that this was a rather unreliable way of hosting a database,
-due to a lack of a distributed volume option within docker swarm.
+I soon found out that this was a rather unreliable way of hosting a database, due to a lack of a distributed volume option within docker swarm.
 
-I tried using Google Cloud’s persistent disk feature, however it only offered
- read only functionality.
+I tried using Google Cloud’s persistent disk feature, however it only offered read only functionality.
 
 In order to get around this issue, I tried to run a GlusterFS distributed
 file server over my nodes, however, I could not get this system functioning
 with Ansible. It added far too much complexity in the limited week I had
  left.
  
-So, I took it back to basics. Running a dedicated Google SQL instance of
- MySQL 5.7, which automatically manages data backup, security, and
-  redundancy... And I had no more issues!
+So, I took it back to basics. Running a dedicated Google SQL instance of MySQL 5.7, which automatically manages data backup, security, and redundancy... And I had no more issues!
 
 ### CI Pipeline
 
@@ -367,7 +357,6 @@ For this project, I did some detailed research on tools for unit testing. For th
 - Use of PyTest fixtures avoids constantly repeating myself. I hate repetition.
 - If implemented correctly, tests read like "speech", and are simple to follow along.
 
-
 ### Unit Testing
 
 Unit testing of our services took longer to write than the actual MVP code...
@@ -406,12 +395,6 @@ Lilypond has a set of distinct markers which indicate note length. I created a P
 #### Unit Testing Service #4
 
 No unit tests were done on service 4, due to the ever increasing logic within the application, utilising Mingus and Lilypond objects. I still have no idea where to start!
-
-## Project Review
-
-What went well:
-
-Even better if:
 
 
 ### Known Issues and Future Optimisations
