@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: service1Deployment
+  namespace: testing
+  labels:
+    app: service1
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: service1
+
+  template:
+    metadata:
+      namespace: testing
+      labels:
+        app: service1
+
+    spec:
+      containers:
+      - name: service1Container
+        image: docker.io/joshuahigginson1/melodie_service1:latest
+        env:
+          - name: FLASK_ENV
+            value: testing
+          - name: TESTING_SECRET_KEY
+            value: $FLASK_ENV
+          - name: FILES_DIRECTORY
+            value: $FILES_DIRECTORY
+          - name: TESTING_DB
+            value: $TESTING_DB
+          - name: TESTING_DB_USERNAME
+            value: $TESTING_DB_USERNAME
+          - name: TESTING_DB_USERPASS
+            value: $TESTING_DB_USERPASS
+          - name: TESTING_DATABASE_ADDRESS
+            value: $TESTING_DATABASE_ADDRESS
+          - name: SERVICE_1_URL
+            value: $SERVICE_1_URL
+          - name: SERVICE_2_URL
+            value: "$SERVICE_2_URL
+          - name: SERVICE_3_URL
+            value: $SERVICE_3_URL
+          - name: SERVICE_4_URL
+            value: $SERVICE_4_URL
+
+        ports:
+          - name: port5001
+            protocol: TCP
+            hostPort: 5001
+            containerPort: 5001
+          - name: port3306
+            protocol: TCP
+            hostPort: 3306
+            containerPort: 3306

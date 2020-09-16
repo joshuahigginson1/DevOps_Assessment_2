@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: service4Deployment
+  namespace: testing
+  labels:
+    app: service4
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: service4
+
+  template:
+    metadata:
+      namespace: testing
+      labels:
+        app: service4
+
+    spec:
+      containers:
+      - name: service4Container
+        image: docker.io/joshuahigginson1/melodie_service4:latest
+        env:
+          - name: FLASK_ENV
+            value: testing
+          - name: SERVICE_2_URL
+            value: "$SERVICE_2_URL
+          - name: SERVICE_3_URL
+            value: $SERVICE_3_URL
+          - name: MIDI_DIRECTORY
+            value: $MIDI_DIRECTORY
+          - name: PNG_DIRECTORY
+            value: $PNG_DIRECTORY
+
+        ports:
+          - name: port5004
+            protocol: TCP
+            hostPort: 5004
+            containerPort: 5004

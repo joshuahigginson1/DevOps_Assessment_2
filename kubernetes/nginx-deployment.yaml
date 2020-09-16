@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Namespace
+
+metadata:
+  name: testing
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: nginxDeployment
+  namespace: nginxDeployment
+  labels:
+    app: nginx
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginxMelodieDeployment
+
+  template:
+    metadata:
+      namespace: nginxDeployment
+      labels:
+        app: nginxMelodieDeployment
+
+    spec:
+      containers:
+      - name: melodieNginxContainer
+        image: docker.io/joshuahigginson1/melodie_nginx:latest
+        ports:
+          - name: HTTPPort80
+            protocol: TCP
+            hostPort: 80
+            containerPort: 80
+
+
