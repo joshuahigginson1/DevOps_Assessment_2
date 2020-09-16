@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: service2Deployment
+  name: service2-deployment
   namespace: testing
   labels:
     app: service2
@@ -21,7 +21,7 @@ spec:
 
     spec:
       containers:
-      - name: service2Container
+      - name: service2-container
         image: docker.io/joshuahigginson1/melodie_service2:latest
         env:
           - name: FLASK_ENV

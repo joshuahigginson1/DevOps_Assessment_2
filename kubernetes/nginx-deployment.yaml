@@ -10,7 +10,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: nginxDeployment
+  name: nginx-deployment
   namespace: testing
   labels:
     app: nginx
@@ -19,17 +19,17 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginxMelodieDeployment
+      app: nginx-melodie-deployment
 
   template:
     metadata:
       namespace: testing
       labels:
-        app: nginxMelodieDeployment
+        app: nginx-melodie-deployment
 
     spec:
       containers:
-      - name: melodieNginxContainer
+      - name: melodie-nginx-container
         image: docker.io/joshuahigginson1/melodie_nginx:latest
         ports:
           - name: port80
