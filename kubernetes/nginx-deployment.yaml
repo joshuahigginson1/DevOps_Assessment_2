@@ -32,7 +32,7 @@ spec:
       - name: melodieNginxContainer
         image: docker.io/joshuahigginson1/melodie_nginx:latest
         ports:
-          - name: HTTPPort80
+          - name: port80
             protocol: TCP
             hostPort: 80
             containerPort: 80
