@@ -41,7 +41,7 @@ spec:
           - name: SERVICE_1_URL
             value: $SERVICE_1_URL
           - name: SERVICE_2_URL
-            value: "$SERVICE_2_URL
+            value: $SERVICE_2_URL
           - name: SERVICE_3_URL
             value: $SERVICE_3_URL
           - name: SERVICE_4_URL

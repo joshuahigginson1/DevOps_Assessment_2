@@ -27,7 +27,7 @@ spec:
           - name: FLASK_ENV
             value: testing
           - name: SERVICE_2_URL
-            value: "$SERVICE_2_URL
+            value: $SERVICE_2_URL
           - name: SERVICE_3_URL
             value: $SERVICE_3_URL
           - name: MIDI_DIRECTORY
