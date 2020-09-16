@@ -11,7 +11,7 @@ kind: Deployment
 
 metadata:
   name: nginxDeployment
-  namespace: nginxDeployment
+  namespace: testing
   labels:
     app: nginx
 
@@ -23,7 +23,7 @@ spec:
 
   template:
     metadata:
-      namespace: nginxDeployment
+      namespace: testing
       labels:
         app: nginxMelodieDeployment
 
